@@ -1,13 +1,104 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+   <!-- 顶部横栏 -->
+   <view class='head'>
+      <view class="s_back">
+         <view class="search">
+            <navigator class="nav_search" url="./search/search">
+               <image class="search_icon" src="../images/搜索@hdpi.png"></image>
+               <text>请输入关键字</text>
+            </navigator>
+         </view>
+         <view class="banner">
+            <image class="ban_img" src="../images/首页banner@hdpi.png"></image>
+         </view>
+      </view>
+   </view>
+   <!-- 分类导航部分 -->
+   <view class="page_classify">
+      <block wx:for="{{classify_top}}" wx:key="{{item}}">
+         <view class="icon">
+            <view class="pic">
+               <image class="cl_img" src="{{item.url}}"></image>
+            </view>
+            <view class="icon_title">{{item.title}}</view>
+         </view>
+      </block>
+   </view>
+   <view class="page_classify">
+      <block wx:for="{{classify_foot}}" wx:key="{{item}}">
+         <view class="icon">
+            <view class="pic">
+               <image class="cl_img" src="{{item.url}}"></image>
+            </view>
+            <view class="icon_title">{{item.title}}</view>
+         </view>
+      </block>
+   </view>
+   <view class='case-page'>
+      <view class='list-masonry'>
+         <view class='item-masonry' bindtap="navigator" wx:for="{{note}}" wx:key="this">
+            <image src='{{item.pic1_path}}' mode='widthFix'></image>
+            <text>{{item.title}}\n</text>
+            <text>¥{{item.price}}</text>
+         </view>
+      </view>
+   </view>
+   <!-- 所有商品 -->
+   <view class='goods'>
+      <view class='goods-container-left'>
+         <block wx:for="{{goods_left}}" wx:key="{{goods}}">
+            <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+               <view class='goods-img'>
+                  <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
+               </view>
+               <view class='goods-detail'>
+                  <view class='goods-title'>{{item.title}}</view>
+                  <view class='goods-info'>
+                     <view class='goods-tags-container'>
+                        <view class='tag'>{{item.isNew}}</view>
+                        <view class='tag'>{{item.tag}}</view>
+                     </view>
+                     <view class='goods-price'>
+                        <view class='price-prv'>
+                           {{item.price}}
+                        </view>
+                        <view class='price-now'>
+                           <span class='price-now'>{{item.purchase_price}}</span>
+                           <span class='price-unit'>￥</span>
+                        </view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+         </block>
+      </view>
+      <view class='goods-container-right'>
+         <block wx:for="{{goods_right}}" wx:key="{{goods}}">
+            <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+               <view class='goods-img'>
+                  <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="true"></image>
+               </view>
+               <view class='goods-detail'>
+                  <view class='goods-title'>{{item.title}}</view>
+                  <view class='goods-info'>
+                     <view class='goods-tags-container'>
+                        <view class='tag'>{{item.isNew}}</view>
+                        <view class='tag'>{{item.tag}}</view>
+                     </view>
+                     <view class='goods-price'>
+                        <view class='price-prv'>
+                           {{item.price}}
+                        </view>
+                        <view class='price-now'>
+                           <span class='price-now'>{{item.purchase_price}}</span>
+                           <span class='price-unit'>￥</span>
+                        </view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+         </block>
+      </view>
+   </view>
 </view>
