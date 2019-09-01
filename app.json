@@ -3,19 +3,20 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/Me/index",
-    "pages/Put/index"
+    "pages/Put/index",
+    "pages/index/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarBackgroundColor": "#FFE896",
+    "navigationBarTitleText": "湘大二手街",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "发现"
       },
       {
         "pagePath": "pages/Put/index",
@@ -26,5 +27,6 @@
         "text": "我的"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

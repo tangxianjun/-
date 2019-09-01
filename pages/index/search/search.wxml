@@ -1,0 +1,9 @@
+<!--pages/index/search/search.wxml-->
+<view class="content">
+  <view class="top">
+    <view class="search">
+      <icon class="icon" type="search"></icon>
+      <input class="search_input" focus="true"></input>
+    </view>
+  </view>
+</view>
