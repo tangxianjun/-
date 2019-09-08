@@ -1,0 +1,31 @@
+/* pages/index/search/search.wxss */
+.top{
+  height: 100rpx;
+  width: 100%;
+  padding-top: 20rpx;
+}
+.search{
+  width: 75%;
+  margin-left: 5%;
+  height: 80rpx;
+  display: flex;
+  background-color: rgb(138, 132, 132);
+  border-radius: 30rpx;
+}
+.icon{
+  height: 60rpx;
+  padding: 20rpx;
+  width: 9%;
+  text-align: center;
+}
+.search_input{
+  height: inherit;
+  margin-left: 1%;
+  padding: 1% 2%;
+  width: 81%;
+}
+/* .search_left{
+  height: 100rpx;
+  width: 20%;
+  background-color: red;
+} */
