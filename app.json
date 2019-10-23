@@ -1,10 +1,19 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/Me/index",
     "pages/Put/index",
-    "pages/index/search/search"
+    "pages/Me/index",
+
+    "pages/login/login",
+    "pages/details/details",
+    "pages/category/category",
+    
+    "pages/collect/collect",
+    "pages/my_sell/sell",
+    "pages/index/search/search",
+    
+    "pages/logs/logs",
+    "pages/result/result"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,14 +25,20 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "发现"
+        "iconPath": "pages/images/二手街未选中@xhdpi.png",
+        "selectedIconPath": "pages/images/二手街选中@xhdpi.png",
+        "text": "二手街"
       },
       {
         "pagePath": "pages/Put/index",
+        "iconPath": "pages/images/发布@xhdpi.png",
+        "selectedIconPath": "pages/images/发布@xhdpi.png",
         "text": "发布"
       },
       {
         "pagePath": "pages/Me/index",
+        "iconPath": "pages/images/我的未选中@hdpi.png",
+        "selectedIconPath": "pages/images/我的选中@xhdpi.png",
         "text": "我的"
       }
     ]

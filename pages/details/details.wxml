@@ -1,0 +1,73 @@
+<!-- 背后的黄色底纹 -->
+<view class="bg"></view>
+<!-- 顶上的个人信息 -->
+<view class="personal">
+    <!-- 个人信息的主要信息，也就是上面的用户名和联系方式 -->
+    <view class="personal-main">
+        <view class="personal-main-name">{{nickname}}</view>
+        <view class="personal-main-link">显示线上联系方式</view>
+    </view>
+    <!-- 个人信息的次要信息，也就是年级、宿舍和是否认证 -->
+    <view class="personal-ex">
+        <view class="personal-ex-gread">
+            <!-- <image src="image/test1.png"></image> -->
+            <span>{{gread}}</span>
+        </view>
+        <view class="personal-ex-dorm">
+            <!-- <image src="image/test1.png"></image> -->
+            <span>{{dorm}}</span>
+        </view>
+        <view class="personal-ex-attestation">
+            <!-- <image src="./image/test1.png"></image> -->
+            <span>{{attestation}}</span>
+        </view>
+    </view>
+    <!-- 个人信息的头像 -->
+    <view class="personal-icon">
+        <image src="{{personalIcon}}"></image>
+    </view>
+</view>
+<!-- 个人信息下的图片 -->
+<view class="picture">
+    <swiper class="picture-swiper" indicator-dots="true">
+        <block wx:for="{{goods_picture}}" wx:key="goods_picture">
+            <swiper-item>
+                <view class="picture-swiper-inner">
+                    <image src="{{item}}" mode="aspectFill"></image>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+<!-- 图片下的商品数字信息 -->
+<view class="number">
+    <view class="number-price">
+        <view class="number-price-now">
+            <view class="number-price-now-unit">￥</view>
+            <view class="number-price-now-num">{{priceNow}}</view>
+        </view>
+        <view class="number-price-prv">
+            <view class="number-price-prv-unit">￥</view>
+            <view class="number-price-prv-num">{{pricePrv}}</view>
+        </view>
+    </view>
+    <view class="number-time">
+        {{time}}
+    </view>
+</view>
+<!-- 商品标题 -->
+<view class="title">
+    <span>{{goodsName}}</span>
+</view>
+<!-- 商品简介 -->
+<view class="detail">
+    <span class="detail-tip">{{detailTip}}</span>
+    <span class="detail-inner">{{detail}}</span>
+</view>
+<!-- 商品标签 -->
+<view class="tip">
+    <view class="tip-title">标签：</view>
+    <view class="tip-inner">{{tip[0]}}</view>
+    <view class="tip-inner">{{tip[1]}}</view>
+    <view class="tip-inner">{{tip[2]}}</view>
+</view>

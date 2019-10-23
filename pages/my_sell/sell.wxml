@@ -1,0 +1,42 @@
+<!--pages/my_sell/sell.wxml-->
+<view class="{{me}}">
+  <view class="my">
+    <view class="{{text}}">
+      <text>{{nickname}}，你卖出的宝贝在这里。</text>
+    </view>
+    <view class="text2">
+      <text>{{tex}}</text>
+    </view>
+    <view class="img">
+      <image class="imgs" src="{{head_img}}"></image>
+    </view>
+  </view>
+</view>
+<view class="sell" wx:for="{{list}}" wx:key="item" style="display:{{display}};z-index:{{100-index}}">
+  <view class="sellinner">
+    <view class="text3">
+      <text>全新宝贝 | 当面交易</text>
+    </view>
+    <view class="status">正出售</view>
+    <view class="bigTitle">{{item.title}}</view>
+    <view class="detail">
+      <image class="imgDate" src = "../images/date-white.svg"></image>
+      <view class="date">2019-9-10</view>
+      <view class="remaining">余28天</view>
+      <image class="imgWatch" src = "../images/watched-white.svg"></image>
+      <view class="views">28</view>
+    </view>
+    <view class="diwen" data-index="{{item.tag}}"></view>
+    <view class="price">
+      <view class="priceUnit">￥</view>
+      <view class="priceNum">{{item.purchase_price}}</view>
+    </view>
+  </view>
+</view>
+<view class="backnone" style="display:{{img_none}}">
+  <image class="none_img" src="../images/noneput.svg"></image>
+  <view class="none_text">
+    <text>你还没有卖出过一件宝贝呢~</text>
+  </view>
+  <button class="button">去逛逛</button>
+</view>

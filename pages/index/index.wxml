@@ -5,19 +5,19 @@
       <view class="s_back">
          <view class="search">
             <navigator class="nav_search" url="./search/search">
-               <image class="search_icon" src="../images/搜索@hdpi.png"></image>
+               <image class="search_icon" src="../images/search@xhdpi.png"></image>
                <text>请输入关键字</text>
             </navigator>
          </view>
          <view class="banner">
-            <image class="ban_img" src="../images/首页banner@hdpi.png"></image>
+            <image class="ban_img" src="../images/banner@hdpi.png"></image>
          </view>
       </view>
    </view>
    <!-- 分类导航部分 -->
    <view class="page_classify">
       <block wx:for="{{classify_top}}" wx:key="{{item}}">
-         <view class="icon">
+         <view class="icon" bindtap="nav" data-index='{{item.title}}'>
             <view class="pic">
                <image class="cl_img" src="{{item.url}}"></image>
             </view>
@@ -27,7 +27,7 @@
    </view>
    <view class="page_classify">
       <block wx:for="{{classify_foot}}" wx:key="{{item}}">
-         <view class="icon">
+         <view class="icon" bindtap="nav" data-index='{{item.title}}'>
             <view class="pic">
                <image class="cl_img" src="{{item.url}}"></image>
             </view>
@@ -35,14 +35,9 @@
          </view>
       </block>
    </view>
-   <view class='case-page'>
-      <view class='list-masonry'>
-         <view class='item-masonry' bindtap="navigator" wx:for="{{note}}" wx:key="this">
-            <image src='{{item.pic1_path}}' mode='widthFix'></image>
-            <text>{{item.title}}\n</text>
-            <text>¥{{item.price}}</text>
-         </view>
-      </view>
+   <view class="nav">
+    <view class="nav_left {{bg?'bg1':'bg2'}}" bindtap="change1"><text>推荐</text></view>
+    <view class="nav_right {{bg?'bg2':'bg1'}}" bindtap="change2"><text>最新发布</text></view>
    </view>
    <!-- 所有商品 -->
    <view class='goods'>

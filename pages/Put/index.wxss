@@ -1,1 +1,430 @@
-/* pages/Put/index.wxss */
+.page {
+    width: 750rpx;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 650rpx;
+    margin-left: 50rpx;
+    margin-top: 50rpx;
+}
+
+/* 顶部标题 */
+
+.title {
+    width: 100%;
+    height: 48rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.title > textarea, label {
+    height: 40rpx;
+    font-size: 28rpx;
+    white-space: nowrap;
+}
+
+.title > label {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.title > textarea {
+    margin-left: 15rpx;
+    width: 524rpx;
+}
+
+.title > label {
+    margin-right: 15rpx;
+}
+
+.title .radio {
+    width: 26rpx;
+    height: 26rpx;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2rpx solid #3F3F3F;
+    margin-right: 12rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title .radio > image {
+    width: 26rpx;
+    height: 26rpx;
+}
+
+/* 描述 */
+
+.describe {
+    width: 100%;
+    height: 354rpx;
+    border: 1px solod #000;
+    margin-top: 22rpx;
+}
+
+.describe > textarea {
+    width: 100%;
+    height: 100%;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular;
+    line-height: 28rpx;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
+    box-sizing: border-box;
+}
+
+/* 图片 */
+
+.imgs {
+    width: 100%;
+    display: flex;
+    margin-top: 12rpx;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.imgs > view {
+    width: 210rpx;
+    height: 210rpx;
+    border-radius: 16rpx;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: 10rpx;
+    margin-right: 10rpx;
+    position: relative;
+}
+
+.camara {
+    border: 1px solid #979797;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imgs > view:nth-child(3) {
+    margin-right: 0;
+}
+.imgs > view:nth-child(6) {
+    margin-right: 0;
+}
+.imgs > .img {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img image {
+    width: 210rpx;
+    height: 210rpx;
+    flex-shrink: 0;
+}
+
+.img view {
+    position: absolute;
+    top: 15rpx;
+    right: 15rpx;
+}
+.img-tip-main {
+    width: 63rpx;
+    height: 31rpx;
+    line-height: 31rpx;
+    font-size: 26rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 20rpx;
+    background-color: rgb(204, 197, 197);
+    color: #ffffff;
+    transition: all 1s;
+}
+.img-tip-delete {
+    width: 31rpx;
+    height: 31rpx;
+    line-height: 31rpx;
+    font-size: 31rpx;
+    border-radius: 50%;
+    background-color: rgb(204, 197, 197);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s;
+}
+
+.imgs > .camara image {
+    width: 81rpx;
+    height: 72rpx;
+}
+
+.imgs > .img:nth-child(3) {
+    margin-right: 0;
+}
+
+/* 拖动式图片 */
+.movable-imgs {
+    width: 650rpx;
+    height: 430rpx;
+}
+.movable-imgs > movable-view {
+    width: 210rpx;
+    height: 210rpx;
+    border-radius: 16rpx;
+    overflow: hidden;
+    transition: all 0.3s linear;
+}
+.camara > image {
+    width: 81rpx;
+    height: 72rpx;
+}
+/* 提示 */
+.tip {
+    width: 100%;
+    height: 30rpx;
+    line-height: 30rpx;
+    display: flex;
+    justify-content: flex-start;
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    color: #bbb;
+    margin-top: 33rpx;
+}
+
+/* 信息 */
+
+.info-link, .info-goods {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 33rpx;
+}
+
+.info-title {
+    width: 145rpx;
+    height: 56rpx;
+    line-height: 50rpx;
+    font-size: 36rpx;
+    border-bottom: 25rpx solid #ffe896;
+    box-sizing: border-box;
+    font-family: PingFangSC-Semibold;
+    font-weight: bold;
+    margin-bottom: 45rpx;
+}
+
+.info-contain {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.info-contain > view {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.info-inner {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 41rpx;
+}
+
+.info-inner-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-shrink: 0;
+    height: 100%;
+}
+
+.info-inner-title-icon {
+    width: 46rpx;
+    height: 46rpx;
+}
+
+.info-inner-title-icon > image {
+    width: 46rpx;
+    height: 46rpx;
+}
+
+.info-inner-title-text {
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    color: #bbb;
+    height: 46rpx;
+    line-height: 46rpx;
+    margin-left: 22rpx;
+    margin-right: 28rpx;
+}
+
+.info-inner-input {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-options {
+    padding-left: 23.5rpx;
+    padding-right: 23.5rpx;
+    height: 47rpx;
+    line-height: 47rpx;
+    font-family: PingFangSC-Semibold;
+    font-size: 24rpx;
+    color: #ff7911;
+    border: 2rpx solid #ffe9b5;
+    border-radius: 1000rpx;
+    margin-right: 10rpx;
+    margin-bottom: 14rpx;
+}
+
+.info-options-choosed {
+    background-color: #ffe9b5;
+}
+
+/* 联系信息->手机号码 */
+
+.info-link > .info-contain > .info-inner:nth-child(2) input {
+    width: 80%;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+}
+
+/* 联系信息->线上联系 */
+
+.info-link > .info-contain > .info-inner:nth-child(3) {
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    color: #bbb;
+}
+
+.info-link > .info-contain > .info-inner:nth-child(3) .info-options {
+    padding-left: 50rpx;
+    padding-right: 50rpx;
+}
+
+.info-link > .info-contain > .info-inner:nth-child(3) .info-inner-text{
+    overflow: hidden;
+    transition: all 1s;
+}
+
+/* 联系信息->微信/QQ号 */
+.info-link > .info-contain > .info-inner:nth-child(4) .info-inner-title-text {
+    width: 105rpx
+}
+.info-link > .info-contain > .info-inner:nth-child(4) input {
+    width: 80%;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+}
+
+.info-link > .info-contain > .info-inner:nth-child(4) {
+    display: block;
+    height: 53.816rpx;
+    overflow: hidden;
+    transition: all 1s;
+}
+.info-link > .info-contain > .info-inner:nth-child(4) > view {
+    width: 100%;
+    display: flex;
+    height: 53.816rpx;
+    transition: all 1s;
+}
+
+/* 商品信息->价格 */
+
+.info-price-input-inner {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    margin-bottom: 31rpx;
+}
+
+.info-price-input-inner > .info-price-input-title {
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    color: #bbb;
+}
+
+.info-price-input-inner > .info-price-input-unit {
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #0b0b0b;
+}
+.info-price-input-inner input {
+    font-family: PingFangSC-Semibold;
+    font-size: 28rpx;
+    color: #3F3F3F;
+    padding-left: 23rpx;
+    padding-right: 23rpx;
+}
+/* 商品信息->价格 */
+.info-goods > .info-contain > .info-inner:nth-child(1) > .info-inner-input > .info-options {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+/* 商品信息->标签 */
+.info-goods > .info-contain > .info-inner:nth-child(3) > .info-inner-input {
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    color: #BBBBBB;
+    /* flex-shrink: 0; */
+    /* height: 282rpx; */
+    height: 47rpx;
+    overflow-y: hidden;
+    position: relative;
+}
+.info-inner-text {
+    width: 100%;
+}
+.tip-container {
+    width: 100%;
+    height: 47rpx;
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.tip-container  .info-options {
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+.info-inner-input-container {
+    width: 100%;
+    transition: all 1s;
+}
+
+/* 商品信息->交易方式 */
+.info-goods > .info-contain > .info-inner:nth-child(4)  .info-options:nth-child(1) {
+    padding-left: 47rpx;
+    padding-right: 47rpx;
+}
+.info-goods > .info-contain > .info-inner:nth-child(4)  .info-options:nth-child(2) {
+    padding-left: 36rpx;
+    padding-right: 36rpx;
+}
+.release {
+    width: 538rpx;
+    height: 97rpx;
+    background-color: #FFE896;
+    font-family: PingFangSC-Semibold;
+    font-size: 36rpx;
+    color: #3F3F3F;
+    margin-bottom: 47rpx;
+    border-radius: 1000rpx;
+    font-weight: 500;
+}

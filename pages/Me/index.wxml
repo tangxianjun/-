@@ -1,0 +1,71 @@
+<view class="content" >
+  <view class="head">
+   <view class="h_text">
+    <text >{{nickname}},欢迎来到二手街。</text>
+   </view>
+   <view class="ba_text" >
+     <text >退出 ></text>
+   </view>
+   <image  class="h_img" src="{{head_img}}"></image>
+  </view> 
+   <view class="img">
+    <image class="image" src="../images/@hdpi.svg"></image>
+   </view>
+   <view class="ba">
+    <view class="c_head">
+      <view class="head_left">我的主页</view>
+      <view class="backgd"></view>
+      
+      <view class="we">
+        <view  class="we_img">
+         <image class="we_img" src="../images/问好@hdpi.svg"></image>
+        </view>
+        <view class="we_text">关于我们</view>
+      </view>
+    </view>
+    <view class="l1" bindtap="nav1">
+      <view class="l1_left">
+        <image class="l1_left" src="../images/fa@hdpi.svg"></image>
+      </view>
+      <view class="l1_text">
+        <text>快去发布宝贝吧！</text>
+      </view>
+      <view class="l1_text2">
+        <text>我的发布 ></text>
+      </view>  
+    </view>
+    <view class="l2">
+      <view class="l2_left">
+         <image class="l2_left" src="../images/mai@hdpi.svg"></image>
+      </view>
+      <view class="l1_text">
+         <text>卖出的宝贝在这里~</text>
+      </view>
+      <view class="l1_text2" bindtap="sell">
+        <text>我的卖出 ></text>
+      </view> 
+    </view>
+    <view class="l2">
+      <view class="l2_left">
+         <image class="l2_left" src="../images/shou@hdpi.svg"></image>
+      </view>
+      <view class="l1_text">
+         <text>收藏的宝贝多来看看~</text>
+      </view>
+      <view class="l1_text2" bindtap="collect">
+        <text>我的收藏 ></text>
+      </view> 
+    </view>
+    <view class="l2">
+      <view class="l2_left">
+         <image class="l2_left" src="../images/liu@hdpi.svg"></image>
+      </view>
+      <view class="l1_text">
+         <text>有人找你喔!</text>
+      </view>
+      <view class="l1_text2" bindtap="news">
+        <text>我的消息 ></text>
+      </view> 
+    </view>   
+   </view>
+</view>

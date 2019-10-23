@@ -1,0 +1,41 @@
+<!--pages/collect/collect.wxml-->
+<view class="me_kong">
+  <view class="my">
+    <view class="text_kong">
+      <text>{{nickname}}</text>
+    </view>
+    <view class="status_text"><text>，这是你喜欢过的宝贝</text></view>
+  <view class="text2"><text>{{tex2}}</text></view>
+    <view class="img"><image class="imgs"  src="{{head_img}}"></image></view>
+  </view>
+</view>
+<view class="backnone" style="display:{{img_none}}"><image class="none_img" src="{{imgurl}}"></image>
+  <view class="none_text"><text>{{tex}}</text></view>
+  <button style="display:{{bttdisplay}}" class="button">去逛逛</button>
+ 
+
+</view>
+ <!-- 收藏 -->
+<view wx:for="{{list}}" class="collect" wx:key="item">
+  <view class="h_back">
+    <view class="right">
+      <view class="r"></view>
+      <view class="r"></view>
+      <view class="r"></view>
+    </view>
+  </view>
+  <view class="c_content">
+    <view class="c_img"><image  class="cimg" src="{{item.pic1_path}}"></image></view>
+    <view class="c_right">
+      <view class="c_top">{{item.title}}</view>
+      <view class="c_z">{{item.description}}</view>
+    </view>
+  </view>
+</view>
+<!-- 我的消息 -->
+<view class="news" wx:for="{{collect}}" wx:key='item'>
+  <view class="img"><image class="n_img" src=""></image></view>
+</view>
+
+
+

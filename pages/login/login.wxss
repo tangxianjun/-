@@ -1,0 +1,99 @@
+/* pages/login/login.wxss */
+.title{
+  height: 80rpx;
+  width: 570rpx;
+  margin-top: 113rpx;
+  margin-left: 63rpx;
+  font-size: 57rpx;
+  padding: 0;
+}
+.bg{
+  margin-top: -30rpx;
+  height: 30rpx;
+  width: 530rpx;
+  background-color: rgb(255, 232, 150);
+}
+.p{
+  margin-top: 15rpx;
+  font-size: 28rpx;
+  color: #7B7B7B;
+  letter-spacing: 0.06px;
+}
+.content{
+  height: 600rpx;
+  width: 100%;
+  margin-top: 50rpx;
+}
+.username{
+  height: 80rpx;
+  width: 100%;
+  line-height: 80rpx;
+  margin-top: 180rpx;
+  font-size: 28rpx;
+  color: #3F3F3F 100%;
+  margin-left: 63rpx;
+  display: flex;
+}
+.passwd{
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 100%;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #3F3F3F 100%;
+  margin-left: 63rpx;
+  display: flex;
+}
+.shu{
+  height: 30rpx;
+  width: 5rpx;
+  margin-top: 27rpx;
+  margin-left: 100rpx;
+  background: #D8D8D8;
+  border:  2rpx;
+}
+#username{
+  margin-top: 15rpx;
+  margin-left: 20rpx;
+  width: 60%;
+}
+/* .center{
+  text-align: center;
+} */
+#passwd{
+  margin-top: 15rpx;
+  margin-left: 20rpx;
+  width: 60%;    
+}
+.agree{
+  display: flex;
+  margin-top: 97rpx;
+  font-size: 22rpx;
+  /* line-height: 30rpx; */
+}
+.agree_left{
+  margin-left: 62rpx;
+}
+.agree_img{
+  height: 30rpx;
+  width: 30rpx;
+}
+.agree_en{
+  height: 30rpx;
+  line-height: 30rpx;
+  margin-left: 20rpx;
+}
+.button{
+  height: 183rpx;
+  width: 100%;
+}
+/* .b_button{
+  margin-top: 40rpx;
+} */
+.login{
+  margin-top: 60rpx;
+  height: 97rpx;
+  width: 628rpx;
+  background: rgb(255, 242, 192);
+  border-radius: 50rpx;
+}

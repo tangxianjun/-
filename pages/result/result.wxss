@@ -1,0 +1,260 @@
+/* 搜索框 */
+
+.search {
+    width: 750rpx;
+    height: 99.9rpx;
+}
+
+.search-input {
+    width: 666rpx;
+    height: 66.9rpx;
+    margin-left: 42rpx;
+    margin-top: 33rpx;
+}
+
+.search-input > input {
+    width: 100%;
+    height: 100%;
+    border-radius: 10000rpx;
+    padding-left: 38rpx;
+    box-sizing: border-box;
+    border: 0.7rpx solid #979797;
+}
+
+/* 结果 */
+
+.result {
+    width: 750rpx;
+    margin-top: 34.1rpx;
+}
+
+/* 结果的标题 */
+
+.result-title {
+    width: 145rpx;
+    height: 53rpx;
+    border-bottom: 25rpx solid #ffe896;
+    box-sizing: border-box;
+    margin-left: 51rpx;
+}
+
+.result-title-text {
+    width: 100%;
+    height: 50rpx;
+    line-height: 50rpx;
+    font-family: PingFangSC-Semibold;
+    font-size: 36rpx;
+    color: #000;
+    letter-spacing: 0.08rpx;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+/* 空结果 */
+
+.result-goods-empty {
+    width: 750rpx;
+    height: 229rpx;
+    margin-top: 149rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-goods-empty-image {
+    width: 154rpx;
+    height: 174rpx;
+}
+
+.result-goods-empty-image > image {
+    width: 100%;
+    height: 100%;
+}
+
+.result-goods-empty-text {
+    width: 385rpx;
+    height: 33rpx;
+    line-height: 33rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 24rpx;
+    color: #bbb;
+    letter-spacing: 0.06rpx;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 有内容 */
+
+/* 抄自首页 */
+
+/* 商品 */
+
+.result-goods-list {
+    width: 750rpx;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20rpx;
+    margin-bottom: 10rpx;
+    border-radius: 30rpx;
+    box-shadow: 0 2px 4px 0 #bbb;
+    overflow: hidden;
+}
+
+.goods {
+    margin-top: 20rpx;
+    margin-bottom: 10rpx;
+    border-radius: 30rpx;
+    box-shadow: 0 2px 4px 0 #bbb;
+    overflow: hidden;
+}
+
+.result-goods-list > view {
+    width: 354rpx; /* 47.2%总宽度 */
+}
+
+.result-goods-list > view > view {
+    width: 100%;
+}
+
+/* 左边的图片宽高1:1，整个方块的宽高354:461，就当1:1.3吧 */
+
+.goods-container-left > view {
+    width: 354rpx;
+    height: 460.2rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 右边的整个方块，确定好详情高度是106图片高度是472了 */
+
+.goods-container-right > view {
+    width: 354rpx;
+    height: 578.2rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 左边的图片长宽比1:1 */
+
+.goods-container-left  .goods-img {
+    width: 354rpx;
+    height: 354rpx;
+    /* 图片居中放置 *//* 需要给图片的mode加上一个aspectFill */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 右边的图片长宽比4:3 */
+
+.goods-container-right  .goods-img {
+    width: 354rpx;
+    height: 472rpx; /* 354/3*4 *//* 图片居中放置 *//* 需要给图片的mode加上一个aspectFill */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 下面的详情，不管是左边还是右边，高度一样，都是106rpx */
+
+.goods-detail {
+    width: 354rpx;
+    height: 106rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* 详情里面的标题和标签 */
+
+.goods-detail > view {
+    width: 354rpx;
+    height: 40.1422rpx; /* 37.87% */
+}
+
+/* 商品名 */
+
+.goods-title {
+    line-height: 40.1422rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 5rpx;
+    padding-right: 5rpx;
+    font-family: PingFangSC-Semibold;
+}
+
+/* 信息 */
+
+.goods-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.goods-info > view {
+    display: flex;
+}
+
+/* 标签 */
+
+.goods-tags-container {
+    margin-left: 0;
+}
+
+.tag {
+    border-radius: 1000px;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    white-space: nowrap;
+    line-height: 40.1422rpx;
+    font-size: 0.8rem;
+    color: #fff;
+    margin-left: 5rpx;
+    font-family: PingFangSC-Medium;
+}
+
+.tag:nth-child(1) {
+    background-color: #03d654;
+}
+
+.tag:nth-child(2) {
+    background-color: #fed269;
+}
+
+/* 价格 */
+
+.goods-price {
+    margin-right: 5rpx;
+    height: 100%;
+}
+
+.goods-price > view {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.price-prv {
+    text-decoration: line-through;
+    color: #bbb;
+    font-size: 0.6rem;
+    margin-right: 15rpx;
+    font-family: PingFangSC-Medium;
+}
+
+.price-now {
+    color: #ee2904;
+    font-family: PingFangSC-Semibold;
+}
+
+.price-unit {
+    font-size: 0.6rem;
+}

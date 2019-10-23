@@ -1,0 +1,272 @@
+/* pages/my_sell/sell.wxss */
+
+.me {
+  position: absolute;
+  height: 206rpx;
+  width: 100%;
+  top: 0;
+  /* padding-top: 38rpx; *//* background-color: rgb(254, 217, 119); */
+  z-index: 101;
+}
+
+.me_kong {
+  height: 168rpx;
+  padding-top: 38rpx;
+  width: 100%;
+  border-radius: 0 0 0 140rpx;
+  background: rgb(255, 255, 255);
+  box-shadow: 2px 2px 8px #888;
+}
+
+.my {
+  height: 206rpx;
+  width: 100%;
+  background: #fff;
+  border-radius: 0 0 0 140rpx;
+}
+
+.text {
+  height: 50rpx;
+  /* width: 492rpx; */
+  font-size: 36rpx;
+  margin-left: 68rpx;
+  /* margin-top: 38rpx; */
+  line-height: 50rpx;
+}
+
+.text_kong {
+  height: 50rpx;
+  /* width: 492rpx; */
+  font-size: 36rpx;
+  margin-left: 68rpx;
+  /* margin-top: 38rpx; */
+  line-height: 50rpx;
+}
+
+.text2 {
+  height: 40rpx;
+  /* width: 200rpx; */
+  float: left;
+  line-height: 40rpx;
+  margin-left: 68rpx;
+  font-size: 28rpx;
+  color: #bbb;
+  letter-spacing: 0.06rpx;
+  text-align: left;
+  margin-top: 5.9rpx;
+}
+
+.img {
+  height: 100rpx;
+  width: 100rpx;
+  float: right;
+  margin-right: 58rpx;
+  margin-bottom: 56rpx;
+  border-radius: 100%;
+}
+
+.imgs {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 100%;
+}
+
+.sell {
+  position: relative;
+  margin: 0;
+  margin-top: -247rpx;
+  /* padding-top: 247rpx; */
+  height: 347rpx;
+  width: 100%;
+  background: linear-gradient(162deg, #ffe896 0%, #fed269 64%);
+  background-clip: border-box;
+  border-radius: 0 0 0 140rpx;
+  padding-top: 247rpx;
+}
+
+.sell:nth-child(2) {
+  position: relative;
+  margin: 0;
+  margin-top: -41rpx;
+  /* padding-top: 247rpx; */
+  height: 347rpx;
+  width: 100%;
+  background: linear-gradient(162deg, #ffe896 0%, #fed269 64%);
+  background-clip: border-box;
+  border-radius: 0 0 0 140rpx;
+}
+
+.sellinner {
+  position: relative;
+  height: 286rpx;
+  padding-top: 61rpx;
+}
+
+.text3 {
+  opacity: 0.7;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #fff;
+  letter-spacing: 0.06rpx;
+  text-align: left;
+  margin-left: 65rpx;
+  float: left;
+}
+
+.bigTitle {
+  margin-left: 65rpx;
+  width: 505rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #fff;
+  letter-spacing: 0.08rpx;
+  text-align: left;
+  float: left;
+  margin-top: 13rpx;
+}
+
+.detail {
+  position: relative;
+  height: 33rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #fff;
+  letter-spacing: 0.06rpx;
+  text-align: center;
+  float: left;
+  clear: left;
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.detail>view {
+  float: left;
+}
+
+.detail>image {
+  height: 26rpx;
+  width: 26rpx;
+  margin-left: 65rpx;
+  margin-right: 14rpx;
+  float: left;
+}
+
+.detail>view:nth-child(3) {
+  margin-left: 21rpx;
+}
+
+.detail>image:nth-child(4) {
+  margin-left: 34rpx;
+}
+
+.price {
+  width: 150rpx;
+  height: 55rpx;
+  position: absolute;
+  top: 240rpx;
+  left: 596rpx;
+}
+
+.priceUnit {
+  /* height: 0%; */
+  float: left;
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #fa6400;
+}
+.diwen{
+  position: absolute;
+  height: 174rpx;
+  width: 206rpx;
+  right: 23.2rpx;
+  bottom: 70.5rpx;
+  z-index: -1;
+}
+.diwen[data-index="图书教材"]{
+  background: url(https://www.woxihuannia.top/img/jiao.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.2;
+}
+.diwen[data-index="数码产品"]{
+  background: url(https://www.woxihuannia.top/img/shu.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.2;
+}
+.diwen[data-index="衣物鞋帽"]{
+  background: url(https://www.woxihuannia.top/img/yi.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.2;
+}
+.diwen[data-index="生活用品"]{
+  background: url(https://www.woxihuannia.top/img/sheng.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.2;
+}
+.diwen[data-index="家用电器"]{
+  background: url(https://www.woxihuannia.top/img/dian.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.2;
+}
+.diwen[data-index="美妆日化"]{
+  background: url(https://www.woxihuannia.top/img/mei.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.2;
+}
+.priceNum {
+  float: left;
+  height: 100%;
+  font-family: PingFangSC-Semibold;
+  font-size: 46rpx;
+  color: #fa6400;
+  letter-spacing: 0.11rpx;
+  line-height: 100%;
+}
+
+
+.status {
+  height: 37.6rpx;
+  width: 95.2rpx;
+  float: right;
+  background: #ffe9b5;
+  border-radius: 18.8px;
+  font-size: 19.2rpx;
+  color: #ff7911;
+  letter-spacing: 0.04px;
+  text-align: center;
+  line-height: 37.6rpx;
+  margin-right: 52.8rpx;
+}
+
+.backnone {
+  height: 730rpx;
+  width: 100%;
+  margin-top: 108.1rpx;
+  text-align: center;
+}
+
+.none_img {
+  margin-left: 192.5rpx;
+  height: 400rpx;
+  width: 372rpx;
+  display: block;
+}
+
+.none_text {
+  margin-top: 24.6rpx;
+  height: 27rpx;
+  font-size: 19.2rpx;
+  color: #bbb;
+  letter-spacing: 0.04px;
+}
+
+.button {
+  height: 97rpx;
+  width: 425rpx;
+  margin-top: 160.8rpx;
+  background: #ffe896;
+  border-radius: 47px;
+  font-size: 34rpx;
+  line-height: 97rpx;
+  color: #000;
+}

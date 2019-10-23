@@ -1,0 +1,78 @@
+<!-- 顶部 -->
+<view class="header">
+    <image src="{{typeImgUrl[typeNum]}}"></image>
+</view>
+<!-- 搜索栏 -->
+<view class="search">
+    <input class="search-input" value="{{searchText}}" bindinput="searchDetail"></input>
+    <view class="search-text" style="display: {{searchTextDisplay}}">
+        <image src="image/search-icon.jpg" class="search-text-img"></image>
+        <span class="search-text-detail">在类目下搜索</span>
+    </view>
+    <view class="search-clear" bindtap="searchClear" style="display: {{searchClearDisplay}}">
+        <image src="image/search-clear.svg"></image>
+    </view>
+</view>
+<!-- 分类 -->
+<view class="category">
+    <block wx:for="{{typeCategory[typeNum].category}}" wx:key="category">
+        <view class="type">{{item}}</view>
+    </block>
+</view>
+<!-- 商品 -->
+<view class="goods">
+    <view class="goods-left">
+        <block wx:for="{{goods_left}}" wx:key="{{goods_left}}">
+            <view class='goods-detail' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+               <view class='goods-detail-img'>
+                  <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
+               </view>
+               <view class='goods-detail-text'>
+                  <view class='goods-detail-text-title'>{{item.title}}</view>
+                  <view class='goods-detail-text-info'>
+                     <view class='goods-detail-text-info-tags'>
+                        <view class='goods-detail-text-info-tags-tag'>{{item.isNew}}</view>
+                        <view class='goods-detail-text-info-tags-tag'>{{item.tag}}</view>
+                     </view>
+                     <view class='goods-detail-text-info-price'>
+                        <view class='goods-detail-text-info-price-prv'>
+                           {{item.price}}
+                        </view>
+                        <view class='goods-detail-text-info-price-now'>
+                           <span class='goods-detail-text-info-price-now-num'>{{item.purchase_price}}</span>
+                           <span class='goods-detail-text-info-price-now-unit'>￥</span>
+                        </view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+        </block>
+    </view>
+    <view class="goods-right">
+        <block wx:for="{{goods_right}}" wx:key="{{goods_left}}">
+            <view class='goods-detail' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+               <view class='goods-detail-img'>
+                  <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
+               </view>
+               <view class='goods-detail-text'>
+                  <view class='goods-detail-text-title'>{{item.title}}</view>
+                  <view class='goods-detail-text-info'>
+                     <view class='goods-detail-text-info-tags'>
+                        <view class='goods-detail-text-info-tags-tag'>{{item.isNew}}</view>
+                        <view class='goods-detail-text-info-tags-tag'>{{item.tag}}</view>
+                     </view>
+                     <view class='goods-detail-text-info-price'>
+                        <view class='goods-detail-text-info-price-prv'>
+                           {{item.price}}
+                        </view>
+                        <view class='goods-detail-text-info-price-now'>
+                           <span class='goods-detail-text-info-price-now-num'>{{item.purchase_price}}</span>
+                           <span class='goods-detail-text-info-price-now-unit'>￥</span>
+                        </view>
+                     </view>
+                  </view>
+               </view>
+            </view>
+        </block>
+    </view>
+</view>
