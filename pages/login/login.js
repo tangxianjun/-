@@ -180,7 +180,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        if (res.data.code == 1) {
+        if (res.data.code == 0) {
           wx.setStorage({
             key: 'token',
             data: res.data.message,
