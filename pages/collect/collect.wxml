@@ -11,7 +11,7 @@
 </view>
 <view class="backnone" style="display:{{img_none}}"><image class="none_img" src="{{imgurl}}"></image>
   <view class="none_text"><text>{{tex}}</text></view>
-  <button style="display:{{bttdisplay}}" class="button">去逛逛</button>
+  <button style="display:{{bttdisplay}}" class="button" bindtap="nav">去逛逛</button>
  
 
 </view>

@@ -162,5 +162,19 @@ Page({
     wx.navigateTo({
       url: '../collect/collect?status=news',
     })
+  },
+  /**
+   * 退出清除token
+   */
+  quit:function(){
+    wx.removeStorage({
+      key: 'token',
+      success(res) {
+        console.log(res)
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      }
+    })
   }
 })

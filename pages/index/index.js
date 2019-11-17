@@ -15,6 +15,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     bg:true,
+    showModal:false,
     classify_top: [{
         title: "图书教材",
         url: "../images/book32_32.png"
@@ -101,26 +102,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 获取商品列表
-    var that = this;
-    wx.request({
-      url: 'https://www.woxihuannia.top/php/goodsinfo.php',
-      method: "GET",
-      data: {
-        status: '1'
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function(res) {
-        that.setData({
-          allGoods: res.data,
-          allGoodsNum: res.data.length,
-        });
-        that.getNextView();
-      }
-      
-    })
+      this.getGoods()
     
   },
   /**
@@ -369,6 +351,50 @@ Page({
     wx.navigateTo({
       url: "../category/category?data="+data
     })
+  },
+  toShowModal(e) {
+    this.setData({
+      showModal: true
+    })
+  },
+
+  hideModal() {
+    this.setData({
+      showModal: false
+    });
+  },
+
+  getGoods:function(){
+    // 获取商品列表
+    var that = this;
+    wx.request({
+      url: 'https://www.woxihuannia.top/php/goodsinfo.php',
+      method: "GET",
+      data: {
+        status: '1'
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+        that.setData({
+          allGoods: res.data,
+          allGoodsNum: res.data.length,
+        });
+        that.getNextView();
+      }
+
+    })
+  },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.getGoods()
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 500);
   }
 
 })

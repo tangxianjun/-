@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="727px" height="270px" viewBox="0 0 727 270" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>类目banner/美妆日化@hdpi</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="21.4318039%" y1="54.4502063%" x2="97.0835201%" y2="45.0279003%" id="linearGradient-1">
+            <stop stop-color="#FFC151" offset="0%"></stop>
+            <stop stop-color="#FFE896" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="703" height="246" rx="30.9"></rect>
+        <filter x="-3.1%" y="-5.7%" width="106.3%" height="117.9%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.97877038   0 0 0 0 0.827898849   0 0 0 0 0.295048541  0 0 0 0.418214598 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-36.5%" y="-46.6%" width="175.0%" height="195.5%" filterUnits="objectBoundingBox" id="filter-5">
+            <feMorphology radius="0.2575" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-32.1%" y="-31.2%" width="164.1%" height="162.5%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.928045743   0 0 0 0 0.928045743   0 0 0 0 0.928045743  0 0 0 0.195749563 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="前端界面" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="类目banner" transform="translate(12.000000, 4.000000)">
+            <g>
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <g id="蒙版">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-2"></use>
+                    <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                </g>
+                <circle id="椭圆形" fill="#FFEBAF" opacity="0.600000024" mask="url(#mask-3)" cx="467" cy="282" r="53"></circle>
+                <circle id="椭圆形备份" fill="#FFEBAF" opacity="0.600000024" mask="url(#mask-3)" cx="658" cy="249" r="53"></circle>
+                <circle id="椭圆形备份-2" fill="#FFEBAF" opacity="0.600000024" mask="url(#mask-3)" cx="551" cy="287" r="64"></circle>
+                <g id="编组" mask="url(#mask-3)">
+                    <g transform="translate(197.000000, 159.000000)">
+                        <rect id="矩形" fill="#FFEEC3" fill-rule="evenodd" x="0" y="0" width="354" height="42" rx="21"></rect>
+                        <text id="二手教材-|-考试用书-|-畅销文学" fill="none" font-family="SourceHanSansCN-Medium, Source Han Sans CN" font-size="22.66" font-weight="400" letter-spacing="0.824000012">
+                            <tspan x="20" y="30" fill="#FF7911">闲置彩妆 | 护肤保养 | 防晒修护</tspan>
+                        </text>
+                    </g>
+                </g>
+                <path d="M99.1327607,-63.4027289 C108.049336,-63.4027289 108.049336,72.3175909 280.294187,101.712888 C452.539037,131.108186 472.045895,72.3175909 608.447608,134.723613 C744.849321,197.129635 715.345244,235.900881 835.507569,164.840167 C915.615787,117.466357 863.83378,15.8529681 680.161549,-140 C286.86464,-88.9351526 93.188377,-63.4027289 99.1327607,-63.4027289 Z" id="路径-2" fill="#FFFFFF" opacity="0.200000003" mask="url(#mask-3)"></path>
+                <path d="M122.12858,-111.298552 C131.042243,-111.298552 167.965656,61.3784724 339.339778,91.7095026 C510.7139,122.040533 533.125514,65.3057669 632.104511,118.120552 C698.09051,153.330408 785.389006,165.795327 894,155.515309 L722.228818,-135 C316.219551,-119.199035 116.186139,-111.298552 122.12858,-111.298552 Z" id="路径-2备份" fill="#FFFFFF" opacity="0.100000001" mask="url(#mask-3)"></path>
+                <text id="图书类目" mask="url(#mask-3)" font-family="SourceHanSansCN-Heavy, Source Han Sans CN" font-size="42" font-weight="600" letter-spacing="0.7" fill="#FFFFFF">
+                    <tspan x="202" y="88">美妆日化</tspan>
+                </text>
+                <text id="湘大二手街" mask="url(#mask-3)" font-family="SourceHanSansCN-Medium, Source Han Sans CN" font-size="24.72" font-weight="400" letter-spacing="0.824000012" fill="#FFFFFF">
+                    <tspan x="199" y="131">湘大二手街</tspan>
+                </text>
+                <circle id="椭圆形" fill="#FFAD00" mask="url(#mask-3)" cx="101.5" cy="123.5" r="47.5"></circle>
+                <g id="教材书籍" filter="url(#filter-5)" transform="translate(75.000000, 100.000000)" fill="#FFFFFF">
+                    <g id="图标/美妆日化" transform="translate(0.240000, 0.400000)">
+                        <g id="美妆日化备份" filter="url(#filter-6)" transform="translate(3.240000, 0.000000)">
+                            <rect id="矩形" fill-rule="nonzero" x="7.88847429" y="1.97746479" width="2.38880571" height="20.8516056"></rect>
+                            <path d="M9.30852,42.6889824 C9.30852,42.6889824 2.68966286,42.731493 0.956725714,40.8635493 C0.548336262,40.4095654 0.249677569,39.8659612 0.08424,39.275493 C0.0285001622,39.0279504 0.00024540927,38.7748923 0,38.5210141 L0,25.3784789 C0.00661741619,23.5609181 1.46384448,22.0900955 3.26129143,22.0867606 L15.2955771,22.0867606 C17.0906747,22.0934341 18.5442517,23.5632845 18.5508514,25.3784789 L18.5508514,38.5210141 C18.4400487,39.3693339 18.110053,40.1731283 17.5941257,40.8513803 C17.2631829,41.3016338 16.0537371,42.6463099 9.30852,42.6889824 Z" id="路径" fill-rule="nonzero"></path>
+                            <path d="M37.7034171,3.79064789 L37.7034171,22.9811831 C37.7034171,23.5658893 37.234667,24.0398873 36.6564343,24.0398873 C36.0782016,24.0398873 35.6094514,23.5658893 35.6094514,22.9811831 L35.6094514,7.21622535 C35.5221055,5.81151125 34.8882238,4.49892778 33.8464286,3.56552113 C33.2423292,3.04944408 32.52402,2.68835579 31.7524629,2.51290141 L25.5307371,2.55549296 C24.9493564,2.50106561 24.3696089,2.67541149 23.9121257,3.04225352 C23.3963872,3.55792014 23.1079023,4.26198318 23.1118457,4.99538028 C22.9734514,6.82073239 23.0035371,20.5899718 23.1960857,39.3302535 C23.3152219,39.7832433 23.5195131,40.2087947 23.7978,40.583662 C24.284537,41.1746236 24.9304271,41.6100376 25.6570971,41.8370704 C28.8883029,43.0052958 36.0787886,43.0052958 39.3099943,41.8370704 C40.0366644,41.6100376 40.6825544,41.1746236 41.1692914,40.583662 C41.4486226,40.2094401 41.653017,39.7836738 41.7710057,39.3302535 C41.8432114,20.3344225 41.7710057,6.38873239 41.6386286,4.99538028 C41.5765068,4.48595601 41.3972188,3.99833437 41.1151371,3.57160563 C40.7458434,3.04442552 40.208245,2.6619598 39.5928,2.48856338 C39.2562379,2.36691933 38.8883964,2.36691933 38.5518343,2.48856338 C38.0711231,2.75141092 37.7525831,3.24028127 37.7034171,3.79064789 Z" id="路径" fill-rule="nonzero"></path>
+                            <rect id="矩形" fill-rule="nonzero" x="6.93174857" y="0" width="4.30225714" height="5.88980282" rx="2.07531072"></rect>
+                            <path d="M35.6094514,42.4333521 L35.6094514,23.1211268 C35.8239539,23.4993938 36.2222106,23.7326962 36.6534257,23.7326962 C37.0846408,23.7326962 37.4828976,23.4993938 37.6974,23.1211268 L37.6974,42.2447324 C37.2156865,42.3582901 36.7237086,42.4214953 36.2292171,42.4333521 L35.6094514,42.4333521 Z" id="路径" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,17 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/details/details",
+    
     "pages/Put/index",
     "pages/Me/index",
-
     "pages/login/login",
-    "pages/details/details",
     "pages/category/category",
-    
     "pages/collect/collect",
     "pages/my_sell/sell",
     "pages/index/search/search",
-    
     "pages/logs/logs",
     "pages/result/result"
   ],
@@ -37,8 +35,8 @@
       },
       {
         "pagePath": "pages/Me/index",
-        "iconPath": "pages/images/我的未选中@hdpi.png",
-        "selectedIconPath": "pages/images/我的选中@xhdpi.png",
+        "iconPath": "pages/images/me.png",
+        "selectedIconPath": "pages/images/l_me.png",
         "text": "我的"
       }
     ]

@@ -246,3 +246,122 @@
     border-radius: 23.5rpx;
     margin-right: 17rpx;
 }
+/* 收藏  */
+.collect{
+  height: 114rpx;
+  width: 114rpx;
+  position: absolute;
+  bottom: 50rpx;
+}
+.all_img{
+  height: 114rpx;
+  width: 114rpx;
+  position: fixed;
+
+}
+.leave{
+  height: 114rpx;
+  width: 114rpx;
+  position: absolute;
+  right: 120rpx;
+  bottom: 50rpx;
+}
+.phone{
+  height: 114rpx;
+  width: 114rpx;
+  position: absolute;
+  right: 0;
+  bottom: 50rpx;
+}
+.le_input{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+.cf-box {
+  padding: 8px 5px;
+  display: flex;
+  /* justify-content: center; */
+}
+.tou_xiang{
+  height: 81rpx;
+  width: 81rpx;
+  background-color: #fff;
+  text-align: center;
+  padding-top: 2rpx;
+  box-sizing: border-box;
+  font-size: 20rpx;
+}
+.touxiang_img{
+  height: 81rpx;
+  width: 81rpx;
+  
+}
+.liu_yan{
+  background-color: #f2f2f2;
+  padding: 20rpx 5rpx;
+  font-size: 24rpx;
+  height: 41rpx;
+  /* line-height: 81rpx; */
+  margin-left: 14rpx;
+  width: 583rpx;
+}
+.in_font{
+  font-size: 24rpx;
+ 
+  /* position: absolute;
+  left: 10rpx;
+  top: 23rpx; */
+}
+.liu{
+  width: 100%;
+  height: 80rpx;
+}
+.liu_font{
+  font-size: 36rpx;
+  margin-top: 45rpx;
+  /* position: absolute; */
+  margin-left: 37rpx;
+}
+.button{
+  position: fixed;
+  width: 100%;
+  bottom: 50rpx;
+}
+.liu_back{
+  background-color: #FFE896;
+  height: 25rpx;
+  width: 75rpx;
+  margin-top: -20rpx;
+  /* position: absolute; */
+  /* left: 37rpx; */
+  
+}
+.liu_message{
+  margin-top: 22rpx;
+}
+.liu_head_img{
+  height: 80rpx;
+  width: 80rpx;
+  float: left;
+  margin-left: 34rpx;
+  /* position: absolute; */
+}
+.liu_nickname{
+  font-size: 28rpx;
+  /* float: left; */
+  margin-left: 15rpx;
+}
+.liu_content{
+  margin-top: 4rpx;
+  margin-left: 15rpx;
+  /* float: left; */
+}
+.right{
+  width: 75%;
+  float: left;
+}

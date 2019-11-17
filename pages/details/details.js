@@ -1,12 +1,23 @@
 // pages/details/details.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      nickname: "Slight_",
-      gread: "大三",
+    send_to_id:null,
+    button_display:'block',
+    token:'',
+    leave_message:'',
+    content:'',
+    goods_id:'',
+    reply:false,
+    jian_pan:false,
+    liu_display:"none",
+    head_img:'',
+    nickname: "Slight_",
+    gread: "大三",
       dorm: "金翰林",
       attestation: "未认证",
       goods_picture: ["", "","","",""],
@@ -24,7 +35,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var that = this;
+    var that = this;
+    var token = wx.getStorageSync('token')
+    if(token){
+      that.setData({
+        token: token
+      })
+    }
+    that.setData({
+      goods_id:options.data
+    })
+    if (app.globalData.img) {
+      this.setData({
+        nickname: app.globalData.userInfo.nickName,
+        head_img: app.globalData.userInfo.avatarUrl
+      })
+    } else {
+
+      app.userInfoReadyCallback = data => {
+        console.log(data);
+        that.setData({
+          head_img: data.userInfo.avatarUrl
+        })
+        // console.log(data.userInfo.nickName)
+      }
+    }
     console.log(options.data)
     wx.request({
       url: 'https://www.woxihuannia.top/php/goodsinfo.php',
@@ -36,21 +71,16 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
-        console.log(res.data)
-        let resData = res.data;
-          let goods_picture = [];
-        //   for(let i=0;i<=5;i++) {
-        //       if (resData.pic1_path !== null) {
-
-        //       }
-        //   }
-          goods_picture[0] = resData.pic1_path;
-          goods_picture[1] = resData.pic2_path;
-          goods_picture[2] = resData.pic3_path;
-          goods_picture[3] = resData.pic4_path;
-          goods_picture[4] = resData.pic5_path;
-          goods_picture[5] = resData.pic6_path;
+        console.log(res.data.leave)
+        let resData = res.data.data;
+        let goods_picture = [];
+        var i = 1;
+         while(resData["pic"+i+"_path"]){
+           goods_picture[i-1] = resData["pic" + i + "_path"];
+           i++;
+         }
         that.setData({
+          leave_message:res.data.leave,
             nickname: resData.nick_name,
             personalIcon: resData.head_portrait,
             goods_picture: goods_picture,
@@ -110,5 +140,101 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  // up:function(e){
+  //   console.log(e.detail)
+  //   this.setData({
+  //     bottom:e.detail.height
+  //   })
+  // },
+  liu_yan:function(e){
+    
+    if(this.data.liu_display=='none'){
+      this.setData({
+        // bottom: e.detai,
+        liu_display:'block',
+        button_display:'none',
+        reply:false,
+        jian_pan:true
+      })
+    }
+  },
+  input:function(e){
+    var content = e.detail.value
+    console.log(e.detail.value)
+      this.setData({
+        content:content
+      })
+  },
+  send:function(){
+    var that = this
+    var goods_id= this.data.goods_id
+    // console.log(this.data.goods_id)
+    var content = this.data.content
+    // console.log(this.data.content)
+    var token = this.data.token
+    if(that.data.reply==false){
+      wx.request({
+        url: 'https://www.woxihuannia.top/php/leave_message.php',
+        method: "POST",
+        data: {
+          token: token,
+          goods_id: goods_id,
+          content: content,
+          nickname: app.globalData.nickname,
+          head_img: app.globalData.img
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data)
+        }
+
+      })
+    }else if(that.data.reply==true){
+      wx.request({
+        url: 'https://www.woxihuannia.top/php/leave_message.php',
+        method: "POST",
+        data: {
+          send_to_id: that.data.send_to_id,
+          token: token,
+          goods_id: goods_id,
+          content: content,
+          nickname: app.globalData.nickname,
+          head_img: app.globalData.img
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data)
+        }
+
+      })
+    }
+
+  },
+  display:function(){
+    if(this.data.liu_display=='block'){
+      this.setData({
+        
+        liu_display: 'none',
+        jian_pan: false,
+        button_display: 'block'
+      })
+    }
+  },
+  reply:function(e){
+    var send_to = e.currentTarget.dataset['index'];
+
+    console.log(e.currentTarget.dataset['index'])
+    this.setData({
+      send_to_id:send_to,
+      reply:true,
+      button_display:'none',
+      jian_pan:true,
+      liu_display:'block'
+    })
   }
 })

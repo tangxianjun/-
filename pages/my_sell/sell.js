@@ -190,5 +190,16 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  nav:function(){
+    wx.switchTab({
+      url: '../index/index',
+    })
+  },
+  nav_detail:function(e){
+    var index = e.currentTarget.dataset['index'];
+    wx.navigateTo({
+      url: '../details/details?data=' + index,
+    })
   }
 })

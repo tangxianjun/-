@@ -3,8 +3,8 @@
    <view class="h_text">
     <text >{{nickname}},欢迎来到二手街。</text>
    </view>
-   <view class="ba_text" >
-     <text >退出 ></text>
+   <view class="ba_text">
+     <text bindtap="quit">退出 ></text>
    </view>
    <image  class="h_img" src="{{head_img}}"></image>
   </view> 

@@ -2,7 +2,7 @@
 <view class="page">
     <view class="container">
         <view class="title">
-            <textarea placeholder="请输入宝贝标题（说重点喔！）" bindblur="setTitle"></textarea>
+            <textarea maxlength="20" placeholder="请输入宝贝标题（说重点喔！）" bindblur="setTitle"></textarea>
             <label>
                 <view class="radio" value="全新" bindtap="checkNew" wx:if="{{isNew}}" style="border-width:0">
                     <image src="img/checked.png" style="display:block"></image>
@@ -125,7 +125,7 @@
                         <view class="info-inner-title-text">手机号码</view>
                     </view>
                     <view class="info-inner-input">
-                        <input bindinput="setPhone" placeholder="请填写手机号码" type="number"></input>
+                        <input bindinput="setPhone" placeholder="请填写手机号码"maxlength='11'            type="number"></input>
                     </view>
                 </view>
                 <!-- 线上联系 -->
@@ -155,7 +155,7 @@
                             <view class="info-inner-title-text">微信</view>
                         </view>
                         <view class="info-inner-input">
-                            <input bindinput="setLinkDetail" placeholder="请填写微信号" type="number"></input>
+                            <input bindinput="setLinkDetail" placeholder="请填写微信号" type="text" maxlength="20"></input>
                         </view>
                     </view>
                     <!-- QQ -->
@@ -167,7 +167,7 @@
                             <view class="info-inner-title-text">QQ</view>
                         </view>
                         <view class="info-inner-input">
-                            <input bindinput="setLinkDetail" placeholder="请填写QQ号" type="number"></input>
+                            <input maxlength="10" bindinput="setLinkDetail" placeholder="请填写QQ号" type="number"></input>
                         </view>
                     </view>
                 </view>
@@ -214,14 +214,14 @@
                         <view class="info-price-input-inner">
                             <view class="info-price-input-title">现价</view>
                             <view class="info-price-input-input">
-                                <input bindinput="setPriceNow" placeholder="请填写价格" type="digit"></input>
+                                <input maxlength="4" bindinput="setPriceNow" placeholder="请填写价格" type="digit"></input>
                             </view>
                             <view class="info-price-input-unit">元</view>
                         </view>
                         <view class="info-price-input-inner">
                             <view class="info-price-input-title">原价</view>
                             <view class="info-price-input-input">
-                                <input bindinput="setPricePrv" placeholder="请填写价格" type="digit"></input>
+                                <input maxlength="4" bindinput="setPricePrv" placeholder="请填写价格" type="number"></input>
                             </view>
                             <view class="info-price-input-unit">元</view>
                         </view>

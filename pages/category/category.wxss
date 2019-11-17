@@ -1,14 +1,19 @@
 /* pages/category/category.wxss */
 /* 顶部 */
 .header {
-    width: 727rpx;
-    height: auto;
+    width: 703rpx;
+    height: 246rpx;
     margin-left: 11.5rpx;
     margin-bottom: 21rpx;
     position: relative;
+    left: 18rpx;
 }
 .header > image {
-    width: 100%;
+    width: 703rpx;
+    height: 246rpx;
+    position: absolute;
+
+    top: 28rpx;
 }
 /* 搜索 */
 .search {
@@ -17,6 +22,7 @@
     margin-left: 61rpx;
     margin-bottom: 21rpx;
     position: relative;
+    margin-top: 42rpx;
 }
 .search-input {
     width: 100%;

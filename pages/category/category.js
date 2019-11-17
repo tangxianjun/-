@@ -13,7 +13,7 @@ Page({
         type: "未选择",
         typeNum: -1,
         typeList: ["图书教材", "数码产品", "衣物鞋帽", "生活用品", "家用电器", "美妆日化"],
-        typeImgUrl: ["image/kano.jpg", "image/kano.jpg", "image/kano.jpg", "image/kano.jpg", "image/kano.jpg", "image/kano.jpg"],
+        typeImgUrl: ["image/book.svg", "image/shu.svg", "image/cloth.svg", "image/live.svg", "image/ele.svg", "image/mei.svg"],
         typeCategory: [{
                 title: "图书教材",
                 category: ["全部", "教材", "考试", "畅销书", "经典"],
@@ -64,6 +64,10 @@ Page({
      */
     onLoad: function(options) {
         console.log(options.data);
+        var nav_title = options.data
+        wx.setNavigationBarTitle({
+          title: nav_title
+        })
         var that = this;
         let i;
         let typeList = this.data.typeList;

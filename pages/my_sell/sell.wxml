@@ -12,7 +12,7 @@
     </view>
   </view>
 </view>
-<view class="sell" wx:for="{{list}}" wx:key="item" style="display:{{display}};z-index:{{100-index}}">
+<view class="sell"  wx:for="{{list}}" wx:key="item" style="display:{{display}};z-index:{{100-index}}" bindtap="nav_detail" data-index='{{item.goods_id}}'>
   <view class="sellinner">
     <view class="text3">
       <text>全新宝贝 | 当面交易</text>
@@ -38,5 +38,5 @@
   <view class="none_text">
     <text>你还没有卖出过一件宝贝呢~</text>
   </view>
-  <button class="button">去逛逛</button>
+  <button class="button" bindtap="nav">去逛逛</button>
 </view>

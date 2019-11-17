@@ -170,5 +170,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  nav:function(){
+    wx.switchTab({
+      url: '../index/index',
+    })
   }
 })

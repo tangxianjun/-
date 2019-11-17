@@ -96,4 +96,42 @@
          </block>
       </view>
    </view>
+   <!--custom Modal-->
+<view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
+<view wx:if="{{showModal}}">
+  <view class='modal-photo'>
+    <image class="userinfo-avatar" src="{{teacherInfo.photo}}" mode="cover"></image>
+  </view>
+  <view class="modal-content">
+    <view class='teacher_name_modal'>{{teacherInfo.name}}
+      <text class='role'>( {{teacherInfo.role}} )</text>
+    </view>
+    <view class='contact_modal'>
+      <image src='/images/phone.jpg'></image>
+      <text class='contact_text_modal'>联系Ta</text>
+    </view>
+    <view class='stars_modal'>
+      <view wx:for="{{stars}}" wx:key="*this">
+        <image class="star-image" style="left: {{item*35}}rpx" src="/images/star_fill.png">
+        </image>
+      </view>
+    </view>
+    <view class='block_modal'>
+      <view class='block_title_modal'>Ta的印象</view>
+      <view class='tags_modal'>
+        <view wx:for="{{tags}}" class='tag_modal' wx:key="*this">{{item}}</view>
+      </view>
+    </view>
+    <view class='teacher_desc_modal'>{{teacherInfo.school}}
+      <text></text>
+    </view>
+    <view class='teacher_desc_modal'>{{teacherInfo.grade}}
+      <text></text>
+    </view>
+    <view class='price_modal'>60<text>元/小时</text></view>
+    <view class='btns'>
+      <button class='btn' bindtap="onChooseTeacher">选择老师</button>
+    </view>
+  </view>
+  </view>
 </view>

@@ -21,11 +21,12 @@
 }
 .ba_text{
   font-size: 28rpx;
+  position: absolute;
   width: 50%;
   color: #7B7B7B;
   letter-spacing: 0.06px;
   text-align: left;
-  float: left;
+  top: 125rpx;
 }
 .img{
   width: 355rpx;
@@ -57,7 +58,7 @@
 }
 .ba{
   background: #FFFFFF;
-  height: 78.9vh;
+  height: 77.7vh;
   margin-top: -9vh;
   width: 688rpx;
   margin-left: 31rpx;

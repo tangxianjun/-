@@ -6,11 +6,11 @@
 <view class="search">
     <input class="search-input" value="{{searchText}}" bindinput="searchDetail"></input>
     <view class="search-text" style="display: {{searchTextDisplay}}">
-        <image src="image/search-icon.jpg" class="search-text-img"></image>
+        <image src="image/search.png" class="search-text-img"></image>
         <span class="search-text-detail">在类目下搜索</span>
     </view>
     <view class="search-clear" bindtap="searchClear" style="display: {{searchClearDisplay}}">
-        <image src="image/search-clear.svg"></image>
+        <image src="image/search.png"></image>
     </view>
 </view>
 <!-- 分类 -->
