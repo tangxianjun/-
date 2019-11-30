@@ -1,6 +1,15 @@
 //app.js
 App({
+  globalData: {
+    userInfo: null,
+    code: {},
+    getsuer: false,
+    nickname: null,
+    img: null,
+    collect: null
+  },
   onLaunch: function () {
+    this.Get_collect()
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -10,7 +19,7 @@ App({
     wx.login({
       success: res => {
         console.log(res)
-        this.globalData.code=res.code
+        this.globalData.code = res.code
         // console.log(this.globalData.code)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
@@ -39,11 +48,25 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null,
-    code:{},
-    getsuer: false,
-    nickname:null,
-    img:null
+  Get_collect: function () {
+    var token = wx.getStorageSync('token')
+    var that = this
+    if (token) {
+      wx.request({
+        url: 'https://www.woxihuannia.top/php/collect_list.php',
+        method: "POST",
+        data: {
+          token: token
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          that.globalData.collect = res.data
+          console.log(that.globalData.collect);
+        }
+
+      })
+    }
   }
 })
