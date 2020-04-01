@@ -1,0 +1,5 @@
+/* pages/notic/notic.wxss */
+image{
+  height: 3145rpx;
+  width: 750rpx;
+}

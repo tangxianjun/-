@@ -1,0 +1,57 @@
+<view class="logo">
+  <image class="logopic" src="https://market.sky31.com/imgs/logo.png"></image>
+</view>
+<view class="topic">
+   <view>
+      <text>湘大二手街</text>
+   </view>
+   <view>
+      <text>湘大人自己的跳蚤市场</text>
+   </view>
+   <view></view>
+   <view>
+      <text>这里是三翼工作室-翼工坊团队。很抱歉让您遇到了问题。但请别担心，我们定会全力为您解决。\n请填写您的具体问题和联系方式，我们将会在1-3个工作日内联系您并进行反馈。感谢你对三翼工作室的支持！</text>
+   </view>
+</view>
+<view class="rew">
+  <view></view>
+  <view>
+    <text>留言反馈</text>
+  </view>
+  <view>
+    <text>问题描述</text>
+    <view></view>
+    <input type="text" placeholder="请用一句话描述你的问题"></input>
+  </view>
+  <view></view>
+  <view>
+    
+    <text>联系方式</text>
+    <view></view>
+    <input type="text" placeholder="请填写您的手机号码"></input>
+  </view>
+  <view></view>
+  <view>
+    <image src="../images/wen@hdpi.svg"></image>
+    <text>常见/热点问题</text>
+  </view>
+</view>
+<view class="footer">
+  <view></view>
+  <view>
+    <text>联系我们</text>
+  </view>
+  <view>
+    <text>如需要直接联系开发团队，请采用以下两种联系方式：</text>
+  </view>
+  <view>
+    <image src="https://market.sky31.com/imgs/mail.png"></image>
+    <text class="email">团队邮箱：\n</text>
+    <text>design@sky31.com</text>
+  </view>
+  <view>
+    <image src="https://market.sky31.com/imgs/qq.png"></image>
+    <text class="email">二手街交流群：</text>
+    <text>888888888</text>
+  </view>
+</view>

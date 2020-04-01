@@ -1,0 +1,4 @@
+<!--pages/notic/notic.wxml-->
+<view>
+  <image src="https://www.woxihuannia.top/img/notic.png"></image>
+</view>
