@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 {
   "pages": [
-    "pages/Me/index",
-    "pages/connect/connect",
     "pages/index/index",
-    
+    "pages/connect/connect",
     
     "pages/notic/notic",
     "pages/index/search/search",
-    
+    "pages/Me/index",
     "pages/details/details",
     "pages/Put/index",
     "pages/login/login",
@@ -50,50 +47,4 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
-=======
-{
-  "pages": [
-    
-    "pages/index/index",
-    "pages/Me/index",
-    "pages/details/details",
-    "pages/Put/index",
-    "pages/login/login",
-    "pages/category/category",
-    "pages/collect/collect",
-    "pages/my_sell/sell",
-    "pages/index/search/search",
-    "pages/logs/logs",
-    "pages/result/result"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFE896",
-    "navigationBarTitleText": "湘大二手街",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "pages/images/二手街未选中@xhdpi.png",
-        "selectedIconPath": "pages/images/二手街选中@xhdpi.png",
-        "text": "二手街"
-      },
-      {
-        "pagePath": "pages/Put/index",
-        "iconPath": "pages/images/发布@xhdpi.png",
-        "selectedIconPath": "pages/images/发布@xhdpi.png",
-        "text": "发布"
-      },
-      {
-        "pagePath": "pages/Me/index",
-        "iconPath": "pages/images/me.png",
-        "selectedIconPath": "pages/images/l_me.png",
-        "text": "我的"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
->>>>>>> cdc0ce316577159ed35d687fa319c2c274051267
 }
