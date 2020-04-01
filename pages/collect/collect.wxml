@@ -4,36 +4,70 @@
     <view class="text_kong">
       <text>{{nickname}}</text>
     </view>
-    <view class="status_text"><text>，这是你喜欢过的宝贝</text></view>
+    <view class="status_text"><text>，{{title}}</text></view>
   <view class="text2"><text>{{tex2}}</text></view>
     <view class="img"><image class="imgs"  src="{{head_img}}"></image></view>
   </view>
 </view>
-<view class="backnone" style="display:{{img_none}}"><image class="none_img" src="{{imgurl}}"></image>
+<!--动态版本-->
+<view class="backnone" style="display:{{img_none}}">
+  <image class="none_img" src="{{imgurl}}"></image>
   <view class="none_text"><text>{{tex}}</text></view>
   <button style="display:{{bttdisplay}}" class="button" bindtap="nav">去逛逛</button>
- 
-
 </view>
  <!-- 收藏 -->
-<view wx:for="{{list}}" class="collect" wx:key="item">
+<view wx:for="{{collect}}" class="collect" wx:key="item">
   <view class="h_back">
-    <view class="right">
-      <view class="r"></view>
-      <view class="r"></view>
-      <view class="r"></view>
+    <view class="right" bindtap="toggleOption" data-index="{{index}}">
+      <view class="r" data-index="{{index}}"></view>
+      <view class="r" data-index="{{index}}"></view>
+      <view class="r" data-index="{{index}}"></view>
+    </view>
+    <view class="optionlist" style="{{selectedOption==index?'display:block':'display:none'}}">
+        <view bindtap="deleteCollect" data-index="{{index}}" data-goods_id="{{item.goods_id}}">取消收藏</view>
     </view>
   </view>
-  <view class="c_content">
+  <view class="c_content" >
     <view class="c_img"><image  class="cimg" src="{{item.pic1_path}}"></image></view>
     <view class="c_right">
       <view class="c_top">{{item.title}}</view>
       <view class="c_z">{{item.description}}</view>
+      <view class="c_time">
+        <image src="../images/date@2x.png"></image>
+        <text>2019-11-21</text>
+      </view>
+      <view class="c_price">
+        <text class='price-prv'>288</text>
+        <text class="dollar">￥</text>
+        <text class="price-now">100</text>
+      </view>
     </view>
   </view>
 </view>
 <!-- 我的消息 -->
-<view class="news" wx:for="{{collect}}" wx:key='item'>
+<view wx:for="{{news}}" style="position:relative">
+  <view class="newsOption">
+    <image src="./img/edit.png"></image>
+    <image src="./img/cancel.png" bindtap="deleteMessage" data-index="{{index}}"></image>
+  </view>
+  <view class="news" wx:key='item' style="right:{{selectedMessage == index?'400rpx':'0px'}}">
+    <view class="newsStatus"></view>
+     <view class="right" bindtap="toggleMessage" data-index="{{index}}">
+      <view class="r" bindtap="toggleMessage" data-index="{{index}}"></view>
+      <view class="r" bindtap="toggleMessage" data-index="{{index}}"></view>
+      <view class="r" bindtap="toggleMessage" data-index="{{index}}"></view>
+    </view>
+    <view class="m_img">
+      <image src="{{item.pic1_path}}"></image>
+    </view>
+    <view style="margin-left:220rpx;padding-top:35rpx">
+      <view style="font-size:40rpx;">{{item.username}}</view>
+      <view style="font-size:22rpx;color:#aaa">{{item.time}}</view>
+      <view style="font-size:22rpx;color:#aaa;margin-top:20rpx">{{item.message}}</view>
+    </view>
+  </view>
+</view>
+<!-- <view class="news"  wx:key='item'>
   <view class="img"><image class="n_img" src=""></image></view>
 </view>
 

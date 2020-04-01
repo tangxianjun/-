@@ -57,6 +57,7 @@ Page({
         searchText: "",
         searchTextDisplay: "flex",
         searchClearDisplay: "none",
+        categorySelected:[1,0,0,0,0]
     },
 
     /**
@@ -124,6 +125,18 @@ Page({
 
     },
     // 懒加载/分left和right
+    categorychange:function(e){
+      console.log(e);
+      var arr = [0,0,0,0,0]
+      for(var i=0;i<arr.length;i++){
+        if(i == e.target.dataset.index)
+          arr[i] = 1;
+      }
+      //这里还需要获得数据 2019.11.20
+      this.setData({
+        categorySelected:arr
+      })
+    },
     getNextView: function() {
         /**
          * i:循环的中间变量

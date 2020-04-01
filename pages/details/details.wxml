@@ -71,9 +71,22 @@
     <view class="tip-inner">{{tip[1]}}</view>
     <view class="tip-inner">{{tip[2]}}</view>
 </view>
+<view class="liu_font">
+  <text>留言</text>
+  <view class="liu_back"></view>
+</view>
+<view class="liu" wx:for="{{leave_message}}" wx:key="item">
+  <view class="liu_message" wx:for="{{item}}" wx:key='item'>
+    <image class="liu_head_img" src="{{item.avatarUrl}}"></image>
+    <view class="right" bindtap="reply" data-index="{{item.id}}">
+      <view class="liu_nickname">{{item.nick_name}}</view>
+      <view class="liu_content">{{item.content}}</view>
+    </view>
+  </view>
+</view>
 <view class="button" style="display:{{button_display}}">
   <view class="collect">
-  <image class="all_img" src="./images/collect.png"></image>
+  <image class="all_img" src="{{collect==0?'./images/collect.png':'./images/collected.png'}}" bindtap="toggleCollect" ></image>
   </view>
   <view class="leave" bindtap="liu_yan">
     <image class="all_img" src="./images/leave.png"></image>
@@ -88,18 +101,5 @@
     <image class="touxiang_img" src="{{head_img}}"></image>
     </view>
     <input maxlength="30" show-confirm-bar='false' class="liu_yan" focus="{{jian_pan}}" bindinput="input" bindblur="display" bindconfirm='send'  placeholder-class="in_font" placeholder="看对眼就留言，问问更多宝贝相关~" ></input>
-  </view>
-</view>
-<view class="liu_font">
-  <text>留言</text>
-  <view class="liu_back"></view>
-</view>
-<view class="liu" wx:for="{{leave_message}}" wx:key="item">
-  <view class="liu_message" wx:for="{{item}}" wx:key='item'>
-    <image class="liu_head_img" src="{{item.avatarUrl}}"></image>
-    <view class="right" bindtap="reply" data-index="{{item.id}}">
-      <view class="liu_nickname">{{item.nick_name}}</view>
-      <view class="liu_content">{{item.content}}</view>
-    </view>
   </view>
 </view>

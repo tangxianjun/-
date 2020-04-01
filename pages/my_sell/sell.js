@@ -16,8 +16,29 @@ Page({
     head_img:null,
     nickname:null,
     img_none:"block",
-    
-    list:[]
+    selected:999,
+    list: [
+      {
+        pic1_path: '../images/shoucang@2x.png',
+        title: '这是一件我收藏的商品，这是一件我收藏的商品',
+        description: '这是一件测试用的收藏商品，如果有实际数据返回了，请把这一组数据删掉',
+        purchase_price:588,
+        status:'已上架'
+      },
+      {
+        pic1_path: '../images/noneput.svg',
+        title: '这是二件我收藏的商品，这是二件我收藏的商品',
+        description: '这是一件测试用的收藏商品，如果有实际数据返回了，请把这一组数据删掉',
+        purchase_price: 588,
+        status: '已上架'
+      },
+      {
+        pic1_path: '../images/news.png',
+        title: '这是三件我收藏的商品，这是三件我收藏的商品',
+        description: '这是一件测试用的收藏商品，如果有实际数据返回了，请把这一组数据删掉',
+        purchase_price: 588,
+        status: '已下架'
+      },]
   },
 
   /**
@@ -51,8 +72,7 @@ Page({
         head_img: app.globalData.img
       })
     } else {
-
-      app.userInfoReadyCallback = data => {
+        app.userInfoReadyCallback = data => {
         console.log(data);
         that.setData({
           nickname: data.userInfo.nickName,
@@ -62,21 +82,6 @@ Page({
       }
     }
 
-  // if(this.data.list==''){
-  //   console.log("ejfoa")
-  //   this.setData({
-  //     me:"me_kong",
-  //     text:"text_kong",
-  //     display:"none"
-  //   })
-  // }else{
-  //   this.setData({
-  //     me:"me",
-  //     text:"text",
-  //     display:"block",
-  //     img_none:"none"
-  //   })
-  // }
   
   try {
     var value = wx.getStorageSync('token')
@@ -142,7 +147,49 @@ Page({
     })
 
 },
+  deleteSell:function(e){
+    var item = e.target.dataset.item;
+    var arr = this.data.list;
+    var result = [];
+    var length = arr.length;
+    arr[e.target.dataset.item] = ""
+    for (var i = 0; i < length; i++) {
+      if (arr[i] != "")
+        result.push(arr[i]);
+    }
+    console.log(arr);
+    wx.showToast({
+      title: '删除成功！',
+    })
+    this.setData({
+      list: result,
+      selected:999
+    })
 
+  },
+  toggleItem:function(e){
+    console.log(e);
+    if (e.target.dataset.item != this.data.selected)
+    {
+      if(e.target.dataset.up)
+        var status = 'none'
+        this.setData({
+          selected: e.target.dataset.item
+      })
+    }
+    else 
+    {
+      this.setData({
+        selected: 999
+      })
+    }
+    console.log(this.data.selected);
+  },
+  cancelSelect:function(){
+    this.setData({
+      selected: 999
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

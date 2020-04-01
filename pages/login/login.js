@@ -6,23 +6,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username:'',
-    password:'',
-    nick_name:null,
-    head_img:null
+    agree:false,
+    modalStr:"",
+    success:false,
+    username: '',
+    password: '',
+    nick_name: null,
+    head_img: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
@@ -30,45 +33,23 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  //   wx.getStorage({
-  //     key: 'token',
-  //     success(res) {
-  //       // console.log(res.data)
-  //       // wx.navigateTo({
-  //       //   url: '../details/details',
-
-  //       console.log("efaf")
-  //       // })
-  //     },
-  //     fail: (res) => {
-  //       wx.switchTab({
-  //         url: '../index/index',
-  //       })
-  //     }
-  //   })
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
     wx.getStorage({
       key: 'token',
       success(res) {
-        // console.log(res.data)
-        // wx.navigateTo({
-        //   url: '../details/details',
-
         console.log("efaf")
-        // })
       },
       fail: (res) => {
         wx.switchTab({
@@ -82,77 +63,45 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
-  in_username:function(e){
-    // console.log(e)
+  in_username: function(e) {
+    console.log(e);
     this.setData({
-      username:e.detail.value
-    })
-    // console.log(this.data.username)
-  },
-  in_passwd:function(e){
-    this.setData({
-      password:e.detail.value
+      username: e.detail.value
     })
   },
-
-  // login:function(){
-
-  //   if (app.globalData.img) {
-  //     this.setData({
-  //       nick_name: app.globalData.userInfo.nickName,
-  //       head_img: app.globalData.userInfo.avatarUrl
-  //     })
-  //   } else {
-
-  //     app.userInfoReadyCallback = data => {
-  //       console.log(data);
-  //       this.setData({
-  //         nick_name: data.userInfo.nickName,
-  //         head_img: data.userInfo.avatarUrl
-  //       })
-  //       // console.log(data.userInfo.nickName)
-  //     }
-  //   }
-  //   wx.getUserInfo({
-  //     success:function(res){
-  //       console.log(res)
-  //     }
-  //   })
-  //   var nickname = this.data.nick_name;
-  //   var img = this.data.head_img;
-  //   var username = this.data.username;
-  //   var password = this.data.password;
-  //   var code = app.globalData.code;
-  //   console.log(nickname)
-  //   console.log(img)
-  //   // console.log(code)
-  //   // console.log(username)
-  //   // console.log(password)
-  //   // console.log(app.globalData.code)
-
-  // },
-  bindGetUserInfo:function(e){
+  in_passwd: function(e) {
+    this.setData({
+      password: e.detail.value
+    })
+  },
+  agree:function(){
+    this.setData({
+     agree:true
+    })
+  },
+  bindGetUserInfo: function(e) {
+    var that = this; 
     console.log(e.detail.userInfo)
     var data = e.detail.userInfo
     this.setData({
-      nick_name:data.nickName,
+      nick_name: data.nickName,
       head_img: data.avatarUrl
     })
     app.globalData.img = this.data.head_img
@@ -164,6 +113,24 @@ Page({
     var img = this.data.head_img;
     var username = this.data.username;
     var password = this.data.password;
+    if (username == "") {
+      that.setData({
+        modalStr: "请输入账号"
+      })
+      return;
+    }
+    else if (password == ""){
+      that.setData({
+        modalStr: "请输入密码"
+      })
+      return ;
+    }
+    else if (this.data.agree == false) {
+      that.setData({
+        modalStr: "请勾选许可使用协议"
+      })
+      return;
+    }
     var code = app.globalData.code;
     wx.request({
       url: 'https://www.woxihuannia.top/php/login.php',
@@ -178,16 +145,29 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
+        
         if (res.data.code == 0) {
+          that.setData({
+            success: true,
+            modalStr: ""
+          })
           wx.setStorage({
             key: 'token',
             data: res.data.message,
           })
-          wx.switchTab({
-            url: '../index/index',
-          })
+          setTimeout(function() {
+            wx.switchTab({
+              url: '../index/index',
+            })
+          }, 2000)
+        }
+        else if(res.data.code == 1) {
+         that.setData({
+           modalStr:"账号密码有误！"
+         })
+         return;
         }
 
       }

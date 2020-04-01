@@ -1,3 +1,6 @@
+Page,view,text{
+   font-family: PingFang SC;
+}
 .page {
     width: 750rpx;
     overflow-x: hidden;
@@ -5,6 +8,7 @@
 
 .container {
     width: 650rpx;
+    transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin-left: 50rpx;
     margin-top: 50rpx;
 }
@@ -70,7 +74,6 @@
     width: 100%;
     height: 100%;
     font-size: 28rpx;
-    font-family: PingFangSC-Regular;
     line-height: 28rpx;
     padding-left: 15rpx;
     padding-right: 15rpx;
@@ -78,7 +81,46 @@
 }
 
 /* 图片 */
-
+.first{
+  position: absolute;
+  bottom: 2px;
+  padding: 2px;
+  border-radius: 2px;
+  color:#fff;
+  background-color: #3F3F3F;
+  right: 2px;
+  font-size: 14px;
+  
+}
+.itembtn{
+  display: none;
+  font-size: 14px;
+  color:#fff;
+  text-align: center;
+  line-height: 25px; 
+  width: 25px;
+  height: 25px;
+  background-color: #3F3F3F;
+  border-radius:50%; 
+  position: absolute;
+  top: -10px;
+  transform: scale(1.0);
+  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+  z-index: 999;
+}
+.delete{
+  right: -10px;
+}
+.toTop{
+  left: -10px;
+}
+.selected{
+  display: block;
+}
+.selected+image{
+  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: scale(1.1);
+}
 .imgs {
     width: 100%;
     display: flex;
@@ -91,14 +133,14 @@
     width: 210rpx;
     height: 210rpx;
     border-radius: 16rpx;
-    overflow: hidden;
     box-sizing: border-box;
-    margin-top: 10rpx;
+    /* margin-top: 10rpx; */
     margin-right: 10rpx;
     position: relative;
 }
 
 .camara {
+    position: flex;
     border: 1px solid #979797;
     box-sizing: border-box;
     display: flex;
@@ -112,7 +154,7 @@
     margin-right: 0;
 }
 .imgs > .img {
-    overflow: hidden;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,11 +166,7 @@
     flex-shrink: 0;
 }
 
-.img view {
-    position: absolute;
-    top: 15rpx;
-    right: 15rpx;
-}
+
 .img-tip-main {
     width: 63rpx;
     height: 31rpx;
@@ -189,7 +227,6 @@
     line-height: 30rpx;
     display: flex;
     justify-content: flex-start;
-    font-family: PingFangSC-Regular;
     font-size: 22rpx;
     color: #bbb;
     margin-top: 33rpx;
@@ -212,7 +249,6 @@
     font-size: 36rpx;
     border-bottom: 25rpx solid #ffe896;
     box-sizing: border-box;
-    font-family: PingFangSC-Semibold;
     font-weight: bold;
     margin-bottom: 45rpx;
 }
@@ -278,7 +314,6 @@
     padding-right: 23.5rpx;
     height: 47rpx;
     line-height: 47rpx;
-    font-family: PingFangSC-Semibold;
     font-size: 24rpx;
     color: #ff7911;
     border: 2rpx solid #ffe9b5;
@@ -295,14 +330,12 @@
 
 .info-link > .info-contain > .info-inner:nth-child(2) input {
     width: 80%;
-    font-family: PingFangSC-Regular;
     font-size: 28rpx;
 }
 
 /* 联系信息->线上联系 */
 
 .info-link > .info-contain > .info-inner:nth-child(3) {
-    font-family: PingFangSC-Regular;
     font-size: 22rpx;
     color: #bbb;
 }
@@ -323,7 +356,6 @@
 }
 .info-link > .info-contain > .info-inner:nth-child(4) input {
     width: 80%;
-    font-family: PingFangSC-Regular;
     font-size: 28rpx;
 }
 
@@ -352,18 +384,15 @@
 }
 
 .info-price-input-inner > .info-price-input-title {
-    font-family: PingFangSC-Regular;
     font-size: 22rpx;
     color: #bbb;
 }
 
 .info-price-input-inner > .info-price-input-unit {
-    font-family: PingFangSC-Regular;
     font-size: 26rpx;
     color: #0b0b0b;
 }
 .info-price-input-inner input {
-    font-family: PingFangSC-Semibold;
     font-size: 28rpx;
     color: #3F3F3F;
     padding-left: 23rpx;
@@ -379,7 +408,6 @@
 
 /* 商品信息->标签 */
 .info-goods > .info-contain > .info-inner:nth-child(3) > .info-inner-input {
-    font-family: PingFangSC-Regular;
     font-size: 22rpx;
     color: #BBBBBB;
     /* flex-shrink: 0; */
@@ -421,10 +449,40 @@
     width: 538rpx;
     height: 97rpx;
     background-color: #FFE896;
-    font-family: PingFangSC-Semibold;
     font-size: 36rpx;
     color: #3F3F3F;
     margin-bottom: 47rpx;
     border-radius: 1000rpx;
     font-weight: 500;
+}
+.toast{
+  width: 100%;
+  position: fixed;
+  top:0;
+  height:50rpx;
+  line-height: 50rpx;
+  font-size:26rpx;
+  background-color: #ff7911;
+  opacity: 0.5;
+  color:#fff;
+  text-align: center;
+}
+.window{
+  transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.window>image{
+  width: 552rpx;
+  height: 627rpx;
+  position: absolute;
+  
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

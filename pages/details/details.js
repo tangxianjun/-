@@ -18,17 +18,18 @@ Page({
     head_img:'',
     nickname: "Slight_",
     gread: "大三",
-      dorm: "金翰林",
-      attestation: "未认证",
-      goods_picture: ["", "","","",""],
-      personalIcon: "",
-      priceNow: 150,
-      pricePrv: 1599,
-      time: "2019-09-12",
-      goodsName: "至臻精品太后御用级窝窝头",
-      detailTip: "全新",
-      detail: "绝对正品，太后娘娘亲口测试，不好吃不要钱，咬过一口就不支持退款，谢谢太监们的支持了",
-      tip: ["面交","全新","可讲价"],
+    dorm: "金翰林",
+    attestation: "未认证",
+    goods_picture: ["", "","","",""],
+    collect:0,
+    personalIcon: "",
+    priceNow: 150,
+    pricePrv: 1599,
+    time: "2019-09-12",
+    goodsName: "至臻精品太后御用级窝窝头",
+    detailTip: "全新",
+    detail: "绝对正品，太后娘娘亲口测试，不好吃不要钱，咬过一口就不支持退款，谢谢太监们的支持了",
+    tip: ["面交","全新","可讲价"],
   },
 
   /**
@@ -43,8 +44,19 @@ Page({
       })
     }
     that.setData({
-      goods_id:options.data
+      goods_id:parseInt(options.data)
     })
+  
+    if(JSON.parse(app.globalData.collect.message).indexOf(this.data.goods_id)==-1){
+      this.setData({
+        collect:0
+      })
+    }
+    else{
+      this.setData({
+        collect: 1
+      })
+    }
     if (app.globalData.img) {
       this.setData({
         nickname: app.globalData.userInfo.nickName,
@@ -71,16 +83,17 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
-        console.log(res.data.leave)
+        console.log(res.data)
         let resData = res.data.data;
         let goods_picture = [];
         var i = 1;
-         while(resData["pic"+i+"_path"]){
+        while(resData["pic"+i+"_path"]){
            goods_picture[i-1] = resData["pic" + i + "_path"];
            i++;
-         }
+        }
+    
         that.setData({
-          leave_message:res.data.leave,
+            leave_message:res.data.leave,
             nickname: resData.nick_name,
             personalIcon: resData.head_portrait,
             goods_picture: goods_picture,
@@ -92,7 +105,51 @@ Page({
 
     })
   },
-
+  toggleCollect:function(e){
+    console.log(this.data.goods_id);
+    var that = this;
+    if(this.data.collect == 0){
+      console.log("收藏");
+      wx.request({
+        url: 'https://www.woxihuannia.top/php/collect.php',
+        method: "POST",
+        data: {
+          token: that.data.token,
+          goods_id: that.data.goods_id
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data)
+          that.setData({
+            collect:1
+          })
+        }
+      })
+    }
+    else{
+      console.log("取消收藏");
+      wx.request({
+        url: 'https://www.woxihuannia.top/php/del_collect.php',
+        method: "POST",
+        data: {
+          token: that.data.token,
+          goods_id: that.data.goods_id
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data)
+          that.setData({
+            collect: 0
+          })
+        }
+      })
+    }
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

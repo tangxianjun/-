@@ -13,7 +13,7 @@
         </view>
     </view>
     <!-- 搜索结果的内容 -->
-    <view class="result-goods">
+    <view class="result-goods"> 
         <!-- 没有相关搜索结果 -->
         <view class="result-goods-empty" wx:if="{{code==1}}">
             <view class="result-goods-empty-image">

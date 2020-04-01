@@ -29,15 +29,9 @@ Page({
               nickname: data.userInfo.nickName,
               head_img: data.userInfo.avatarUrl
             })
-            // console.log(data.userInfo.nickName)
+          
           }
         }
-        // console.log(res.data)
-        // wx.navigateTo({
-        //   url: '../details/details',
-
-        // console.log("efaf")
-        // })
       },
       fail: (res) => {
         wx.navigateTo({

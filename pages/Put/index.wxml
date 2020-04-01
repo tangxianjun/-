@@ -1,313 +1,237 @@
 <!--pages/Put/index.wxml-->
 <view class="page">
-    <view class="container">
-        <view class="title">
-            <textarea maxlength="20" placeholder="请输入宝贝标题（说重点喔！）" bindblur="setTitle"></textarea>
-            <label>
-                <view class="radio" value="全新" bindtap="checkNew" wx:if="{{isNew}}" style="border-width:0">
-                    <image src="img/checked.png" style="display:block"></image>
-                </view>
-                <view class="radio" value="全新" bindtap="checkNew" wx:else style="border-width:2">
-                    <image src="img/checked.png" style="display:none"></image>
-                </view>
-                全新
-            </label>
+  <view class="container" style="filter:{{success==true?'blur(2px)':'blur(0px)'}}" >
+    <view class="title">
+      <textarea maxlength="20" placeholder="请输入宝贝标题（说重点喔！）" bindblur="setTitle" value="{{title}}"></textarea>
+      <label>
+        <view class="radio" value="全新" bindtap="checkNew" wx:if="{{isNew}}" style="border-width:0">
+          <image src="img/checked.png" style="display:block"></image>
         </view>
-        <view class="describe">
-            <textarea type="text" placeholder="请给宝贝一段描述（不多于120字）" maxlength="120" adjust-position="false" bindblur="setDescribe"></textarea>
+        <view class="radio" value="全新" bindtap="checkNew" wx:else style="border-width:2">
+          <image src="img/checked.png" style="display:none"></image>
         </view>
-        <!-- <view class="imgs">
-            <view class="img" wx:if="{{picture.length > 0}}">
-                <image src="{{picture[0]}}" mode='aspectFill'></image>
-                <view class="img-tip-main">主图</view>
-            </view>
-            <view class="img" wx:if="{{picture.length > 1}}">
-                <image src="{{picture[1]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-index="2" class="img-tip-delete">×</view>
-            </view>
-            <view class="img" wx:if="{{picture.length > 2}}">
-                <image src="{{picture[2]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-index="3" class="img-tip-delete">×</view>
-            </view>
-            <view class="img" wx:if="{{picture.length > 3}}">
-                <image src="{{picture[3]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-index="4" class="img-tip-delete">×</view>
-            </view>
-            <view class="img" wx:if="{{picture.length > 4}}">
-                <image src="{{picture[4]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-index="5" class="img-tip-delete">×</view>
-            </view>
-            <view class="img" wx:if="{{picture.length > 5}}">
-                <image src="{{picture[5]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-index="6" class="img-tip-delete">×</view>
-            </view>
-            <view class="camara" wx:if="{{picture.length <= 5}}" bindtap="chooseImg">
-                <image src="img/camara.png"></image>
-            </view>
-        </view> -->
-        <!-- 可移动 -->
-        <movable-area class="movable-imgs">
-            <movable-view bindtouchend="moveOver" bindchange="moving" bindtouchstart="movePic" data-index="0" data-place="{{index[0]}}" scale scale-value="{{picSize[0]}}" x="{{x[0]}}rpx" y="{{y[0]}}rpx" style="z-index:{{zIndex[0]}}" wx:if="{{picture[0] != ''}}" class="img"
-                direction="all">
-                <image src="{{picture[0]}}" mode='aspectFill'></image>
-                <view class="img-tip-main" data-place="{{index[0]}}" data-index="0" style="transform:scale({{isMove}})">主图{{index[0]}}</view>
-            </movable-view>
-
-            <movable-view bindtouchend="moveOver" bindchange="moving" bindtouchstart="movePic" data-index="1" data-place="{{index[1]}}" scale scale-value="{{picSize[1]}}" x="{{x[1]}}rpx" y="{{y[1]}}rpx" style="z-index:{{zIndex[1]}}" wx:if="{{picture[1] != ''}}" class="img"
-                direction="all">
-                <image src="{{picture[1]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-place="{{index[1]}}" data-index="1" class="img-tip-delete" style="transform:scale({{isMove}})">{{index[1]}}×</view>
-            </movable-view>
-
-            <movable-view bindtouchend="moveOver" bindchange="moving" bindtouchstart="movePic" data-index="2" data-place="{{index[2]}}" scale scale-value="{{picSize[2]}}" x="{{x[2]}}rpx" y="{{y[2]}}rpx" style="z-index:{{zIndex[2]}}" wx:if="{{picture[2] != ''}}" class="img"
-                direction="all">
-                <image src="{{picture[2]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-place="{{index[2]}}" data-index="2" class="img-tip-delete" style="transform:scale({{isMove}})">{{index[2]}}×</view>
-            </movable-view>
-
-            <movable-view bindtouchend="moveOver" bindchange="moving" bindtouchstart="movePic" data-index="3" data-place="{{index[3]}}" scale scale-value="{{picSize[3]}}" x="{{x[3]}}rpx" y="{{y[3]}}rpx" style="z-index:{{zIndex[3]}}" wx:if="{{picture[3] != ''}}" class="img"
-                direction="all">
-                <image src="{{picture[3]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-place="{{index[3]}}" data-index="3" class="img-tip-delete" style="transform:scale({{isMove}})">{{index[3]}}×</view>
-            </movable-view>
-
-            <movable-view bindtouchend="moveOver" bindchange="moving" bindtouchstart="movePic" data-index="4" data-place="{{index[4]}}" scale scale-value="{{picSize[4]}}" x="{{x[4]}}rpx" y="{{y[4]}}rpx" style="z-index:{{zIndex[4]}}" wx:if="{{picture[4] != ''}}" class="img"
-                direction="all">
-                <image src="{{picture[4]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-place="{{index[4]}}" data-index="4" class="img-tip-delete" style="transform:scale({{isMove}})">{{index[4]}}×</view>
-            </movable-view>
-
-            <movable-view bindtouchend="moveOver" bindchange="moving" bindtouchstart="movePic" data-index="5" data-place="{{index[5]}}" scale scale-value="{{picSize[5]}}" x="{{x[5]}}rpx" y="{{y[5]}}rpx" style="z-index:{{zIndex[5]}}" wx:if="{{picture[5] != ''}}" class="img"
-                direction="all">
-                <image src="{{picture[5]}}" mode='aspectFill'></image>
-                <view bindtap="deletePic" data-place="{{index[5]}}" data-index="5" class="img-tip-delete" style="transform:scale({{isMove}})">{{index[5]}}×</view>
-            </movable-view>
-
-            <movable-view style="left:{{positionX[picNum]}}rpx;top:{{positionY[picNum]}}rpx" wx:if="{{picNum < 6}}" class="camara" bindtap="chooseImg">
-                <image src="img/camara.png"></image>
-            </movable-view>
-        </movable-area>
-        <!-- 图片下面的提示 -->
-        <view class="tip">提示：商品发布一个月后将自动下架</view>
-        <!-- 联系信息 -->
-        <view class="info-link">
-            <view class="info-title">联系信息</view>
-            <view class="info-contain">
-                <!-- 宿舍 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/dormitory.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">宿舍</view>
-                    </view>
-                    <view class="info-inner-input">
-                        <view class="info-options info-options-choosed" wx:if="{{dormitory == 'J'}}">金翰林</view>
-                        <view bindtap="setDormitory" data-index="J" class="info-options" wx:else>金翰林</view>
-                        <view class="info-options info-options-choosed" wx:if="{{dormitory == 'Q'}}">琴湖</view>
-                        <view bindtap="setDormitory" data-index="Q" class="info-options" wx:else>琴湖</view>
-                        <view class="info-options info-options-choosed" wx:if="{{dormitory == 'B'}}">北苑</view>
-                        <view bindtap="setDormitory" data-index="B" class="info-options" wx:else>北苑</view>
-                        <view class="info-options info-options-choosed" wx:if="{{dormitory == 'N'}}">南苑</view>
-                        <view bindtap="setDormitory" data-index="N" class="info-options" wx:else>南苑</view>
-                        <view class="info-options info-options-choosed" wx:if="{{dormitory == 'X'}}">兴湘</view>
-                        <view bindtap="setDormitory" data-index="X" class="info-options" wx:else>兴湘</view>
-                        <view class="info-options info-options-choosed" wx:if="{{dormitory == 'Z'}}">校外租房</view>
-                        <view bindtap="setDormitory" data-index="Z" class="info-options" wx:else>校外租房</view>
-                    </view>
-                </view>
-                <!-- 手机号码 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/phone.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">手机号码</view>
-                    </view>
-                    <view class="info-inner-input">
-                        <input bindinput="setPhone" placeholder="请填写手机号码"maxlength='11'            type="number"></input>
-                    </view>
-                </view>
-                <!-- 线上联系 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/linkWay.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">线上联系</view>
-                    </view>
-                    <view class="info-inner-input">
-                        <view wx:if="{{linkWay == 'WeChat'}}" class="info-options info-options-choosed">微信</view>
-                        <view bindtap="setLinkWay" wx:else data-index="WeChat" class="info-options">微信</view>
-                        <view wx:if="{{linkWay == 'QQ'}}" class="info-options info-options-choosed">QQ</view>
-                        <view bindtap="setLinkWay" wx:else data-index="QQ" class="info-options">QQ</view>
-                        <view class="info-inner-text" style="height:{{linkWay_text_height}}">*选择常用软件进行填写</view>
-                    </view>
-                </view>
-                <!-- 微信或QQ -->
-                <view class="info-inner" style="height: {{linkDetail_height_container}}">
-                    <!-- 微信 -->
-                    <view style="transform:translateY(-{{linkDetail_height_inner}})" class="info-inner-wechat">
-                        <view class="info-inner-title">
-                            <view class="info-inner-title-icon">
-                                <image src="img/wechat.png"></image>
-                            </view>
-                            <view class="info-inner-title-text">微信</view>
-                        </view>
-                        <view class="info-inner-input">
-                            <input bindinput="setLinkDetail" placeholder="请填写微信号" type="text" maxlength="20"></input>
-                        </view>
-                    </view>
-                    <!-- QQ -->
-                    <view style="transform:translateY(-{{linkDetail_height_inner}})" class="info-inner-QQ">
-                        <view class="info-inner-title">
-                            <view class="info-inner-title-icon">
-                                <image src="img/linkWay.png"></image>
-                            </view>
-                            <view class="info-inner-title-text">QQ</view>
-                        </view>
-                        <view class="info-inner-input">
-                            <input maxlength="10" bindinput="setLinkDetail" placeholder="请填写QQ号" type="number"></input>
-                        </view>
-                    </view>
-                </view>
-                <!-- 微信 -->
-                <!-- wx:if="{{linkWay == 'WeChat'}}" -->
-                <!-- <view class="info-inner" >
-                <view class="info-inner-title">
-                    <view class="info-inner-title-icon">
-                        <image src="img/wechat.png"></image>
-                    </view>
-                    <view class="info-inner-title-text">微信</view>
-                </view>
-                <view class="info-inner-input">
-                    <input bindinput="setLinkDetail" placeholder="请填写微信号" type="number"></input>
-                </view>
-            </view> -->
-                <!-- QQ -->
-                <!-- wx:elif="{{linkWay == 'QQ'}}" -->
-                <!-- <view class="info-inner" >
-                <view class="info-inner-title">
-                    <view class="info-inner-title-icon">
-                        <image src="img/linkWay.png"></image>
-                    </view>
-                    <view class="info-inner-title-text">QQ</view>
-                </view>
-                <view class="info-inner-input">
-                    <input bindinput="setLinkDetail" placeholder="请填写QQ号" type="number"></input>
-                </view>
-            </view> -->
-            </view>
-        </view>
-        <view class="info-goods">
-            <view class="info-title">商品信息</view>
-            <view class="info-contain">
-                <!-- 价格 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/price.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">价格</view>
-                    </view>
-                    <view class="info-inner-input">
-                        <view class="info-price-input-inner">
-                            <view class="info-price-input-title">现价</view>
-                            <view class="info-price-input-input">
-                                <input maxlength="4" bindinput="setPriceNow" placeholder="请填写价格" type="digit"></input>
-                            </view>
-                            <view class="info-price-input-unit">元</view>
-                        </view>
-                        <view class="info-price-input-inner">
-                            <view class="info-price-input-title">原价</view>
-                            <view class="info-price-input-input">
-                                <input maxlength="4" bindinput="setPricePrv" placeholder="请填写价格" type="number"></input>
-                            </view>
-                            <view class="info-price-input-unit">元</view>
-                        </view>
-                        <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" class="info-options info-options-choosed" wx:if="{{bargaining}}">可讲价</view>
-                        <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" bindtap="setBargaining" class="info-options" wx:else>可讲价</view>
-                        <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" class="info-options info-options-choosed" wx:if="{{!bargaining}}">一口价</view>
-                        <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" bindtap="setBargaining" class="info-options" wx:else>一口价</view>
-                    </view>
-                </view>
-                <!-- 分类 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/type.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">分类</view>
-                    </view>
-                    <view class="info-inner-input">
-                        <view bindtap="setType" data-index="图书教材" data-num="0" wx:if="{{type != '图书教材'}}" class="info-options">图书教材</view>
-                        <view wx:else class="info-options info-options-choosed">图书教材</view>
-
-                        <view bindtap="setType" data-index="数码产品" data-num="1" wx:if="{{type != '数码产品'}}" class="info-options">数码产品</view>
-                        <view wx:else class="info-options info-options-choosed">数码产品</view>
-
-                        <view bindtap="setType" data-index="衣物鞋帽" data-num="2" wx:if="{{type != '衣物鞋帽'}}" class="info-options">衣物鞋帽</view>
-                        <view wx:else class="info-options info-options-choosed">衣物鞋帽</view>
-
-                        <view bindtap="setType" data-index="生活用品" data-num="3" wx:if="{{type != '生活用品'}}" class="info-options">生活用品</view>
-                        <view wx:else class="info-options info-options-choosed">生活用品</view>
-
-                        <view bindtap="setType" data-index="美妆日记" data-num="4" wx:if="{{type != '美妆日记'}}" class="info-options">美妆日化</view>
-                        <view wx:else class="info-options info-options-choosed">美妆日化</view>
-
-                        <view bindtap="setType" data-index="家用电器" data-num="5" wx:if="{{type != '家用电器'}}" class="info-options">家用电器</view>
-                        <view wx:else class="info-options info-options-choosed">家用电器</view>
-                    </view>
-                </view>
-                <!-- 标签 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/tip.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">标签</view>
-                    </view>
-                    <view class="info-inner-input">
-                    <view class="info-inner-input-container" style="transform: translateY(-{{tipY}}rpx)">
-                        <block wx:for="{{allTip}}" wx:key="tips">
-                            <view class="tip-container">
-                                <view data-index="{{item.tip[0]}}" bindtap="setTip" wx:if="{{tip != item.tip[0]}}" class="info-options">{{item.tip[0]}}</view>
-                                <view wx:else class="info-options info-options-choosed">{{item.tip[0]}}</view>
-
-                                <view data-index="{{item.tip[1]}}" bindtap="setTip" wx:if="{{tip != item.tip[1]}}" class="info-options">{{item.tip[1]}}</view>
-                                <view wx:else class="info-options info-options-choosed">{{item.tip[1]}}</view>
-
-                                <view data-index="{{item.tip[2]}}" bindtap="setTip" wx:if="{{tip != item.tip[2]}}" class="info-options">{{item.tip[2]}}</view>
-                                <view wx:else class="info-options info-options-choosed">{{item.tip[2]}}</view>
-
-                                <view data-index="{{item.tip[3]}}" bindtap="setTip" wx:if="{{tip != item.tip[3]}}" class="info-options">{{item.tip[3]}}</view>
-                                <view wx:else class="info-options info-options-choosed">{{item.tip[3]}}</view>
-
-                                <view data-index="{{item.tip[4]}}" bindtap="setTip" wx:if="{{tip != item.tip[4]}}" class="info-options">{{item.tip[4]}}</view>
-                                <view wx:else class="info-options info-options-choosed">{{item.tip[4]}}</view>
-                            </view>
-                        </block>
-                        </view>
-                        <view class="info-inner-text">*分类与标签将决定投放栏目，请认真选择</view>
-                    </view>
-                </view>
-                <!-- 交易方式 -->
-                <view class="info-inner">
-                    <view class="info-inner-title">
-                        <view class="info-inner-title-icon">
-                            <image src="img/tradeWay.png"></image>
-                        </view>
-                        <view class="info-inner-title-text">交易方式</view>
-                    </view>
-                    <view class="info-inner-input">
-                        <view wx:if="{{tradeWay == 0}}" class="info-options info-options-choosed">面交</view>
-                        <view wx:else bindtap="setTradeWay" class="info-options">面交</view>
-                        <view wx:if="{{tradeWay == 1}}" class="info-options info-options-choosed">可邮寄</view>
-                        <view wx:else bindtap="setTradeWay" class="info-options">可邮寄</view>
-                    </view>
-                </view>
-            </view>
-        </view>
-        <button class="release" bindtap="release">发布</button>
+        全新
+      </label>
     </view>
+    <view class="describe">
+      <textarea type="text" placeholder="请给宝贝一段描述（不多于120字）" maxlength="120" adjust-position="false" bindblur="setDescribe" value="{{describe}}"></textarea>
+    </view>
+    <!-- 可移动 -->
+    <movable-area class="movable-imgs imgs">
+      <block wx:for="{{picture}}">
+
+        <view class="img" class="img" style="{{picture[index]==''?'display:none':'display:flex'}}">
+          <view class="first" style="{{index==0?'display:block':'display:none'}}">主图</view>
+          <view class="itembtn delete {{none[index]==1?'selected':''}}" bindtap="deleteItem" data-index="{{index}}">×</view>
+          <view class="itembtn toTop {{none[index]==1?'selected':''}}" bindtap="toTopItem" data-index="{{index}}">主</view>
+          <image src="{{picture[index]}}" mode='aspectFill' bindlongpress="selectItem" bindtap="resetSelected" data-index="{{index}}"></image>
+        </view>
+      </block>
+      <movable-view style="left:{{positionX[picNum]}}rpx;top:{{positionY[picNum]}}rpx" wx:if="{{picNum < 6}}" class="camara" bindtap="chooseImg">
+        <image src="img/camara.png"></image>
+      </movable-view>
+    </movable-area>
+    <!-- 图片下面的提示 -->
+    <view class="tip">提示：商品发布一个月后将自动下架</view>
+    <!-- 联系信息 -->
+    <view class="info-link">
+      <view class="info-title">联系信息</view>
+      <view class="info-contain">
+        <!-- 宿舍 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/dormitory.png"></image>
+            </view>
+            <view class="info-inner-title-text">宿舍</view>
+          </view>
+          <view class="info-inner-input">
+            <view class="info-options info-options-choosed" wx:if="{{dormitory == 'J'}}">金翰林</view>
+            <view bindtap="setDormitory" data-index="J" class="info-options" wx:else>金翰林</view>
+            <view class="info-options info-options-choosed" wx:if="{{dormitory == 'Q'}}">琴湖</view>
+            <view bindtap="setDormitory" data-index="Q" class="info-options" wx:else>琴湖</view>
+            <view class="info-options info-options-choosed" wx:if="{{dormitory == 'B'}}">北苑</view>
+            <view bindtap="setDormitory" data-index="B" class="info-options" wx:else>北苑</view>
+            <view class="info-options info-options-choosed" wx:if="{{dormitory == 'N'}}">南苑</view>
+            <view bindtap="setDormitory" data-index="N" class="info-options" wx:else>南苑</view>
+            <view class="info-options info-options-choosed" wx:if="{{dormitory == 'X'}}">兴湘</view>
+            <view bindtap="setDormitory" data-index="X" class="info-options" wx:else>兴湘</view>
+            <view class="info-options info-options-choosed" wx:if="{{dormitory == 'Z'}}">校外租房</view>
+            <view bindtap="setDormitory" data-index="Z" class="info-options" wx:else>校外租房</view>
+          </view>
+        </view>
+        <!-- 手机号码 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/phone.png"></image>
+            </view>
+            <view class="info-inner-title-text">手机号码</view>
+          </view>
+          <view class="info-inner-input">
+            <input bindinput="setPhone" placeholder="请填写手机号码" maxlength='11' type="number" value="{{phone}}"></input>
+          </view>
+        </view>
+        <!-- 线上联系 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/linkWay.png"></image>
+            </view>
+            <view class="info-inner-title-text">线上联系</view>
+          </view>
+          <view class="info-inner-input">
+            <view wx:if="{{linkWay == 'WeChat'}}" class="info-options info-options-choosed">微信</view>
+            <view bindtap="setLinkWay" wx:else data-index="WeChat" class="info-options">微信</view>
+            <view wx:if="{{linkWay == 'QQ'}}" class="info-options info-options-choosed">QQ</view>
+            <view bindtap="setLinkWay" wx:else data-index="QQ" class="info-options">QQ</view>
+            <view class="info-inner-text" style="height:{{linkWay_text_height}}">*选择常用软件进行填写</view>
+          </view>
+        </view>
+        <!-- 微信或QQ -->
+        <view class="info-inner" style="height: {{linkDetail_height_container}}">
+          <!-- 微信 -->
+          <view style="transform:translateY(-{{linkDetail_height_inner}})" class="info-inner-wechat">
+            <view class="info-inner-title">
+              <view class="info-inner-title-icon">
+                <image src="img/wechat.png"></image>
+              </view>
+              <view class="info-inner-title-text">微信</view>
+            </view>
+            <view class="info-inner-input">
+              <input bindinput="setLinkDetail" placeholder="请填写微信号" type="text" maxlength="20" value="{{linkDetail}}"></input>
+            </view>
+          </view>
+          <!-- QQ -->
+          <view style="transform:translateY(-{{linkDetail_height_inner}})" class="info-inner-QQ">
+            <view class="info-inner-title">
+              <view class="info-inner-title-icon">
+                <image src="img/linkWay.png"></image>
+              </view>
+              <view class="info-inner-title-text">QQ</view>
+            </view>
+            <view class="info-inner-input">
+              <input maxlength="10" bindinput="setLinkDetail" placeholder="请填写QQ号" type="number" value="{{linkDetail}}"></input>
+            </view>
+          </view>
+        </view>
+        <!-- 微信 -->
+      </view>
+    </view>
+    <view class="info-goods">
+      <view class="info-title">商品信息</view>
+      <view class="info-contain">
+        <!-- 价格 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/price.png"></image>
+            </view>
+            <view class="info-inner-title-text">价格</view>
+          </view>
+          <view class="info-inner-input">
+            <view class="info-price-input-inner">
+              <view class="info-price-input-title">现价</view>
+              <view class="info-price-input-input">
+                <input maxlength="4" bindinput="setPriceNow" placeholder="请填写价格" type="digit" value="{{priceNow}}"></input>
+              </view>
+              <view class="info-price-input-unit">元</view>
+            </view>
+            <view class="info-price-input-inner">
+              <view class="info-price-input-title">原价</view>
+              <view class="info-price-input-input">
+                <input maxlength="4" bindinput="setPricePrv" placeholder="请填写价格" type="number" value="{{pricePrv}}"></input>
+              </view>
+              <view class="info-price-input-unit">元</view>
+            </view>
+            <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" class="info-options info-options-choosed" wx:if="{{bargaining}}">可讲价</view>
+            <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" bindtap="setBargaining" class="info-options" wx:else>可讲价</view>
+            <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" class="info-options info-options-choosed" wx:if="{{!bargaining}}">一口价</view>
+            <view style="opacity: {{price_options_opacity}};height: {{price_options_height}}" bindtap="setBargaining" class="info-options" wx:else>一口价</view>
+          </view>
+        </view>
+        <!-- 分类 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/type.png"></image>
+            </view>
+            <view class="info-inner-title-text">分类</view>
+          </view>
+          <view class="info-inner-input">
+            <view bindtap="setType" data-index="图书教材" data-num="0" wx:if="{{type != '图书教材'}}" class="info-options">图书教材</view>
+            <view wx:else class="info-options info-options-choosed">图书教材</view>
+
+            <view bindtap="setType" data-index="数码产品" data-num="1" wx:if="{{type != '数码产品'}}" class="info-options">数码产品</view>
+            <view wx:else class="info-options info-options-choosed">数码产品</view>
+
+            <view bindtap="setType" data-index="衣物鞋帽" data-num="2" wx:if="{{type != '衣物鞋帽'}}" class="info-options">衣物鞋帽</view>
+            <view wx:else class="info-options info-options-choosed">衣物鞋帽</view>
+
+            <view bindtap="setType" data-index="生活用品" data-num="3" wx:if="{{type != '生活用品'}}" class="info-options">生活用品</view>
+            <view wx:else class="info-options info-options-choosed">生活用品</view>
+
+            <view bindtap="setType" data-index="美妆日记" data-num="4" wx:if="{{type != '美妆日记'}}" class="info-options">美妆日化</view>
+            <view wx:else class="info-options info-options-choosed">美妆日化</view>
+
+            <view bindtap="setType" data-index="家用电器" data-num="5" wx:if="{{type != '家用电器'}}" class="info-options">家用电器</view>
+            <view wx:else class="info-options info-options-choosed">家用电器</view>
+          </view>
+        </view>
+        <!-- 标签 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/tip.png"></image>
+            </view>
+            <view class="info-inner-title-text">标签</view>
+          </view>
+          <view class="info-inner-input">
+            <view class="info-inner-input-container" style="transform: translateY(-{{tipY}}rpx)">
+              <block wx:for="{{allTip}}" wx:key="tips">
+                <view class="tip-container">
+                  <view data-index="{{item.tip[0]}}" bindtap="setTip" wx:if="{{tip != item.tip[0]}}" class="info-options">{{item.tip[0]}}</view>
+                  <view wx:else class="info-options info-options-choosed">{{item.tip[0]}}</view>
+
+                  <view data-index="{{item.tip[1]}}" bindtap="setTip" wx:if="{{tip != item.tip[1]}}" class="info-options">{{item.tip[1]}}</view>
+                  <view wx:else class="info-options info-options-choosed">{{item.tip[1]}}</view>
+
+                  <view data-index="{{item.tip[2]}}" bindtap="setTip" wx:if="{{tip != item.tip[2]}}" class="info-options">{{item.tip[2]}}</view>
+                  <view wx:else class="info-options info-options-choosed">{{item.tip[2]}}</view>
+
+                  <view data-index="{{item.tip[3]}}" bindtap="setTip" wx:if="{{tip != item.tip[3]}}" class="info-options">{{item.tip[3]}}</view>
+                  <view wx:else class="info-options info-options-choosed">{{item.tip[3]}}</view>
+
+                  <view data-index="{{item.tip[4]}}" bindtap="setTip" wx:if="{{tip != item.tip[4]}}" class="info-options">{{item.tip[4]}}</view>
+                  <view wx:else class="info-options info-options-choosed">{{item.tip[4]}}</view>
+                </view>
+              </block>
+            </view>
+            <view class="info-inner-text">*分类与标签将决定投放栏目，请认真选择</view>
+          </view>
+        </view>
+        <!-- 交易方式 -->
+        <view class="info-inner">
+          <view class="info-inner-title">
+            <view class="info-inner-title-icon">
+              <image src="img/tradeWay.png"></image>
+            </view>
+            <view class="info-inner-title-text">交易方式</view>
+          </view>
+          <view class="info-inner-input">
+            <view wx:if="{{tradeWay == 0}}" class="info-options info-options-choosed">面交</view>
+            <view wx:else bindtap="setTradeWay" class="info-options">面交</view>
+            <view wx:if="{{tradeWay == 1}}" class="info-options info-options-choosed">可邮寄</view>
+            <view wx:else bindtap="setTradeWay" class="info-options">可邮寄</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button class="release" bindtap="release">发布</button>
+
+  </view>
+  <view class="toast" style="display:{{modal == true?'block':'none'}}">{{modalStr}}</view>
+  <view class="window" bindtap="closeWindow" style="top:{{success == true?'0':'100%'}}">
+    <image src="../images/PutSuccess.png"></image>
+  </view>
 </view>

@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //发布成功弹窗
+    showWindow:false,
     // index:'',                      //当前商品id\\
     change:false,
     indicatorDots: true,
@@ -108,6 +110,14 @@ Page({
   /**
    * 加载下面的内容
    */
+  toCollect:function(){
+    wx.navigateTo({
+      url: '../collect/collect',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
   getNextView: function() {
 
     

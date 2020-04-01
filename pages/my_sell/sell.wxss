@@ -1,5 +1,7 @@
 /* pages/my_sell/sell.wxss */
-
+Page,view,text{
+   font-family: PingFang SC;
+}
 .me {
   position: absolute;
   height: 206rpx;
@@ -70,8 +72,20 @@
   width: 100rpx;
   border-radius: 100%;
 }
-
+.selected{
+  top:120rpx!important;
+}
+.option{
+  position: absolute;
+  top: -110rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .sell {
+  top: 0rpx;
+  transition:0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
   margin: 0;
   margin-top: -247rpx;
@@ -104,7 +118,7 @@
 
 .text3 {
   opacity: 0.7;
-  font-family: PingFangSC-Semibold;
+  font-weight:bold;
   font-size: 24rpx;
   color: #fff;
   letter-spacing: 0.06rpx;
@@ -116,7 +130,7 @@
 .bigTitle {
   margin-left: 65rpx;
   width: 505rpx;
-  font-family: PingFangSC-Semibold;
+  font-weight:bold;
   font-size: 36rpx;
   color: #fff;
   letter-spacing: 0.08rpx;
@@ -171,7 +185,7 @@
 .priceUnit {
   /* height: 0%; */
   float: left;
-  font-family: PingFangSC-Semibold;
+  font-weight:bold;
   font-size: 28rpx;
   color: #fa6400;
 }
@@ -182,6 +196,21 @@
   right: 23.2rpx;
   bottom: 70.5rpx;
   z-index: -1;
+}
+
+.option>view{
+  margin:0 20px;
+  height: 50px;
+  width: 50px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 50%;
+  background-color:#FFE9B5;
+  text-align: center;
+}
+.option>view>image{
+  width:30px;
+  height: 30px;
 }
 .diwen[data-index="图书教材"]{
   background: url(https://www.woxihuannia.top/img/jiao.png) no-repeat;
@@ -216,7 +245,7 @@
 .priceNum {
   float: left;
   height: 100%;
-  font-family: PingFangSC-Semibold;
+  font-weight:bold;
   font-size: 46rpx;
   color: #fa6400;
   letter-spacing: 0.11rpx;

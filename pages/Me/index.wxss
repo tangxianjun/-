@@ -1,4 +1,7 @@
 /* pages/Me/index.wxss */
+Page,view,text{
+   font-family: PingFang SC;
+}
 .head{
   height: 130rpx;
   width: 92%;

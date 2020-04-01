@@ -1,4 +1,5 @@
-<!--index.wxml-->
+ <!--index.wxml-->
+
 <view class="container">
    <!-- 顶部横栏 -->
    <view class='head'>
@@ -38,12 +39,13 @@
    <view class="nav">
     <view class="nav_left {{bg?'bg1':'bg2'}}" bindtap="change1"><text>推荐</text></view>
     <view class="nav_right {{bg?'bg2':'bg1'}}" bindtap="change2"><text>最新发布</text></view>
+    <image src="../images/shoucang@2x.png" class="shoucang" bindtap="toCollect"></image>
    </view>
    <!-- 所有商品 -->
    <view class='goods'>
       <view class='goods-container-left'>
          <block wx:for="{{goods_left}}" wx:key="{{goods}}">
-            <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+            <view class='goods goods-item' bindtap='goods_detail' data-index='{{item.goods_id}}'>
                <view class='goods-img'>
                   <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
                </view>

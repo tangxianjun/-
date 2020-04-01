@@ -22,6 +22,10 @@ Page({
          * tradeWay 交易方式，0是面交，1是可邮寄
          * picture 图片
          */
+        success:false,
+        modal:false,
+        modalStr:"",
+        none:[0,0,0,0,0,0],
         isNew: false,
         title: "",
         describe: "",
@@ -92,10 +96,31 @@ Page({
         // 层叠
         zIndex: [1, 1, 1, 1, 1, 1],
     },
-    up: function (i){
-      var token = wx.getStorageSync('token')
-      var that = this
-
+    //重置数据
+    reset:function(){
+      this.setData({
+        success: false,
+        modal: false,
+        modalStr: "",
+        none: [0, 0, 0, 0, 0, 0],
+        isNew: false,
+        title: "",
+        describe: "",
+        dormitory: "J",
+        phone: "",
+        linkWay: "",
+        linkDetail: "",
+        pricePrv: "",
+        priceNow: "",
+        bargaining: true,
+        type: "图书教材",
+        tip: "{{item.tip[0]}}",
+        tradeWay: 0,
+        picture: ["", "", "", "", "", ""],
+        picNum: 0,
+        picNow: 0,
+        pic_url: ["", "", "", "", "", ""],
+      })
     },
     //上传图片
     up:function(i){
@@ -136,9 +161,67 @@ Page({
       })
       return promise
     },
+    //长按选择商品
+    selectItem: function (e) {
+       var arr = [0,0,0,0,0,0];
+       console.log(e);
+       for(var i=0;i<6;i++){
+         if(i == e.target.dataset.index){
+           arr[i] = 1;
+         }
+       }
+       this.setData({
+         none:arr
+       })
+    },
+    // 短按恢复
+    resetSelected:function (){
+      var arr = [0, 0, 0, 0, 0, 0];
+      this.setData({
+        none: arr
+      })
+    },
+    // 删除发布品
+    deleteItem:function (e){
+      var picNum = this.data.picNum - 1;
+      var picNow = this.data.picNow - 1;
+      var none = [0,0,0,0,0,0];
+      var arr = this.data.picture;
+      for (var i = e.target.dataset.index; i < 6; i++) {
+        if (i == e.target.dataset.index){
+          arr[i] = ""
+        }
+        else
+          arr[i-1] = arr[i];
+      }
+      console.log(arr);
+      this.setData({
+        picture: arr,
+        none:none,
+        picNum:picNum,
+        picNow:picNow
+      })
+    },
+    // 置顶
+    toTopItem:function(e){
+      var picNum = this.data.picNum;
+      var none = [0, 0, 0, 0, 0, 0];
+      var arr = this.data.picture;
+      var pic = arr[e.target.dataset.index];
+      for (var i = e.target.dataset.index; i > 0; i--) {
+        arr[i] = arr[i-1];
+      }
+      arr[0] = pic;
+      console.log(arr);
+      this.setData({
+        picture: arr,
+        none: none,
+      })
+    },
     // 发布
     
     release: function() {
+      var that = this;
       var token = wx.getStorageSync('token')
       if(!token){
         wx.navigateTo({
@@ -152,23 +235,11 @@ Page({
         result.push(this.up(i))
         i++;
       }
-      // var img = up(i)
-    var k=0;
+      var k=0;
       Promise.all(result).then((res)=> {
-        // console.log(res)
-        // while(res[k].message){
-        //   console.log(res[k].message)
-        //   k++;
-        // }
-        // var p=0
-        // while(this.data.pic_url[p]){
-        //   console.log(this.data.pic_url[p])
-        //   p++
-        // }
         var that = this;
         
-        if(that.data.linkWay=="QQ"){
-          
+        if (that.checked()==1&&that.data.linkWay=="QQ"){
           wx.request({
             url: 'https://www.woxihuannia.top/php/put.php',
             method: "POST",
@@ -198,19 +269,26 @@ Page({
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-              
               // var res = JSON.parse(res.data)
               console.log(res.data)
               if (res.data.message =="数据插入成功"){
-                wx.switchTab({
-                  url: '../index/index',
-                })
+                  that.setData({
+                    success: true,
+                  })
+                  
+                  setTimeout(function(){
+                    that.reset();
+                    wx.switchTab({
+                      url: '../index/index',
+                    })
+                  },1000)
+                  
               }
             }
 
           })
         }
-        if (this.data.linkWay =="WeChat"){
+        if (that.checked() == 1&&that.data.linkWay =="WeChat"){
           wx.request({
             url: 'https://www.woxihuannia.top/php/put.php',
             method: "POST",
@@ -246,11 +324,8 @@ Page({
 
           })
         }
-
-        
         })
   
- 
     },
     // 按紧图片
     movePic: function(e) {
@@ -268,45 +343,6 @@ Page({
         }
 
     },
-    // 移动图片
-    // moving: function(e) {
-    //     // 这个过程主要是让那些图片让位
-    //     let x = e.detail.x;
-    //     let y = e.detail.y;
-    //     x = this.pxTOrpx(x);
-    //     y = this.pxTOrpx(y);
-    //     // 获取到这是第几张图
-    //     let num = e.currentTarget.dataset['index'];
-    //     // 设定一下现在的总宽度和总高度
-    //     // 把整个container分为六块
-    //     let w = 650;
-    //     let h = 430;
-    //     // 让x和y自增每一个view的一半，这样就是从左上角到中间了
-    //     x = x + 105;
-    //     y = y + 105;
-    //     // 获取横纵
-    //     let xSide = parseInt(x / (w / 3));
-    //     let ySide = parseInt(y / (h / 2));
-    //     // console.log(xSide + " " + ySide);
-    //     // newNum就是最终的位置
-    //     let newNum = (3 * ySide) + (xSide+1);
-    //     // console.log(newNum);
-    //     let index = this.data.index;
-    //     if(newNum > num) {
-    //         // 现在摸着的这个被移动到后面去了
-    //         // 前移部分方块
-    //         for(let i=0;i<=5;i++) {
-    //             if(index[i]>num && index[i]<=newNum) {
-    //                 index[i]--;
-    //             } else if(index[i] == num) {
-    //                 index[i] = newNum;
-    //             }
-    //         }
-    //         // console.log(index);
-    //     } else if(newNum) {
-
-    //     }
-    // },
     // px转rpx
     pxTOrpx: function(px) {
         return 750 / wx.getSystemInfoSync().windowWidth * px;
@@ -363,10 +399,53 @@ Page({
             y: nowY,
         })
     },
+    checked:function(){
+      var str = "";
+      var flag = 1;
+      if(this.data.title==""){
+        flag = 0;
+        str = "请填写标题"
+        return flag;
+      } else if(this.data.describe == ""){
+        flag = 0;
+        str = "请填写商品信息"
+        return flag;
+      } else if(this.data.picNum == 0){
+        flag = 0;
+        str = "请至少上传一张图片"
+        return flag;
+      } else if(this.data.phone == ""){
+        flag = 0;
+        str = "请填写手机号码"
+        return flag;
+      } else if (this.data.linkWay == "") {
+        flag = 0;
+        str = "请选择线上联系的方式"
+        return flag;
+      } else if (this.data.linkDetail == "") {
+        flag = 0;
+        str = "请填写微信/QQ号"
+      } else if (this.data.pricePrv == "") {
+        flag = 0;
+        str = "请填写商品原价"
+        return flag;
+      } else if (this.data.priceNow == "") {
+        flag = 0;
+        str = "请填写商品现价"
+        return flag;
+      }
+      
+      if(flag == 0){
+        this.setData({
+          modal:true,
+          modalStr:str
+        })
+      return flag;
+      }
+    },
     //   修改全新状态
     checkNew: function() {
         let that = this;
-
         if (that.data.isNew) {
             // 如果现在是勾选状态
             that.setData({
@@ -534,6 +613,13 @@ Page({
     },
     // 选择图片
     chooseImg: function() {
+      if(this.data.picNum == 5)
+      {
+        wx.showToast({
+          title: '一次最多上传5张图片哦',
+        })
+        return;
+      }
         var that = this;
         wx.chooseImage({
             count: 6 - that.data.picNum, // 默认9  
@@ -542,6 +628,7 @@ Page({
             success: function(res) {
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 let newPicture = res.tempFilePaths;
+                console.log(newPicture);
                 let prvPicture = that.data.picture;
                 let picNow = that.data.picNow;
                 // 把图片逐张加入数组
@@ -556,6 +643,7 @@ Page({
                     prvPicture[picNow] = newPicture[i];
                     picNow++;
                 }
+                console.log(picNow);
                 that.setData({
                     picture: prvPicture,
                     picNum: that.data.picNum + newPicture.length,

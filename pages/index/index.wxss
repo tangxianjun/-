@@ -1,8 +1,12 @@
 /**index.wxss**/
 /* 顶部横栏 */
+view,text{
+   font-family: PingFang SC;
+}
 .container {
     width: 750rpx;
-    overflow-x: hidden;
+    overflow-x: hidd
+    en;
 }
 .head{
   height: 390rpx;
@@ -80,12 +84,20 @@
   font-size: 25rpx;
 }
 .nav{
+  margin-top: 32rpx;
   width: 100%;
   height: 50rpx;
   display: flex;
 }
 .nav_left{
   margin-left: 20rpx;
+}
+.shoucang{
+  width:45px;
+  height: 45px;
+  position: fixed;
+  z-index: 999;
+  right: 20px;
 }
 .bg1{
   color: #000000;
@@ -127,7 +139,6 @@
    margin-bottom: 10rpx;
    justify-content: space-around;
    border-radius: 30rpx;
-   box-shadow: 0 2px 4px 0 #BBBBBB;
    overflow: hidden;
 }
 .goods > view {
@@ -177,9 +188,13 @@
    align-items: center;
 }
 /* 下面的详情，不管是左边还是右边，高度一样，都是106rpx */
+.goods-item{
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,0.06);
+}
 .goods-detail {
+  padding-bottom: 10rpx;
    width: 354rpx;
-   height: 106rpx;
+   height: 108rpx;
    display: flex;
    flex-direction: column;
    justify-content: space-around;
@@ -191,16 +206,18 @@
 }
 /* 商品名 */
 .goods-title {
+   font-size: 36rpx;
    line-height: 40.1422rpx;
    white-space: nowrap;
    overflow: hidden;
    text-overflow: ellipsis;
-   padding-left: 5rpx;
-   padding-right: 5rpx;
-   font-family: PingFangSC-Semibold;
+   padding-left: 16rpx;
+   padding-right: 16rpx;
+   font-family: PingFang SC,PingFang SC-Semibold;
 }
 /* 信息 */
 .goods-info {
+   padding-left: 11rpx;
    display: flex;
    justify-content: space-between;
 }
@@ -217,10 +234,10 @@
    padding-right: 20rpx;
    white-space: nowrap;
    line-height: 40.1422rpx;
-   font-size: 0.8rem;
+   font-size: 20rpx;
    color: #FFFFFF;
    margin-left: 5rpx;
-   font-family: PingFangSC-Medium;
+   font-family: Pingfang SC,PingFang SC-Medium;
 }
 .tag:nth-child(1) {
    background-color: #03D654;

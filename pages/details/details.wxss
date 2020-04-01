@@ -1,4 +1,10 @@
 /* 黄色底纹 */
+Page,view,text{
+   font-family: PingFang SC;
+}
+Page{
+  padding-bottom: 80px;
+}
 .bg{
   height: 788rpx;
   width: 750rpx;
@@ -31,7 +37,6 @@
     /* width: 95rpx; */
     height: 50rpx;
     white-space: nowrap;
-    font-family: PingFangSC-Semibold;
     font-size: 36rpx;
     color: #3F3F3F;
     letter-spacing: 0.08rpx;
@@ -45,7 +50,6 @@
     white-space: nowrap;
     padding-left: 18rpx;
     padding-right: 18rpx;
-    font-family: PingFangSC-Medium;
     font-size: 24rpx;
     color: #FF7911;
     letter-spacing: 0.06rpx;
@@ -67,7 +71,6 @@
     align-items: center;
 }
 .personal-ex span {
-    font-family: PingFangSC-Medium;
     font-size: 22rpx;
     color: #3F3F3F;
     letter-spacing: 0.05rpx;
@@ -157,13 +160,11 @@
     align-items: flex-end;
 }
 .number-price-now {
-    font-family: PingFangSC-Semibold;
     font-size: 39rpx;
     color: #EE2904;
 }
 .number-price-prv {
     margin-left: 20rpx;
-    font-family: PingFangSC-Semibold;
     font-size: 24.5rpx;
     color: #BBBBBB;
     line-height: 28rpx;
@@ -185,7 +186,6 @@
     /* top: 13rpx; */
     margin-top: 13rpx;
     left: 37rpx;
-    font-family: PingFangSC-Semibold;
     font-size: 36rpx;
     color: #000000;
     letter-spacing: 0.08rpx;
@@ -200,7 +200,6 @@
     padding-left: 17rpx;
     padding-right: 17rpx;
     margin-right: 6rpx;
-    font-family: PingFangSC-Medium;
     font-size: 20rpx;
     color: #FFFFFF;
     text-align: center;
@@ -209,7 +208,6 @@
     display: inline-block;
 }
 .detail-inner {
-    font-family: PingFangSC-Regular;
     font-size: 28rpx;
     line-height: 28rpx;
     color: #7B7B7B;
@@ -226,7 +224,6 @@
     align-items: center;
 }
 .tip-title {
-    font-family: PingFangSC-Regular;
     font-size: 24rpx;
     line-height: 24rpx;
     color: #3F3F3F;
@@ -238,7 +235,6 @@
     line-height: 47rpx;
     padding-left: 23rpx;
     padding-right: 23rpx;
-    font-family: PingFangSC-Medium;
     font-size: 24rpx;
     color: #FF7911;
     letter-spacing: 0.06rpx;
@@ -248,30 +244,30 @@
 }
 /* 收藏  */
 .collect{
+   margin: 0 0 0 20rpx; 
+  float: left;
   height: 114rpx;
   width: 114rpx;
-  position: absolute;
   bottom: 50rpx;
 }
 .all_img{
+  
   height: 114rpx;
   width: 114rpx;
-  position: fixed;
-
 }
 .leave{
+  margin: 0 20rpx 0 0; 
+  float: right;
   height: 114rpx;
   width: 114rpx;
-  position: absolute;
   right: 120rpx;
-  bottom: 50rpx;
 }
 .phone{
+  margin: 0 20rpx; 
+  float: right;
   height: 114rpx;
   width: 114rpx;
-  position: absolute;
   right: 0;
-  bottom: 50rpx;
 }
 .le_input{
   position: fixed;
@@ -330,7 +326,7 @@
 .button{
   position: fixed;
   width: 100%;
-  bottom: 50rpx;
+  bottom: 20rpx;
 }
 .liu_back{
   background-color: #FFE896;
