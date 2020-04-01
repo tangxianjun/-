@@ -5,7 +5,16 @@ Page,view,text{
     width: 750rpx;
     overflow-x: hidden;
 }
-
+.notic{
+  font-size: 20rpx;
+  
+  margin-right: 15rpx;
+}
+.Dnotic{
+  font-size: 20rpx;
+  position: absolute;
+  right: 40rpx;
+}
 .container {
     width: 650rpx;
     transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -14,7 +23,15 @@ Page,view,text{
 }
 
 /* 顶部标题 */
+.inputTitle{
+  width: 80%;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  box-sizing: border-box;
 
+}
 .title {
     width: 100%;
     height: 48rpx;
@@ -27,6 +44,7 @@ Page,view,text{
 .title > textarea, label {
     height: 40rpx;
     font-size: 28rpx;
+    line-height: 40rpx;
     white-space: nowrap;
 }
 
@@ -43,6 +61,9 @@ Page,view,text{
 
 .title > label {
     margin-right: 15rpx;
+}
+.posi{
+  position: relative;
 }
 
 .title .radio {
@@ -65,18 +86,17 @@ Page,view,text{
 
 .describe {
     width: 100%;
-    height: 354rpx;
+    height: 334rpx;
     border: 1px solod #000;
     margin-top: 22rpx;
 }
 
 .describe > textarea {
     width: 100%;
-    height: 100%;
+    height: 89%;
     font-size: 28rpx;
     line-height: 28rpx;
     padding-left: 15rpx;
-    padding-right: 15rpx;
     box-sizing: border-box;
 }
 
@@ -231,7 +251,12 @@ Page,view,text{
     color: #bbb;
     margin-top: 33rpx;
 }
+.tip>image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10px;
 
+}
 /* 信息 */
 
 .info-link, .info-goods {
@@ -274,7 +299,22 @@ Page,view,text{
     align-items: flex-start;
     margin-bottom: 41rpx;
 }
-
+.info-inner-class{
+   width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 11rpx;
+}
+.info-inner-yan{
+    width: 800%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 11rpx;
+    margin-left:150rpx;
+  
+}
 .info-inner-title {
     display: flex;
     justify-content: flex-start;
@@ -424,8 +464,23 @@ Page,view,text{
     height: 47rpx;
     display: flex;
     position: relative;
+    margin-bottom: 31rpx;
     top: 0;
     left: 0;
+}
+.info-optionss{
+  padding-left: 23.5rpx;
+    padding-right: 23.5rpx;
+    height: 47rpx;
+    line-height: 47rpx;
+    font-size: 24rpx;
+    color: #ff7911;
+    border: 2rpx solid #ffe9b5;
+    border-radius: 1000rpx;
+    margin-right: 10rpx;
+    /* margin-bottom: 4rpx; */
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 .tip-container  .info-options {
     white-space: nowrap;
@@ -433,6 +488,7 @@ Page,view,text{
 }
 .info-inner-input-container {
     width: 100%;
+    height: 294rpx;
     transition: all 1s;
 }
 
@@ -447,13 +503,19 @@ Page,view,text{
 }
 .release {
     width: 538rpx;
+    text-align: center;
+    line-height: 97rpx;
     height: 97rpx;
     background-color: #FFE896;
     font-size: 36rpx;
     color: #3F3F3F;
     margin-bottom: 47rpx;
-    border-radius: 1000rpx;
+    border-radius: 500rpx;
     font-weight: 500;
+    margin-top:5rpx;
+    margin-left: 56rpx;
+    box-shadow:5px 5px 20px rgba(255,232,150,0.5);
+    /* border: 5rpx solid #FFE896; */
 }
 .toast{
   width: 100%;
@@ -468,7 +530,7 @@ Page,view,text{
   text-align: center;
 }
 .window{
-  transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
   position: fixed;
   top: 0;
   width: 100%;
@@ -485,4 +547,69 @@ Page,view,text{
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.windo{
+  transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.w_bo{
+  width: 511rpx;
+  height: 627rpx;
+  position: absolute;
+  margin: auto;
+  top: -10%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius:51rpx 51rpx 51rpx 51rpx;
+}
+.w_bo>image{
+  height: 430rpx;
+  width: 510rpx;
+  display: block;
+  border-radius:51rpx 51rpx 0rpx 0rpx;
+  box-shadow: 0rpx 20rpx  25rpx #AAAAAA;
+  -webkit-box-shadow:0 0px 20px rgba(138, 138, 138, 0.4); 
+  
+}
+.backg{
+  background-color: #FFFFFF;
+  box-shadow: 0rpx 0rpx  25rpx #AAAAAA;
+  -webkit-box-shadow:0 0px 20px rgba(138, 138, 138, 0.4); 
+  width: 511rpx;
+  height: 190rpx;
+  border-radius:0px 0px 51rpx 51rpx;
+}
+.topT{
+  height: 50rpx;
+  width: auto;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: 600;
+  padding-top: 18rpx;
+}
+.call_notic{
+  height: 30rpx;
+  text-align: center;
+  width: auto;
+  font-size: 22rpx;
+  font-weight: 500;
+  color:rgba(187,187,187,1);
+}
+.foot{
+  text-align: center;
+  display: flex;
+  margin-left: 8rpx;
+}
+.CL{
+  font-size: 24rpx;
+  font-weight: 500;
+  width: 50%;
+  height: inherit;
+  line-height: 100rpx;
 }

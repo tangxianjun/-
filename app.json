@@ -1,17 +1,22 @@
 {
   "pages": [
-    
-    "pages/index/index",
     "pages/Me/index",
+    "pages/connect/connect",
+    "pages/index/index",
+    
+    
+    "pages/notic/notic",
+    "pages/index/search/search",
+    
     "pages/details/details",
     "pages/Put/index",
     "pages/login/login",
     "pages/category/category",
     "pages/collect/collect",
     "pages/my_sell/sell",
-    "pages/index/search/search",
     "pages/logs/logs",
-    "pages/result/result"
+    "pages/result/result",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,6 +25,8 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "selectedColor": "#FBD377",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -29,8 +36,8 @@
       },
       {
         "pagePath": "pages/Put/index",
-        "iconPath": "pages/images/发布@xhdpi.png",
-        "selectedIconPath": "pages/images/发布@xhdpi.png",
+        "iconPath": "pages/images/put@xhdpi.png",
+        "selectedIconPath": "pages/images/put@xhdpi.png",
         "text": "发布"
       },
       {

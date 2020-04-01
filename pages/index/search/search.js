@@ -134,6 +134,14 @@ Page({
     wx.navigateTo({
       url: "../../result/result?data=" + data
     })
+  },
+  hot_search:function(e){
+    
+    var data = e.currentTarget.dataset['text']
+    wx.navigateTo({
+      url: "../../result/result?data=" + data
+    })
+    
   }
   
 })

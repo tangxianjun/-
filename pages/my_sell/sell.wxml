@@ -2,7 +2,7 @@
 <view class="{{me}}" bindtap="cancelSelect">
   <view class="my">
     <view class="{{text}}">
-      <text>{{nickname}}，你卖出的宝贝在这里。</text>
+      <text>{{nickname}}，{{tex2}}。</text>
     </view>
     <view class="text2">
       <text>{{tex}}</text>
@@ -13,25 +13,37 @@
   </view>
 </view>
 
-<view class="sell {{index>=selected?'selected':''}}"  wx:for="{{list}}" wx:key="item" style="display:{{display}};z-index:{{100-index}}" bindtap="nav_detail"  data-index='{{item.goods_id}}'  >
-  <view class="sellinner"  catchlongpress="toggleItem" data-item="{{index}}">
+<view class="sell {{index>=selected?'selected':''}}"  wx:for="{{list}}" wx:key="item" style="display:{{display}};z-index:{{100-index}}" bindtap="toggleItem"  data-index='{{item.goods_id}}'  >
+  <view class="sellinner"   data-item="{{index}}">
     <view class="option">
-      <view style="{{item.status=='1'?'display:block':'display:none'}}"><image src="./img/cancel.png" catchtap="deleteSell" data-index='{{item.goods_id}}' data-item="{{index}}"></image></view>
-      <view style="{{item.status=='1'?'display:block':'display:none'}}"><image src="./img/edit.png" ></image></view>
-      <view  style="{{item.status=='1'?'display:block':'display:none'}}"><image src="./img/sell.png"></image></view>
-      <view style="{{item.status=='0'?'display:block':'display:none'}}"><image src="./img/upload.png" ></image></view>
+      
+      <view catchtap="nav_detail" data-index='{{item.goods_id}}' data-item="{{index}}" style="{{item.status=='正出售'?'display:block':'display:none'}}"><image src="./img/look.png" ></image>
+         <text wx:if="{{selected == index}}">查看</text>
+      </view>
+      <view catchtap="edit" data-index='{{item.goods_id}}' data-item="{{index}}" style="{{item.status=='正出售'?'display:block':'display:none'}}"><image src="./img/edit.png" ></image>
+       <text wx:if="{{selected == index}}">编辑</text>
+      </view>
+      <view catchtap="selled"  data-index='{{item.goods_id}}' data-item="{{index}}"style="{{item.status=='正出售'?'display:block':'display:none'}}"><image src="./img/sell.png"  ></image>
+        <text style="left: -5px;" wx:if="{{selected == index}}">已卖出</text>
+      </view>
+      <view  style="{{item.status=='正出售'?'display:block':'display:none'}}">
+        <image src="./img/delete.png" catchtap="deleteSell" data-index='{{item.goods_id}}' data-item="{{index}}"></image>
+        <text wx:if="{{selected == index}}">下架</text>
+      </view>
+      <view catchtap="delete" data-index='{{item.goods_id}}' data-item="{{index}}"  style="{{item.status=='已下架'?'display:block':'display:none'}}"><image  src="./img/delete.png" data-item="{{index}}"></image></view>
     </view>
-    <view class="text3">
-      <text>全新宝贝 | 当面交易</text>
+    <view  class="text3">
+      <text wx:if="{{status=='sell'}}">恭喜你，卖出宝贝啦！</text>
+      <text wx:else>快去卖宝贝吧！</text>
     </view>
     <view class="status"  catchtap="toggleItem" data-item="{{index}}" data-status="1">{{item.status}}</view>
     <view class="bigTitle" catchlongpress="toggleItem" data-item="{{index}}">{{item.title}}</view>
     <view class="detail" catchlongpress="toggleItem" data-item="{{index}}">
       <image class="imgDate" src = "../images/date-white.svg"></image>
-      <view class="date">2019-9-10</view>
-      <view class="remaining">余28天</view>
-      <image class="imgWatch" src = "../images/watched-white.svg"></image>
-      <view class="views">28</view>
+      <view class="date">{{item.release_time}}</view>
+      <view wx:if="{{status =='put'}}" class="remaining">余{{item.expire_time}}天</view>
+      <image wx:if="{{item.view_number!='0'}}" class="imgWatch" src = "../images/watched-white.svg"></image>
+      <view wx:if="{{item.view_number!='0'}}" class="views">{{item.view_number}}</view>
     </view>
     <view class="diwen" data-index="{{item.tag}}"></view>
     <view class="price">
@@ -44,7 +56,11 @@
 <view class="backnone" style="display:{{img_none}}">
   <image class="none_img" src="../images/noneput.svg"></image>
   <view class="none_text">
-    <text>你还没有卖出过一件宝贝呢~</text>
+    <text>{{noneTex}}</text>
   </view>
-  <button class="button" bindtap="nav">去逛逛</button>
+  <view wx:if="{{status=='put'}}" class="button" bindtap="nav">去发一个</view>
+  <view wx:else class="button" bindtap="nav">去逛逛</view>
 </view>
+<!-- <view class="window" bindtap="closeWindow" style="top:{{selled == true?'0':'100%'}}">
+  <image src="../images/loginSuccess.png"></image>
+</view> -->

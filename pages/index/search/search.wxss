@@ -5,23 +5,36 @@
   padding-top: 20rpx;
   margin-top: 800rpx;
 } */
+.se_font{
+  text-align: center;
+  font-size: 10rpx;
+}
 .search{
-  width: 666rpx;
+  font-weight: bold;
+  width: 626rpx;
   margin-left: 42rpx;
   margin-top: 30rpx;
   height: 70rpx;
   display: flex;
+  padding: 0 20rpx;
   background-color: rgb(255, 255, 255);
-  border-radius: 33.5rpx;
-  border: 1px solid #979797;
+  border-radius: 60.5rpx;
+  border: 1px solid #d6d6d6 ;
+}
+.se_input{
+  font-size: 26rpx;
+  line-height: 70rpx;
+  width: inherit;
+  height: 70rpx;
+  margin-left: 8rpx;
 }
 .icon{
-  height: 25rpx;
+  height: 35rpx;
   /* padding: 20rpx; */
-  margin-left: 228.5rpx;
+  margin-left: 0rpx;
   margin-top: 23.4rpx;
   /* size: 25rpx; */
-  width: 25rpx;
+  width: 35rpx;
   text-align: center;
 }
 .text{
@@ -66,6 +79,7 @@
   padding: 0rpx 25rpx;
 }
 .hot{
+  font-weight: bold;
   height: 50rpx;
   line-height: 50rpx;
   width: 148rpx;
@@ -128,6 +142,7 @@ image{
 
 }
 .input_style{
+  padding-left:10px;
   height: 81rpx;
   width: 687rpx;
   margin-left: 24rpx;

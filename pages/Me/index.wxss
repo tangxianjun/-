@@ -2,11 +2,27 @@
 Page,view,text{
    font-family: PingFang SC;
 }
+.newsStatus{
+  background-color:#ff7911;
+  width: 25rpx;
+  height: 25rpx;
+  position: relative;
+  /* left: 60px; */
+  /* top: 20rpx; */
+  border-radius: 50%;
+  z-index: 999;
+}
 .head{
   height: 130rpx;
   width: 92%;
   padding-left: 8%;
   /* display: flex; */
+}
+.r_icon{
+  position: relative;
+  height: 30rpx;
+  width: 30rpx;
+  top: 8rpx;
 }
 .content{
   padding-top: 6vh;
@@ -22,6 +38,12 @@ Page,view,text{
   letter-spacing: 0.08px;
   text-align: left;
 }
+.q_icon{
+  height: 19rpx;
+  width: 11rpx;
+  position: relative;
+  left: 8rpx;
+}
 .ba_text{
   font-size: 28rpx;
   position: absolute;
@@ -29,7 +51,7 @@ Page,view,text{
   color: #7B7B7B;
   letter-spacing: 0.06px;
   text-align: left;
-  top: 125rpx;
+  top: 135rpx;
 }
 .img{
   width: 355rpx;
@@ -61,7 +83,9 @@ Page,view,text{
 }
 .ba{
   background: #FFFFFF;
-  height: 77.7vh;
+  position: absolute;
+  bottom: 0;
+  height: 75vh;
   margin-top: -9vh;
   width: 688rpx;
   margin-left: 31rpx;
@@ -74,6 +98,8 @@ Page,view,text{
   
 }
 .head_left{
+  font-weight: bold;
+
   height: 50rpx;
   width: 150rpx;
   font-size: 36rpx;
@@ -105,7 +131,9 @@ Page,view,text{
 .we_img{
   height: 30rpx;
   width: 30rpx;
-  margin-top: 5.5rpx;
+  top: 5.8rpx;
+  left: 6rpx;
+  position: relative;
 }
 .we_text{
   margin-left: 20rpx;
@@ -123,6 +151,7 @@ Page,view,text{
   width: 75rpx;
 }
 .l1_text{
+  display: flex;
   height: inherit;
   font-size: 24rpx;
   line-height: 75rpx;

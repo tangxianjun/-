@@ -10,33 +10,36 @@
   <!-- 中间的内容学号密码部分 -->
   <view class="content">
   <view class="username">
-    <text class="xue">学号</text>
+    <text  class="xue">学号</text>
     <view class="shu"></view>
-    <input id="username" placeholder="请填写你的学号" placeholder-class="center" bindinput="in_username"></input>
+    <input maxlength="12" id="username" placeholder="请填写你的学号" placeholder-class="center" bindinput="in_username"></input>
   </view>
   <view class="passwd">
     <text>密码</text>
     <view class="shu"></view>
-    <input id="passwd" password="true" bindinput="in_passwd" placeholder="请填写教务系统密码" ></input>
+    <input id="passwd" maxlength="18" password="true" bindinput="in_passwd" placeholder="请填写教务系统或信息门户密码" ></input>
   </view>
   <view class="agree"> 
     <view class="agree_left">
-      <image class="agree_img" src="../images/提示@hdpi.png"></image>
+      <image class="agree_img" src="../images/hint@hdpi.png"></image>
     </view>
     <view class="agree_en">
-      <text class="text" >我已经认真阅读《许可使用协议》</text>
-      <radio class="radio" bindtap="agree"></radio>
+      <text class="text" >我已经认真阅读</text>
+      <text class="aple" bindtap="aple">《许可使用协议》</text>
+      <radio  color="#FFE896" class="radio" bindtap="agree"></radio>
     </view>
   </view>
   <!-- button按钮 -->
   <view class="button">
     <view class="b_button">
-      <button class="login" bindgetuserinfo="bindGetUserInfo" open-type="getUserInfo" >登录</button>
+      <button class="login" bindgetuserinfo="bindGetUserInfo" open-type="getUserInfo" style='opacity:{{flag==true?1:0.5}}'>
+      <view>登录</view>
+      </button>
     </view>
   </view>
   </view>
 </view>
 <view class="toast" style="display:{{modalStr != ''?'block':'none'}}">{{modalStr}}</view>
-<view class="window" bindtap="closeWindow" style="top:{{success == true?'0':'100%'}}">
-  <image src="../images/loginSuccess.png"></image>
+<view class="window" bindtap="closeWindow" style="top:{{success == true?'0%':'100%'}}">
+  <image mode="aspectFit" src="../images/loginSuccess.png"></image>
 </view>

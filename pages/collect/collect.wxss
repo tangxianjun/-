@@ -3,13 +3,25 @@
 Page,view,text{
    font-family: PingFang SC;
 }
+.tag-a {
+   border-radius: 1000px;
+   padding-left: 20rpx;
+   padding-right: 20rpx;
+   white-space: nowrap;
+   line-height: 40.1422rpx;
+   font-size: 0.8rem;
+   color: #FFFFFF;
+   background-color: #FED269;
+   margin-left: 5rpx;
+   font-family: PingFangSC-Medium;
+}
 Page{
   background-color: #f9f9f9;
 }
 .me_kong{
   height: 168rpx;
   padding-top: 38rpx;
-  width: 100%;
+  width: 750rpx;
   border-radius: 0 0 0 140rpx;
   background: rgb(255, 255, 255);
   box-shadow: 2px 2px 10px #eee;
@@ -17,7 +29,7 @@ Page{
 .my{
   position: relative;
   height: inherit;
-  width: 100%;
+  width: 750rpx;
   background: #FFFFFF;
   border-radius: 0 0 0 140px;
 }
@@ -47,7 +59,8 @@ Page{
   /* width: 200rpx; */
   float: left;
   line-height: 40rpx;
-  margin-left: 68rpx;
+  padding-left: 68rpx;
+  box-sizing: border-box;
   font-size: 28rpx;
   color: #BBBBBB;
   letter-spacing: 0.06px;
@@ -65,8 +78,8 @@ Page{
   right: 0px;
 }
 .m_img{
-  height: 150rpx;
-  width: 150rpx;
+  height: 128rpx;
+  width: 128rpx;
   position: absolute;
   top:0px;
   bottom:0px;
@@ -81,6 +94,7 @@ Page{
   border-radius:50%;
 }
 .imgs{
+  border-radius: 50%;
   height: 100rpx;
   width: 100rpx;
 }
@@ -99,7 +113,7 @@ Page{
 .none_text{
   margin-top: 24.6rpx;
   height: 27rpx;
-  font-size: 19.2rpx;
+  
   color: #BBBBBB;
   letter-spacing: 0.04px;
 }
@@ -112,6 +126,9 @@ Page{
   font-size: 34rpx;
   line-height: 97rpx;
   color: #000000;
+}
+.button::after{
+  border: 0;
 }
 .collect{
   transition: 0.3s all;
@@ -172,7 +189,7 @@ Page{
 .c_content{
   background: #FFFFFF;
   margin-top: 36rpx;
-  height: 212rpx;
+  height: 223rpx;
   width: 639rpx;
   margin-left: 26rpx;
 
@@ -194,15 +211,14 @@ Page{
   float: left;
 }
 .c_top{
-  font-size: 28rpx;
+  /* width: 95%; */
+  font-size: 34rpx;
   height: 80rpx;
   width: 406;
   text-overflow: ellipsis;
   overflow: hidden;
-  -webkit-line-clamp:2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
+  white-space: nowrap;
+ 
 }
 .c_z{
   font-size: 22rpx;
@@ -218,9 +234,11 @@ Page{
   color: #BBBBBB;
 }
 .c_time{
+  color: #BBBBBB;
   display: inline;
-  margin-top: 45rpx;
+  margin-top: 47rpx;
   float: left;
+  margin-left: 20rpx;
   font-size: 24rpx;
 }
 .c_time>image{
@@ -229,7 +247,7 @@ Page{
   width: 20rpx;
 }
 .c_price{
-  float: right;
+  float: left;
   margin-top: 30rpx;
   vertical-align: middle;
   display: inline;
@@ -245,6 +263,7 @@ Page{
   color:#FA6400;
 }
 .price-prv{
+  margin-left: 10rpx;
   font-size: 24rpx;
   text-decoration: line-through;
   color: #BBBBBB;
@@ -257,20 +276,20 @@ Page{
   width: 704rpx;
   background: #FFFFFF;
   box-shadow: 0 2px 30px 0 #EDEDED;
-  border-radius: 30px;
-  margin-left: 25rpx;
-  margin-top: 20rpx;
+  border-radius: 30rpx;
+  margin:22rpx auto 0px;
   position: relative;
   transition:0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 .news>.right{
-  width:40rpx;
-  position: absolute;
-  right: 50px;
-  top: 0px;
-  bottom: 0px;
-  height: 130rpx;
-  margin: auto
+  width:20rpx;
+  position:absolute;
+  right:38px;
+  top:0px;
+  bottom:0px;
+  height:71rpx;
+  margin:auto;
+
 }
 .newsOption{
   position:absolute;
@@ -289,9 +308,21 @@ Page{
   margin-right: 20px;
 }
 .news>.right>.r{
-  
-  background-color:#aaa;
-  margin-top: 10px;
+  width:11rpx;
+  height: 11rpx;
+  background-color:#d8d8d8;
+  margin-top: 5px;
+}
+.replyContent{
+  font-size:22rpx;
+  color:#3f3f3f;
+  opacity:0.5;
+  margin-top:10px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  width:75%;
+  overflow:hidden;
+
 }
 .newsStatus{
   background-color:#ff7911;

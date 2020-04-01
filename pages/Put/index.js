@@ -1,5 +1,5 @@
 // pages/Put/index.js
-
+const app = getApp()
 Page({
 
     /**
@@ -7,6 +7,7 @@ Page({
      */
     data: {
         /**
+         * putFlag 已经点击了发布
          * isNew 是否为全新
          * title 宝贝标题
          * describe 宝贝描述
@@ -22,52 +23,63 @@ Page({
          * tradeWay 交易方式，0是面交，1是可邮寄
          * picture 图片
          */
+      Sure:false,
+        id:"",
+        nickName:'',
+        token:'',
+        putFlag:false,
+        grade:'大一',
+        color: '#3F3F3F;',
+        Dcolor: '#3F3F3F;',
         success:false,
-        modal:false,
         modalStr:"",
+        font_count:0,
+        Dfont_count:0,
         none:[0,0,0,0,0,0],
-        isNew: false,
+        isNew: 1,
         title: "",
         describe: "",
         dormitory: "J",
         phone: "",
         linkWay: "",
-        linkDetail: "",
+        linkDetailQ: "",
+        linkDetailW:"",
         pricePrv: "",
         priceNow: "",
         bargaining: true,
-        type: "图书教材",
-        tip: "{{item.tip[0]}}",
-        tradeWay: 0,
+      type: "学习相关",
+        tip: "",
+        tradeWay: "面交",
         picture: ["", "", "", "", "", ""],
         picNum: 0,
         picNow: 0,
         pic_url:["","","","","",""],
         // 所有标签
-        allTip: [{
-                title: "图书教材",
-                tip: ["推荐", "教材", "考试", "文学", "畅销"],
-            },
-            {
-                title: "美妆日化",
-                tip: ["推荐", "护肤", "美妆", "洗护", "大牌"],
-            }, 
-            {
-                title: "衣服鞋帽",
-                tip: ["推荐", "上装", "裤装", "鞋履", "配饰"],
-            },
-            {
-                title: "数码产品",
-                tip: ["推荐", "手机", "电脑", "相机", "其它"],
-            }, 
-            {
-                title: "生活日用",
-                tip: ["推荐", "收纳", "雨伞", "洗晒", "清洁"],
-            }, 
-            {
-                title: "家用电器",
-                tip: ["推荐", "厨具", "电暖气", "电冷器", "照明"],
-            },
+         allTip: [{
+            title: "学习相关",
+            tip: ["教辅", "文具", "课外", "其它"],
+          },
+          {
+            title: "生活用品",
+            tip: [ "寝室", "电器", "娱乐", "其它"],
+          },
+          {
+            title: "数码产品",
+            tip: [ "设备", "配件", "外设", "其它"],
+          },
+          {
+            title: "美妆日化",
+            tip: [ "美妆", "洗护", "大牌", "其它"],
+          },
+           {
+             title: "衣物鞋帽",
+             tip: [ "衣物", "鞋帽", "饰品", "其它"],
+           },
+          {
+            title: "大杂烩",
+            tip: [ "动植物", "租借", "零食", "其它"],
+          }
+
         ],
         // dom操作
         options_height: "47rpx",
@@ -99,23 +111,35 @@ Page({
     //重置数据
     reset:function(){
       this.setData({
+        id:"",
+        options_height: "47rpx",
+        options_opacity: "1",
+        price_options_opacity: "0",
+        price_options_height: "0",
+        linkDetail_height: "53.816rpx",
+        linkDetail_height_inner: "0",
+        linkDetail_height_container: "0",
+        linkWay_text_height: "30rpx",
+        tipY: "0",
         success: false,
         modal: false,
         modalStr: "",
         none: [0, 0, 0, 0, 0, 0],
-        isNew: false,
+        isNew: 1,
         title: "",
         describe: "",
         dormitory: "J",
         phone: "",
         linkWay: "",
-        linkDetail: "",
+        linkDetailQ: "",
+        linkDetailW:'',
         pricePrv: "",
         priceNow: "",
+        grade:'大一',
         bargaining: true,
         type: "图书教材",
         tip: "{{item.tip[0]}}",
-        tradeWay: 0,
+        tradeWay: "面交",
         picture: ["", "", "", "", "", ""],
         picNum: 0,
         picNow: 0,
@@ -129,20 +153,29 @@ Page({
       const promise = new Promise(function (resolve, reject) {
         setTimeout(function () {
           wx.uploadFile({
-            url: 'https://www.woxihuannia.top/php/faBuPic.php', //仅为示例，非真实的接口地址
+            url: 'https://market.sky31.com/php/faBuPic.php', //仅为示例，非真实的接口地址
             filePath: that.data.picture[i],
             name: 'upfile0',
             formData: {
-              token: token
+              token: token,
+              nickName: that.data.nickName,
             },
             success(res) {
               // var data = res.data
-
+            console.log(res)
               const data = JSON.parse(res.data)
+              if(data.code == 2){
+                wx.navigateTo({
+                  url: '../login/login?data=请先登录'
+                })
+                wx.removeStorageSync('token')
+                return;
+              }
               // return data.message
-              // console.log(res)
+              console.log(data)
               var url = "pic_url[" + i + "]"
               if (data.code == 0) {
+                console.log(data.message)
                 that.setData({
                   [url]: data.message
                 })
@@ -183,11 +216,12 @@ Page({
     },
     // 删除发布品
     deleteItem:function (e){
+
       var picNum = this.data.picNum - 1;
       var picNow = this.data.picNow - 1;
       var none = [0,0,0,0,0,0];
       var arr = this.data.picture;
-      for (var i = e.target.dataset.index; i < 6; i++) {
+      for (var i = e.target.dataset.index; i < 5; i++) {
         if (i == e.target.dataset.index){
           arr[i] = ""
         }
@@ -218,33 +252,62 @@ Page({
         none: none,
       })
     },
+    //避免重复点击
+    avoidClickAgain:function(){
+      var that = this;
+      //避免重复点击
+      if (that.data.putFlag == false) {
+        
+        that.setData({
+          putFlag: true
+        })
+        return true;
+      } else {
+        return false;
+      }
+      
+    },
     // 发布
-    
     release: function() {
       var that = this;
-      var token = wx.getStorageSync('token')
-      if(!token){
-        wx.navigateTo({
-          url: '../login/login',
-        })
-      }
+
       var i = 0
       const result = []
       console.log(this.data.linkWay)
       while(this.data.picture[i]){
-        result.push(this.up(i))
+        if (this.data.picture[i].indexOf("https://mar") != -1){
+          var url = "pic_url[" + i + "]"
+          
+            
+            that.setData({
+              [url]: this.data.picture[i]
+            })
+            
+            //   // console.log(that1.data.pic_url[0])
+          
+        }else{
+          result.push(this.up(i))
+          
+        }
         i++;
       }
       var k=0;
+
+  
+
       Promise.all(result).then((res)=> {
         var that = this;
-        
-        if (that.checked()==1&&that.data.linkWay=="QQ"){
+        var token = wx.getStorageSync('token')
+        if (that.data.linkWay == "QQ"){
+          if(that.avoidClickAgain() == false){
+            return;
+          }
+          console.log(that.data.pic_url)
           wx.request({
-            url: 'https://www.woxihuannia.top/php/put.php',
+            url: 'https://market.sky31.com/php/put.php',
             method: "POST",
             data: {
-              qq: that.data.linkDetail,
+              qq: that.data.linkDetailQ,
               token:token,
               title:that.data.title,
               describ: that.data.describe,
@@ -255,45 +318,84 @@ Page({
               dormitory:that.data.dormitory,
               purchase_price:that.data.priceNow,
               phone:that.data.phone,
-              grade:"大一",
-              pic0:that.data.pic_url[0],
+              grade:that.data.grade,
+              pic0: that.data.pic_url[0],
               pic1: that.data.pic_url[1],
               pic2: that.data.pic_url[2],
               pic3: that.data.pic_url[3],
               pic4: that.data.pic_url[4],
               pic5: that.data.pic_url[5],
-              bargaining: that.data.bargaining
-
+              bargaining: that.data.bargaining,
+              tradeWay:that.data.tradeWay,
+              id:that.data.id
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
+              wx.hideLoading()
               // var res = JSON.parse(res.data)
               console.log(res.data)
+              if(res.data.code == 103){
+                that.setData({
+                  putFlag: false,
+                  modalStr: "含有敏感信息"
+                })
+                setTimeout(function () {
+                  that.setData({
+                    modalStr: ''
+                  })
+                }, 2000)
+                return
+              }
+              if (res.data.code == 2 || res.data.code == 4) {
+                wx.navigateTo({
+                  url: '../login/login?data=请先登录'
+                })
+                wx.removeStorageSync('token')
+                return;
+              }
               if (res.data.message =="数据插入成功"){
                   that.setData({
                     success: true,
+                    modalStr: '',
+                    putFlag: false,
                   })
-                  
+                 app.globalData.putdata = null,
+                 app.globalData.edit = false
                   setTimeout(function(){
+                    
                     that.reset();
-                    wx.switchTab({
-                      url: '../index/index',
+                    wx.navigateTo({
+                      url: '../my_sell/sell',
                     })
-                  },1000)
+                  },2000)
                   
+              }else{
+                that.setData({
+                  putFlag: false,
+                  modalStr:"发布失败"
+                })
+                setTimeout(function(){
+                  that.setData({
+                    modalStr:''
+                  })
+                },2000)
               }
+              
             }
 
           })
         }
-        if (that.checked() == 1&&that.data.linkWay =="WeChat"){
+        else if (that.data.linkWay == "WeChat" ){
+          if (that.avoidClickAgain() == false) {
+            return;
+          }
           wx.request({
-            url: 'https://www.woxihuannia.top/php/put.php',
+            url: 'https://market.sky31.com/php/put.php',
             method: "POST",
             data: {
-              wechat: that.data.linkDetail,
+              wechat: that.data.linkDetailW,
               token: token,
               title: that.data.title,
               describ: that.data.describe,
@@ -304,22 +406,57 @@ Page({
               dormitory: that.data.dormitory,
               purchase_price: that.data.priceNow,
               phone: that.data.phone,
-              grade: "大一",
+              grade: that.data.grade,
               pic0: that.data.pic_url[0],
               pic1: that.data.pic_url[1],
               pic2: that.data.pic_url[2],
               pic3: that.data.pic_url[3],
               pic4: that.data.pic_url[4],
               pic5: that.data.pic_url[5],
-              bargaining: that.data.bargaining
+              bargaining: that.data.bargaining,
+              tradeWay: that.data.tradeWay,
+              id:that.data.id
 
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-              console.log(res.data.data)
-              
+              if (res.data.code == 2 || res.data.code == 4) {
+                wx.navigateTo({
+                  url: '../login/login?data=请先登录'
+                })
+                wx.removeStorageSync('token')
+                return;
+              }
+              wx.hideLoading()
+              console.log(res.data)
+              if (res.data.code == 103) {
+                that.setData({
+                  putFlag: false,
+                  modalStr: "含有敏感信息"
+                })
+                setTimeout(function () {
+                  that.setData({
+                    modalStr: ''
+                  })
+                }, 2000)
+                return
+              }
+              if (res.data.message == "数据插入成功") {
+                that.setData({
+                  success: true,
+                  modalStr:'',
+                  putFlag:false
+                })
+                setTimeout(function () {
+                  that.reset();
+                  wx.navigateTo({
+                    url: '../my_sell/sell',
+                  })
+                }, 1000)
+
+              }
             }
 
           })
@@ -327,136 +464,23 @@ Page({
         })
   
     },
-    // 按紧图片
-    movePic: function(e) {
-        // 只进行一次setData
-        if (this.data.isMove == 1) {
-            let newSize = [0.8, 0.8, 0.8, 0.8, 0.8, 0.8];
-            let newIndex = [1, 1, 1, 1, 1, 1];
-            newSize[e.currentTarget.dataset['index']] = 1.1;
-            newIndex[e.currentTarget.dataset['index']] = 10;
-            this.setData({
-                isMove: 0,
-                picSize: newSize,
-                zIndex: newIndex,
-            })
-        }
+  
+  
 
-    },
-    // px转rpx
-    pxTOrpx: function(px) {
-        return 750 / wx.getSystemInfoSync().windowWidth * px;
-    },
-    // 移动结束
-    moveOver: function() {
-        this.setData({
-            isMove: 1,
-            picSize: [1, 1, 1, 1, 1, 1],
-        })
-    },
-    // 删除图片
-    deletePic: function(e) {
-        let that = this;
-        let picNum = e.currentTarget.dataset['index'];
-        let pic = this.data.picture;
-        console.log("删除图片" + this.data.picture[picNum]);
-        pic[picNum] = "";
-        this.setData({
-            picture: pic,
-            picNum: that.data.picNum - 1,
-        })
-        console.log("剩余图片" + that.data.picNum + "张");
-        console.log("当前图片" + that.data.picture);
-        // 前端排序
-        let picPlace = e.currentTarget.dataset['place'];
-        let index = that.data.index;
-        for (let i = 0; i < 6; i++) {
-            if (index[i] > picNum) {
-                index[i]--;
-            } else if (index[i] == picPlace) {
-                index[i] = 5;
-            }
-        }
-        that.setData({
-            index: index,
-        })
-        console.log("重新排序为" + that.data.index);
-        that.indexSort();
-    },
-    // 根据index进行前端的排序
-    indexSort: function() {
-        let prvX = [0, 220, 440, 0, 220, 440];
-        let prvY = [0, 0, 0, 220, 220, 220];
-        let index = this.data.index;
-        let nowX = [],
-            nowY = [];
-        for (let i = 0; i <= 5; i++) {
-            nowX[i] = prvX[index[i]];
-            nowY[i] = prvY[index[i]];
-        }
-        this.setData({
-            x: nowX,
-            y: nowY,
-        })
-    },
-    checked:function(){
-      var str = "";
-      var flag = 1;
-      if(this.data.title==""){
-        flag = 0;
-        str = "请填写标题"
-        return flag;
-      } else if(this.data.describe == ""){
-        flag = 0;
-        str = "请填写商品信息"
-        return flag;
-      } else if(this.data.picNum == 0){
-        flag = 0;
-        str = "请至少上传一张图片"
-        return flag;
-      } else if(this.data.phone == ""){
-        flag = 0;
-        str = "请填写手机号码"
-        return flag;
-      } else if (this.data.linkWay == "") {
-        flag = 0;
-        str = "请选择线上联系的方式"
-        return flag;
-      } else if (this.data.linkDetail == "") {
-        flag = 0;
-        str = "请填写微信/QQ号"
-      } else if (this.data.pricePrv == "") {
-        flag = 0;
-        str = "请填写商品原价"
-        return flag;
-      } else if (this.data.priceNow == "") {
-        flag = 0;
-        str = "请填写商品现价"
-        return flag;
-      }
-      
-      if(flag == 0){
-        this.setData({
-          modal:true,
-          modalStr:str
-        })
-      return flag;
-      }
-    },
     //   修改全新状态
     checkNew: function() {
         let that = this;
-        if (that.data.isNew) {
+        if (that.data.isNew == 0) {
             // 如果现在是勾选状态
             that.setData({
-                isNew: false
+                isNew: 1
             })
         } else {
             that.setData({
-                isNew: true
+                isNew: 0
             })
         }
-        if (that.data.isNew) {
+        if (that.data.isNew==0) {
             console.log("商品状态切换为全新");
         } else {
             console.log("商品状态切换为非全新");
@@ -464,17 +488,37 @@ Page({
     },
     // 填写宝贝标题
     setTitle: function(e) {
+      console.log(e.detail.value.length)
         this.setData({
             title: e.detail.value,
+            font_count: e.detail.value.length
         })
+      if (e.detail.value.length == 20){
+        this.setData({
+          color:'red'
+        })
+      }else{
+        this.setData({
+          color: '#3F3F3F'
+        })
+      }
         console.log("标题：" + this.data.title);
     },
 
     // 填写描述
     setDescribe: function(e) {
+      console.log(e)
         this.setData({
             describe: e.detail.value,
+          Dfont_count: e.detail.value.length
         })
+      if (e.detail.value.length == 120){
+        this.setData({
+          Dcolor:'red'
+        })
+      }else{
+        Dcolor: '#3F3F3F'
+      }
         console.log("描述：" + this.data.describe);
     },
     // 选择宿舍
@@ -520,6 +564,7 @@ Page({
     },
     // 设置现价
     setPriceNow: function(e) {
+      console.log(e)
         this.setData({
             priceNow: e.detail.value,
         })
@@ -570,25 +615,31 @@ Page({
         }
     },
     // 设置QQ或微信号
-    setLinkDetail: function(e) {
+    setLinkDetailQ: function(e) {
         this.setData({
-            linkDetail: e.detail.value,
+            linkDetailQ: e.detail.value,
         })
-        console.log("联系的QQ或者微信号为" + this.data.linkDetail);
+        console.log("联系的QQ为" + this.data.linkDetail);
     },
+  setLinkDetailW: function (e) {
+    this.setData({
+      linkDetailW: e.detail.value,
+    })
+    console.log("联系的微信号为" + this.data.linkDetail);
+  },
     // 修改交易方式
     setTradeWay: function() {
         let that = this;
-        if (that.data.tradeWay == 0) {
+        if (that.data.tradeWay == "面交") {
             that.setData({
-                tradeWay: 1,
+                tradeWay: "可邮寄",
             })
         } else {
             that.setData({
-                tradeWay: 0,
+                tradeWay: "面交",
             })
         }
-        if (that.data.tradeWay == 0) {
+        if (that.data.tradeWay == "面交") {
             console.log("交易方式切换为面交");
         } else {
             console.log("交易方式切换为可邮寄");
@@ -597,7 +648,8 @@ Page({
     // 设置分类
     setType: function(e) {
         // 计算标签的translate
-        let tipY = e.currentTarget.dataset['num'] * 47;
+      console.log(e.currentTarget.dataset['num'])
+        let tipY = e.currentTarget.dataset['num'] * 76.2;
         this.setData({
             type: e.currentTarget.dataset['index'],
             tipY: tipY,
@@ -622,33 +674,43 @@ Page({
       }
         var that = this;
         wx.chooseImage({
-            count: 6 - that.data.picNum, // 默认9  
+            count: 5 - that.data.picNum, // 默认9  
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
             success: function(res) {
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+              var tempFilesSize = res.tempFiles
                 let newPicture = res.tempFilePaths;
                 console.log(newPicture);
                 let prvPicture = that.data.picture;
+              // console.log(prvPicture)
                 let picNow = that.data.picNow;
+                var length = 0;
                 // 把图片逐张加入数组
                 for (let i = 0; i < newPicture.length; i++) {
                     if (picNow > 5) {
                         // 如果picNow大于5了，就让它变成0
                     }
-                    while (prvPicture[picNow] != "") {
-                        console.log('a');
-                        picNow++;
-                    }
+   
+                  if (tempFilesSize[i].size <= 8000000){
                     prvPicture[picNow] = newPicture[i];
                     picNow++;
+                    length++;
+                  }else{
+                    wx.showToast({
+                      title: '上传图片不能大于8M!',  //标题
+                      icon: 'none'       //图标 none不使用图标，详情看官方文档
+                    })
+                  }
+                    
                 }
                 console.log(picNow);
                 that.setData({
                     picture: prvPicture,
-                    picNum: that.data.picNum + newPicture.length,
+                    picNum: that.data.picNum + length,
                     picNow: picNow,
                 })
+              console.log(that.data.picture)
                 console.log("目前存好的图片为：" + that.data.picture);
                 console.log("当前有" + that.data.picNum + "张图片");
             }
@@ -661,9 +723,38 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+      // console.log(options.data)
+      var that = this
+      var token = wx.getStorageSync('token')
+      if (token) {
+        that.setData({
+          token:token
+        })
+        
+      }else{
+        wx.navigateTo({
+          url: '../login/login?data=请先登录',
+        })
+        return;
+      }
         wx.setNavigationBarTitle({
             title: "发布宝贝",
         })
+      if (app.globalData.img) {
+        that.setData({
+          nickName: app.globalData.nickname,
+          
+        })
+      } else {
+
+        app.userInfoReadyCallback = data => {
+          console.log(data);
+          that.setData({
+            nickName: data.userInfo.nickName,
+          })
+
+        }
+      }
     },
 
     /**
@@ -677,8 +768,73 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+      // 编辑是edit为true
+      
+      console.log(app.globalData.putdata)
+      
+      if(app.globalData.edit){
+        var data = app.globalData.putdata
+        var ty=[]
+        ty['学习相关'] = 0;
+        ty['生活用品'] = 1 * 76.2;
+        ty['数码产品'] = 2 * 76.2;
+        ty['美妆日化'] = 3 * 76.2;
+        ty["衣物鞋帽"] = 4 * 76.2;
+        ty['大杂烩'] = 5 * 76.2;
+        console.log(data[0])
+        /**
+         * 图片
+         */
+        var i = 6;
+        var n = 0;
+        var pic = ["","","","","",""]
+        while(data[i] && i<=11){
+          
+          pic[n] = data[i];
+          i++;
+          n++
+        }
+        if(data[20]){
+          
+          this.setData({
+            linkWay:'WeChat',
+            linkDetailW: data[20],
+            linkDetail_height_container: this.data.linkDetail_height,
+            linkDetail_height_inner: "0",
+            linkWay_text_height: "0",
+          })
+        }else{
+          this.setData({
+            linkDetail_height_container: this.data.linkDetail_height,
+            linkDetail_height_inner: this.data.linkDetail_height,
+            linkWay_text_height: "0",
+            linkWay: 'QQ',
+            linkDetailQ: data[21],
+          })
+        }
+        this.setData({
+          title:data[4],
+          describe:data[5],
+          grade:data[15],
+          pricePrv:data[13],
+          priceNow:data[14],
+          type:data[1],
+          tradeWay:data[24],
+          dormitory:data[22],
+          phone:data[19],
+          tip:data[2],
+          picture:pic,
+          pic_url:pic,
+          picNow:n,
+          picNum:n,
+          tipY:ty[data[1]],
+          id:data[0]
+        })
+        console.log(this.data.pic_url)
+        app.globalData.edit = false;
+      }
     },
+    
 
     /**
      * 生命周期函数--监听页面隐藏
@@ -713,5 +869,92 @@ Page({
      */
     onShareAppMessage: function() {
 
+    },
+  setClass:function(e){
+    this.setData({
+      grade: e.currentTarget.dataset['index'],
+    })
+    console.log("宿舍切换到" + this.data.grade);
+  },
+  Sure:function(){
+    var str = "";
+    var flag = 1;
+    var that = this;
+
+    
+    if (this.data.title == "") {
+
+      flag = 0;
+      str = "请填写标题"
+    } else if (that.data.describe == "") {
+      flag = 0;
+      str = "请填写商品信息"
+    } else if (that.data.picNum == 0 && !that.data.pic_url) {
+      flag = 0;
+      str = "请至少上传一张图片"
+    }else if(that.data.phone == ''){
+          var str = "请输入电话号码";
+          var   flag = 0;
+    } else if (!(/^((13[0-9])|(14[0-9])|(16[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\d{8}$/.test(that.data.phone))) {
+      var flag = 0;
+      var str = "请输入正确的手机号码"
+    } else if (that.data.linkWay == "") {
+      flag = 0;
+      str = "请选择线上联系的方式"
+      
+    } else if (that.data.linkDetailQ == "" && that.data.linkDetailW == '') {
+      flag = 0;
+      str = "请填写微信/QQ号"
+    } else if (that.data.pricePrv == "") {
+      flag = 0;
+      str = "请填写商品原价"
+    } else if (that.data.priceNow == "") {
+      flag = 0;
+      str = "请填写商品现价"
+    } else if (that.data.tip == "") {
+      flag = 0;
+      str = "请选择标签"
+    } else if (parseInt(that.data.pricePrv) < parseInt(that.data.priceNow) ){
+      flag = 0;
+      str = "现价不能大于原价"
     }
+
+
+    if (flag == 0) {
+      this.setData({
+        modalStr: str
+      })
+      setTimeout(function () {
+        that.setData({
+          modalStr: ""
+        })
+      }, 2000)
+    }else{
+      this.setData({
+        Sure: true
+      })
+    }
+    return
+  
+  },
+  True:function(){
+    this.setData({
+
+      Sure: false
+    })
+    wx.showLoading({
+      title: '正在发布中',
+    })
+    this.release();
+  },
+  closeWindow:function(){
+    this.setData({
+      phone: '',
+      Sure:false
+    })
+    wx.showLoading({
+      title: '正在发布中',
+    })
+    this.release()
+  }
 })

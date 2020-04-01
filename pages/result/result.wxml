@@ -1,84 +1,85 @@
 <!-- 搜索框 -->
 <view class="search">
-    <view class="search-input">
-        <input value="{{searchWord}}"></input>
-    </view>
+  <view class="search-input">
+    <input value="{{searchWord}}" disabled='{{true}}'></input>
+  </view>
 </view>
 <!-- 搜索结果 -->
 <view class="result">
-    <!-- 搜索结果的标题 -->
-    <view class="result-title">
-        <view class="result-title-text">
-            搜索结果
-        </view>
+  <!-- 搜索结果的标题 -->
+  <view class="result-title">
+    <view class="result-title-text">
+      搜索结果
     </view>
-    <!-- 搜索结果的内容 -->
-    <view class="result-goods"> 
-        <!-- 没有相关搜索结果 -->
-        <view class="result-goods-empty" wx:if="{{code==1}}">
-            <view class="result-goods-empty-image">
-                <image src="image/empty.svg"></image>
-            </view>
-            <view class="result-goods-empty-text">
-                没找到相关宝贝，去首页翻翻看吧！
-            </view>
-        </view>
-        <!-- 搜索到了相关结果 -->
-        <view class="result-goods-list" wx:else>
-            <view class='goods-container-left'>
-                <block wx:for="{{goods_left}}" wx:key="{{goods}}">
-                    <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
-                        <view class='goods-img'>
-                            <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
-                        </view>
-                        <view class='goods-detail'>
-                            <view class='goods-title'>{{item.title}}</view>
-                            <view class='goods-info'>
-                                <view class='goods-tags-container'>
-                                    <view class='tag'>{{item.isNew}}</view>
-                                    <view class='tag'>{{item.tag}}</view>
-                                </view>
-                                <view class='goods-price'>
-                                    <view class='price-prv'>
-                                        {{item.price}}
-                                    </view>
-                                    <view class='price-now'>
-                                        <span class='price-now'>{{item.purchase_price}}</span>
-                                        <span class='price-unit'>￥</span>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </block>
-            </view>
-            <view class='goods-container-right'>
-                <block wx:for="{{goods_right}}" wx:key="{{goods}}">
-                    <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
-                        <view class='goods-img'>
-                            <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="true"></image>
-                        </view>
-                        <view class='goods-detail'>
-                            <view class='goods-title'>{{item.title}}</view>
-                            <view class='goods-info'>
-                                <view class='goods-tags-container'>
-                                    <view class='tag'>{{item.isNew}}</view>
-                                    <view class='tag'>{{item.tag}}</view>
-                                </view>
-                                <view class='goods-price'>
-                                    <view class='price-prv'>
-                                        {{item.price}}
-                                    </view>
-                                    <view class='price-now'>
-                                        <span class='price-now'>{{item.purchase_price}}</span>
-                                        <span class='price-unit'>￥</span>
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </block>
-            </view>
-        </view>
+  </view>
+  <!-- 搜索结果的内容 -->
+  <view class="result-goods">
+    <!-- 没有相关搜索结果 -->
+    <view class="result-goods-empty" wx:if="{{code==1}}">
+      <view class="result-goods-empty-image">
+        <image src="image/empty.svg"></image>
+      </view>
+      <view class="result-goods-empty-text">
+        没找到相关宝贝，去首页翻翻看吧！
+      </view>
     </view>
+    <!-- 搜索到了相关结果 -->
+    <view class="result-goods-list" wx:else>
+      <view class='goods-container-left'>
+        <block wx:for="{{goods_left}}" wx:key="{{goods}}">
+          <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+            <view class='goods-img'>
+              <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
+            </view>
+            <view class='goods-detail'>
+              <view class='goods-title'>{{item.title}}</view>
+              <view class='goods-info'>
+                <view class='goods-price'>
+                  <!-- <view class='price-prv'>
+                    {{item.price}}
+                  </view> -->
+                  <view class='price-now'>
+                    <span class='price-now'>{{item.purchase_price}}</span>
+                    <span class='price-unit'>￥</span>
+                  </view>
+                </view>
+                <view class='goods-tags-container'>
+                  <view wx:if="{{item.new == '0'}}" class='tag' >全新</view>
+                  <view class='tag-a'>{{item.tag}}</view>
+                </view>
+
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class='goods-container-right'>
+        <block wx:for="{{goods_right}}" wx:key="{{goods}}">
+          <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+            <view class='goods-img'>
+              <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="true"></image>
+            </view>
+            <view class='goods-detail'>
+              <view class='goods-title'>{{item.title}}</view>
+              <view class='goods-info'>
+                <view class='goods-price'>
+                  <!-- <view class='price-prv'>
+                    {{item.price}}
+                  </view> -->
+                  <view class='price-now'>
+                    <span class='price-now'>{{item.purchase_price}}</span>
+                    <span class='price-unit'>￥</span>
+                  </view>
+                </view>
+                <view class='goods-tags-container'>
+                  <view wx:if="{{item.new == '0'}}" class='tag'>全新</view>
+                  <view class='tag-a'>{{item.tag}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
 </view>

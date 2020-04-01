@@ -6,24 +6,19 @@ App({
     getsuer: false,
     nickname: null,
     img: null,
-    collect: null
+    collect: null,
+    edit:false,
+    putdata:null,
+    News:false,
+    Put:"[]"
   },
   onLaunch: function () {
     this.Get_collect()
+    this.Get_Put_id();
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        console.log(res)
-        this.globalData.code = res.code
-        // console.log(this.globalData.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -31,7 +26,7 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(res.userInfo.avatarUrl)
+              
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               this.globalData.nickname = res.userInfo.nickName
@@ -53,7 +48,7 @@ App({
     var that = this
     if (token) {
       wx.request({
-        url: 'https://www.woxihuannia.top/php/collect_list.php',
+        url: 'https://market.sky31.com/php/collect_list.php',
         method: "POST",
         data: {
           token: token
@@ -62,8 +57,42 @@ App({
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
         success: function (res) {
-          that.globalData.collect = res.data
-          console.log(that.globalData.collect);
+          console.log(res.data)
+          if(res.data.code==0){
+            that.globalData.collect = res.data
+            that.globalData.News = res.data.News 
+          }else {
+            that.globalData.News = res.data.News 
+          }
+          console.log(that.globalData.News);
+        }
+
+      })
+    }
+  },
+  /**
+   * 获取自己正在出售的商品
+   */
+  Get_Put_id:function(){
+
+    var token = wx.getStorageSync('token')
+    var that = this
+    if (token) {
+      wx.request({
+        url: 'https://market.sky31.com/php/getGoods.php',
+        method: "POST",
+        data: {
+          token: token
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data)
+          if(res.data.code == 0){
+            that.globalData.Put = res.data.message
+          }
+       
         }
 
       })

@@ -1,105 +1,142 @@
-<!-- 背后的黄色底纹 -->
-<view class="bg"></view>
-<!-- 顶上的个人信息 -->
-<view class="personal">
-    <!-- 个人信息的主要信息，也就是上面的用户名和联系方式 -->
-    <view class="personal-main">
-        <view class="personal-main-name">{{nickname}}</view>
-        <view class="personal-main-link">显示线上联系方式</view>
-    </view>
-    <!-- 个人信息的次要信息，也就是年级、宿舍和是否认证 -->
-    <view class="personal-ex">
-        <view class="personal-ex-gread">
-            <!-- <image src="image/test1.png"></image> -->
-            <span>{{gread}}</span>
-        </view>
-        <view class="personal-ex-dorm">
-            <!-- <image src="image/test1.png"></image> -->
-            <span>{{dorm}}</span>
-        </view>
-        <view class="personal-ex-attestation">
-            <!-- <image src="./image/test1.png"></image> -->
-            <span>{{attestation}}</span>
-        </view>
-    </view>
-    <!-- 个人信息的头像 -->
-    <view class="personal-icon">
-        <image src="{{personalIcon}}"></image>
-    </view>
-</view>
-<!-- 个人信息下的图片 -->
-<view class="picture">
-    <swiper class="picture-swiper" indicator-dots="true">
-        <block wx:for="{{goods_picture}}" wx:key="goods_picture">
-            <swiper-item>
-                <view class="picture-swiper-inner">
-                    <image src="{{item}}" mode="aspectFill"></image>
-                </view>
-            </swiper-item>
-        </block>
-    </swiper>
-</view>
-<!-- 图片下的商品数字信息 -->
-<view class="number">
-    <view class="number-price">
-        <view class="number-price-now">
-            <view class="number-price-now-unit">￥</view>
-            <view class="number-price-now-num">{{priceNow}}</view>
-        </view>
-        <view class="number-price-prv">
-            <view class="number-price-prv-unit">￥</view>
-            <view class="number-price-prv-num">{{pricePrv}}</view>
-        </view>
-    </view>
-    <view class="number-time">
-        {{time}}
-    </view>
-</view>
-<!-- 商品标题 -->
-<view class="title">
-    <span>{{goodsName}}</span>
-</view>
-<!-- 商品简介 -->
-<view class="detail">
-    <span class="detail-tip">{{detailTip}}</span>
-    <span class="detail-inner">{{detail}}</span>
-</view>
-<!-- 商品标签 -->
-<view class="tip">
-    <view class="tip-title">标签：</view>
-    <view class="tip-inner">{{tip[0]}}</view>
-    <view class="tip-inner">{{tip[1]}}</view>
-    <view class="tip-inner">{{tip[2]}}</view>
-</view>
-<view class="liu_font">
-  <text>留言</text>
-  <view class="liu_back"></view>
-</view>
-<view class="liu" wx:for="{{leave_message}}" wx:key="item">
-  <view class="liu_message" wx:for="{{item}}" wx:key='item'>
-    <image class="liu_head_img" src="{{item.avatarUrl}}"></image>
-    <view class="right" bindtap="reply" data-index="{{item.id}}">
-      <view class="liu_nickname">{{item.nick_name}}</view>
-      <view class="liu_content">{{item.content}}</view>
+
+
+<view style="filter:{{tooLate==true || Call==true?'blur(2px)':'blur(0px)'}}" >
+  
+  <!-- 背后的黄色底纹 -->
+  <view class="bg"></view>
+  <!-- 顶上的个人信息 -->
+  <view class="personal">
+      <!-- 个人信息的主要信息，也就是上面的用户名和联系方式 -->
+      <view class="personal-main">
+          <view class="personal-main-name">{{nickname}}</view>
+          <view class="personal-main-link" catchlongtap="copy" bindtap="showLinkWay">{{linkWay}}</view>
+      </view>
+      <!-- 个人信息的次要信息，也就是年级、宿舍和是否认证 -->
+      <view class="personal-ex">
+          <view class="personal-ex-gread">
+              <image class="sIcon" src="./images/degree.png"></image>
+              <span>{{grade}}</span>
+          </view>
+          <view class="personal-ex-dorm">
+              <image class="wIcon" src="./images/address.png"></image>
+              <span>{{dorm}}</span>
+          </view>
+          <view class="personal-ex-attestation">
+              <image class="xIcon" src="./images/authorization.png"></image>
+              <span>已认证</span>
+          </view>
+      </view>
+      <!-- 个人信息的头像 -->
+      <view class="personal-icon">
+          <image src="{{personalIcon}}"></image>
+      </view>
+  </view>
+  <!-- 个人信息下的图片 -->
+  <view class="picture">
+      <swiper class="picture-swiper" autoplay='true' interval='2000' indicator-dots="true">
+          <block wx:for="{{goods_picture}}" wx:key="goods_picture">
+              <swiper-item>
+                  <view class="picture-swiper-inner">
+                      <image data-src="{{item}}" src="{{item}}" bindtap="previewImage" mode="aspectFill"></image>
+                  </view>
+              </swiper-item>
+          </block>
+      </swiper>
+  </view>
+  <!-- 图片下的商品数字信息 -->
+  <view class="number">
+      <view class="number-price">
+          <view class="number-price-now">
+              <view class="number-price-now-unit">￥</view>
+              <view class="number-price-now-num">{{priceNow}}</view>
+          </view>
+          <view class="number-price-prv">
+              <view class="number-price-prv-unit">￥</view>
+              <view class="number-price-prv-num">{{pricePrv}}</view>
+          </view>
+      </view>
+      <view class="number-time" wx:if="{{time<=0}}">这个宝贝刚刚发布哟！</view>
+      <view class="number-time" wx:if="{{time<=10 && time>0}}">这个宝贝{{time}}天前刚发布哟！</view>
+      <view class="number-time"  wx:if="{{time>10 }}">宝贝已上架{{time}}天，快带走它吧！</view>
+  </view>
+  <!-- 商品标题 -->
+  <view class="title">
+      <span>{{goodsName}}</span>
+  </view>
+  <!-- 商品简介 -->
+  <view class="detail">
+      <span wx:if="{{isnew=='0'}}" class="detail-tip">全新</span>
+      <span wx:else class="detail-tip">{{tradeWay}}</span>
+      <span class="detail-inner">{{detail}}</span>
+  </view>
+  <!-- 商品标签 -->
+  <view class="tip">
+      <view class="tip-title">标签：</view>
+      <view class="tip-inner">{{tradeWay}}</view>
+      <view wx:if="{{isnew=='0'}}" class="tip-inner">全新</view>
+      <view wx:if="{{bargainable=='true'}}" class="tip-inner">可讲价</view>
+      <view wx:else class="tip-inner">一口价</view>
+  </view>
+  <view class="liu_font">
+    <text>留言</text>
+    <view class="liu_back"></view>
+  </view>
+ 
+  <view class='none_message' style="display:{{leave_message.length==0?'block':'none'}}" bindtap='liu_yan'>
+    <view>宝贝还没有留言，快来问问卖家吧</view>
+    <view >留言</view>
+  </view>
+  <view class="liu" wx:for="{{leave_message}}" wx:key="item">
+    <view class="liu_message" wx:for="{{item}}" bindlongpress='deleteMessage' data-id="{{item.id}}" wx:key='item'>
+      <image class="liu_head_img" src="{{item.avatarUrl}}"></image>
+      <view class="right" bindtap="reply" data-index="{{item.id}}">
+        <view class="liu_nickname">{{item.nick_name}}</view>
+        <view class="liu_content">{{item.content}}</view>
+      </view>
     </view>
   </view>
+
+
 </view>
-<view class="button" style="display:{{button_display}}">
-  <view class="collect">
-  <image class="all_img" src="{{collect==0?'./images/collect.png':'./images/collected.png'}}" bindtap="toggleCollect" ></image>
-  </view>
-  <view class="leave" bindtap="liu_yan">
-    <image class="all_img" src="./images/leave.png"></image>
-  </view>
-  <view class="phone">
-    <image class="all_img" src="./images/phone.png"></image>
-  </view>
-</view>
-<view class="le_input" style="display:{{liu_display}}" >
-  <view class="cf-box">
-    <view class="tou_xiang">
-    <image class="touxiang_img" src="{{head_img}}"></image>
+
+
+    
+    <image style="display:{{leave}}" class="collect" src="{{collect==0?'./images/collect.png':'./images/collected.png'}}" bindtap="toggleCollect" ></image>
+    <image style="display:{{leave}}" class="leave"  bindtap="liu_yan" src="./images/leave.png"></image>
+    <view style="display:{{leave}}"  bindtap="call" class="phone" >我想要</view>
+
+  <view class="le_input" style="display:{{liu_display}}" >
+    <view class="cf-box">
+      <view class="tou_xiang">
+      <image class="touxiang_img" src="{{head_img}}"></image>
+      </view>
+      <input maxlength="30" cursor-spacing='15' show-confirm-bar='false' value="{{content}}" class="liu_yan" focus="{{jian_pan}}" bindinput="input" bindblur="display" bindconfirm='send'confirm-type="send"  placeholder-class="in_font" placeholder="看对眼就留言，问问更多宝贝相关~" ></input>
+      <view class="send" bindtap="send">发送</view>
     </view>
-    <input maxlength="30" show-confirm-bar='false' class="liu_yan" focus="{{jian_pan}}" bindinput="input" bindblur="display" bindconfirm='send'  placeholder-class="in_font" placeholder="看对眼就留言，问问更多宝贝相关~" ></input>
+  </view>
+<view class="window" bindtap="closeWindow" style="display:{{tooLate == true?'block':'none'}}">
+  <image src="../images/tooLate.png"></image>
+</view>
+<view class="windo" bindtap="closeWindow" style="display:{{Call == true?'block':'none'}}">
+    
+  <view class="w_bo">
+    <image mode="scaleToFill" src="./images/call.png"></image>
+    <view class="backg">
+      <view class="topT">
+        <text wx:if="{{phone!=''}}">将拨打卖家电话</text>
+        <text wx:else>对方不想被打扰~</text>
+      </view>
+      <view class="call_notic">
+        <text wx:if="{{phone!=''}}">宝贝虽好，记得避开上课时间拨打~</text>
+        <text wx:else>快尝试通过线上的方式联系卖家吧！</text>
+        
+      </view>
+      <view class="foot">
+        <view wx:if="{{phone!=''}}" bindtap="closeWindow" style="color:rgba(187,187,187,1);" class="CL">暂不</view>
+        <view wx:else bindtap="closeWindow" style="color:rgba(187,187,187,1);" class="CL">确认</view>
+        <view wx:if="{{phone!=''}}" bindtap="CallTrue" style="color:rgba(255,121,17,1);" class="CL">确认</view>
+        <view wx:else bindtap="CallTrue" style="color:rgba(255,121,17,1);" class="CL">复制QQ/微信</view>
+      </view>
+    </view>
   </view>
 </view>

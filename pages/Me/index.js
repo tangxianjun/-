@@ -6,90 +6,94 @@ Page({
    * 页面的初始数据
    */
   data: {
+    News:false,
     nickname:'',
-    head_img:''
+    head_img:'',
+    token:'',
+    once:true
   },
   onTabItemTap(item) {
 
     // tab 点击时执行
-    var that = this
-    wx.getStorage({
-      key: 'token',
-      success(res) {
-        if (app.globalData.img) {
-          that.setData({
-            nickname: app.globalData.nickname,
-            head_img: app.globalData.img
-          })
-        } else {
-
-          app.userInfoReadyCallback = data => {
-            console.log(data);
-            that.setData({
-              nickname: data.userInfo.nickName,
-              head_img: data.userInfo.avatarUrl
-            })
-          
-          }
-        }
-      },
-      fail: (res) => {
-        wx.navigateTo({
-          url: '../login/login',
+    if (this.data.once){
+      var token = wx.getStorageSync('token')
+      if (token) {
+        this.setData({
+          nickname: app.globalData.nickname,
+          head_img: app.globalData.img,
+          token: token
         })
+      } else {
+        wx.navigateTo({
+          url: '../login/login?data=请先登录',
+        })
+        return;
       }
-    })
+    }
+    // wx.getStorage({
+    //   key: 'token',
+    //   success(res) {
+    //     if (app.globalData.img) {
+    //       that.setData({
+    //         nickname: app.globalData.nickname,
+    //         head_img: app.globalData.img
+    //       })
+    //     } else {
+
+    //       app.userInfoReadyCallback = data => {
+    //         console.log(data);
+    //         that.setData({
+    //           nickname: data.userInfo.nickName,
+    //           head_img: data.userInfo.avatarUrl
+    //         })
+          
+    //       }
+    //     }
+    //   },
+    //   fail: (res) => {
+    //     wx.navigateTo({
+    //       url: '../login/login',
+    //     })
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getStorage({
-      key: 'token',
-      success(res) {
-        console.log(res.data)
-        // wx.navigateTo({
-        //   url: '../details/details',
-        // })
-      },
-      fail: (res) => {
-        wx.navigateTo({
-          url: '../login/login',
-        })
-      }
-    })
-    app.globalData.getsuer = true
-    console.log(app.globalData.userInfo)
-    if(app.globalData.img){
-      this.setData({
-        nickname:app.globalData.userInfo.nickName,
-        head_img:app.globalData.userInfo.avatarUrl
-      })
-    }else{
 
-      app.userInfoReadyCallback = data => {
-      console.log(data);
-      this.setData({
-        nickname: data.userInfo.nickName,
-        head_img: data.userInfo.avatarUrl
-        })
-        // console.log(data.userInfo.nickName)
-      }
-    }
     // const app = getApp()
 
   
-    // this.setData({
-    //   nickname:app.globalData.nickName
-    // })
+    this.setData({
+      News:app.globalData.News
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+    var that = this
+    // app.globalData.getsuer = true
+    // console.log(app.globalData.userInfo)
+    if (app.globalData.img) {
+      that.setData({
+        nickname: app.globalData.nickname,
+        head_img: app.globalData.img
+      })
+    } else {
+
+      app.userInfoReadyCallback = data => {
+        console.log(data);
+        that.setData({
+          nickname: data.userInfo.nickName,
+          head_img: data.userInfo.avatarUrl
+        })
+        // console.log(data.userInfo.nickName)
+      }
+    }
     
   },
 
@@ -105,7 +109,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+      this.setData({
+        once:true
+      })
   },
 
   /**
@@ -156,6 +162,9 @@ Page({
     wx.navigateTo({
       url: '../collect/collect?status=news',
     })
+    this.setData({
+      News:false
+    })
   },
   /**
    * 退出清除token
@@ -169,6 +178,11 @@ Page({
           url: '../login/login',
         })
       }
+    })
+  },
+  connect:function(){
+    wx.navigateTo({
+      url: '../connect/connect',
     })
   }
 })

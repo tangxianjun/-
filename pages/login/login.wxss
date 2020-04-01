@@ -3,12 +3,16 @@ view,text{
    font-family: PingFang SC;
 }
 .title{
+  font-weight: bold;
   height: 80rpx;
   width: 570rpx;
+  color: #3f3f3f;
   margin-top: 113rpx;
   margin-left: 63rpx;
-  font-size: 57rpx;
+  font-size: 56rpx;
   padding: 0;
+
+  
 }
 .bg{
   margin-top: -30rpx;
@@ -31,7 +35,7 @@ view,text{
 }
 .username{
   height: 80rpx;
-  width: 100%;
+  width: 90%;
   line-height: 80rpx;
   margin-top: 180rpx;
   font-size: 28rpx;
@@ -42,7 +46,7 @@ view,text{
 .passwd{
   height: 80rpx;
   line-height: 80rpx;
-  width: 100%;
+  width: 90%;
   margin-top: 20rpx;
   font-size: 28rpx;
   color: #3F3F3F 100%;
@@ -65,6 +69,9 @@ view,text{
 /* .center{
   text-align: center;
 } */
+.aple{
+  color: #0091FF;
+}
 #passwd{
   margin-top: 15rpx;
   margin-left: 20rpx;
@@ -78,6 +85,8 @@ view,text{
 }
 .agree_left{
   margin-left: 62rpx;
+  position: relative;
+  top: 8rpx;
 }
 .agree_img{
   height: 30rpx;
@@ -96,16 +105,26 @@ view,text{
   margin-top: 40rpx;
 } */
 .login{
-  margin-top: 60rpx;
-  height: 97rpx;
-  width: 628rpx;
-  background: rgb(255, 242, 192);
-  border-radius: 50rpx;
+  height:97rpx;
+  width:628rpx;
+  background:rgb(255, 232, 150);
+  border-radius:50rpx;
+  font-size:32rpx;
+  line-height:97rpx;
+  text-align:center;
+  margin:40rpx auto;
+  font-weight:bold;
+  box-shadow:5px 5px 20px rgba(255,232,150,0.5);
+  color:#3f3f3f;
+}
+button::after {
+  border: none
 }
 .radio{
   width:29rpx;
   height:29rpx;
   border-radius:17px;
+  transform:scale(0.6);
 }
 .toast{
   width: 100%;
@@ -120,7 +139,7 @@ view,text{
   text-align: center;
 }
 .window{
-  transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
   position: fixed;
   top: 0;
   width: 100%;
@@ -128,11 +147,11 @@ view,text{
   z-index: 999;
 }
 .window>image{
-  width: 552rpx;
-  height: 627rpx;
+  width: 624rpx;
+  height: 709rpx;
   position: absolute;
   margin: auto;
-  top: 0;
+  top: -20rpx;
   bottom: 0;
   left: 0;
   right: 0;

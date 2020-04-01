@@ -12,61 +12,64 @@
 <!--动态版本-->
 <view class="backnone" style="display:{{img_none}}">
   <image class="none_img" src="{{imgurl}}"></image>
-  <view class="none_text"><text>{{tex}}</text></view>
-  <button style="display:{{bttdisplay}}" class="button" bindtap="nav">去逛逛</button>
+  <view class="none_text"><text style="font-size: 15px;">{{tex}}</text></view>
+  <button wx:if="{{status=='collect'}}" style="display:{{bttdisplay}}" class="button" bindtap="toindex">去逛逛</button>
 </view>
  <!-- 收藏 -->
-<view wx:for="{{collect}}" class="collect" wx:key="item">
-  <view class="h_back">
-    <view class="right" bindtap="toggleOption" data-index="{{index}}">
+<view wx:for="{{collect}}"  data-data="{{item.goods_id}}" class="collect" wx:key="item">
+  <view class="h_back" bindtap="nav" data-data="{{item.goods_id}}">
+    <view class="right" catchtap="toggleOption" data-index="{{index}}">
       <view class="r" data-index="{{index}}"></view>
       <view class="r" data-index="{{index}}"></view>
       <view class="r" data-index="{{index}}"></view>
     </view>
     <view class="optionlist" style="{{selectedOption==index?'display:block':'display:none'}}">
-        <view bindtap="deleteCollect" data-index="{{index}}" data-goods_id="{{item.goods_id}}">取消收藏</view>
+        <view catchtap="deleteCollect" data-index="{{index}}" data-goods_id="{{item.goods_id}}">取消收藏</view>
     </view>
   </view>
-  <view class="c_content" >
+  <view class="c_content" bindtap="nav" data-data="{{item.goods_id}}">
     <view class="c_img"><image  class="cimg" src="{{item.pic1_path}}"></image></view>
     <view class="c_right">
       <view class="c_top">{{item.title}}</view>
       <view class="c_z">{{item.description}}</view>
+       <view class="c_price">
+        <text class="price-now">{{item.purchase_price}}</text>
+        <text class="dollar">￥</text>
+        <text class='price-prv'>{{item.price}}</text>
+        
+      </view>
       <view class="c_time">
         <image src="../images/date@2x.png"></image>
-        <text>2019-11-21</text>
+        <text>{{item.release_time}}</text>
       </view>
-      <view class="c_price">
-        <text class='price-prv'>288</text>
-        <text class="dollar">￥</text>
-        <text class="price-now">100</text>
-      </view>
+     
     </view>
   </view>
 </view>
 <!-- 我的消息 -->
-<view wx:for="{{news}}" style="position:relative">
+<view wx:for="{{news}}" style="position:relative" wx:key='item' >
   <view class="newsOption">
-    <image src="./img/edit.png"></image>
-    <image src="./img/cancel.png" bindtap="deleteMessage" data-index="{{index}}"></image>
+    <!-- <image src="./img/edit.png" bindtap="replyMessage"></image> -->
+    <image src="./img/delete.png" catchtap="deleteMessage" data-id="{{item.message_id}}" data-index="{{index}}"></image>
   </view>
-  <view class="news" wx:key='item' style="right:{{selectedMessage == index?'400rpx':'0px'}}">
-    <view class="newsStatus"></view>
-     <view class="right" bindtap="toggleMessage" data-index="{{index}}">
-      <view class="r" bindtap="toggleMessage" data-index="{{index}}"></view>
-      <view class="r" bindtap="toggleMessage" data-index="{{index}}"></view>
-      <view class="r" bindtap="toggleMessage" data-index="{{index}}"></view>
+  <view class="news" bindtap="reply" bindlongpress="toggleMessage"   data-index="{{index}}"  wx:key='item' data-goodsid="{{item.goods_id}}" style="right:{{selectedMessage == index?'200rpx':'0px'}}" >
+    <view class="newsStatus" style="display:{{item.status==1?'block':'none'}}"></view>
+     <view class="right" bindlongpress="toggleMessage"  data-index="{{index}}">
+      <view class="r" bindlongpress="toggleMessage"  data-index="{{index}}"></view>
+      <view class="r" bindlongpress="toggleMessage"  data-index="{{index}}"></view>
+      <view class="r" bindlongpress="toggleMessage"  data-index="{{index}}"></view>
     </view>
     <view class="m_img">
-      <image src="{{item.pic1_path}}"></image>
+      <image src="{{item.head_portrait}}"></image>
     </view>
-    <view style="margin-left:220rpx;padding-top:35rpx">
-      <view style="font-size:40rpx;">{{item.username}}</view>
-      <view style="font-size:22rpx;color:#aaa">{{item.time}}</view>
-      <view style="font-size:22rpx;color:#aaa;margin-top:20rpx">{{item.message}}</view>
+    <view style="margin-left:220rpx;padding-top:35rpx" bindlongpress="toggleMessage"   data-index="{{index}}">
+      <view style="font-size:36rpx;" bindlongpress="toggleMessage"  data-index="{{index}}">{{item.former_nick_name}}</view>
+      <view style="font-size:22rpx;color:#3f3f3f;opacity:0.5"  bindlongpress="toggleMessage" data-index="{{index}}">{{item.intervals_time}}</view>
+      <view class='replyContent' bindlongpress="toggleMessage"  data-index="{{index}}">{{item.content}}</view>
     </view>
   </view>
 </view>
+<!---->
 <!-- <view class="news"  wx:key='item'>
   <view class="img"><image class="n_img" src=""></image></view>
 </view>

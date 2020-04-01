@@ -6,10 +6,10 @@ Page{
   padding-bottom: 80px;
 }
 .bg{
-  height: 788rpx;
+  height: 806rpx;
   width: 750rpx;
   background: #FFE896;
-  border-radius: 0 0 40px 40px;
+  border-radius: 0 0 20px 20px;
   position: absolute;
   top: 0;
   left: 0;
@@ -35,9 +35,12 @@ Page{
 }
 .personal-main-name {
     /* width: 95rpx; */
+    overflow: hidden;
+    text-overflow: ellipsis;
     height: 50rpx;
     white-space: nowrap;
     font-size: 36rpx;
+    width: 250rpx;
     color: #3F3F3F;
     letter-spacing: 0.08rpx;
 }
@@ -53,6 +56,8 @@ Page{
     font-size: 24rpx;
     color: #FF7911;
     letter-spacing: 0.06rpx;
+    margin-left: 20rpx;
+
 }
 /* 个人信息-次要信息 */
 .personal-ex {
@@ -82,17 +87,19 @@ Page{
     height: 30rpx;
 }
 .personal-ex-gread > image {
-    width: 27.9rpx;
-    height: 21.5rpx;
+   width: 26rpx;
+    height: 26rpx;
+
 }
 /* 个人信息-次要信息-宿舍 */
 .personal-ex-dorm {
-    width: 75.9rpx;
+    max-width: 130rpx;
     height: 30rpx;
 }
 .personal-ex-dorm > image {
-    width: 18.9rpx;
-    height: 22rpx;
+    width: 26rpx;
+    height: 26rpx;
+    position: relative;
 }
 /* 个人信息-次要信息-是否认证 */
 .personal-ex-attestation {
@@ -100,8 +107,9 @@ Page{
     height: 30rpx;
 }
 .personal-ex-attestation > image {
-    width: 18.6rpx;
-    height: 21.6rpx;
+   width: 26rpx;
+  height: 26rpx;
+
 }
 /* 个人信息-头像 */
 .personal-icon {
@@ -145,7 +153,7 @@ Page{
     /* top: 35rpx; */
     margin-top: 35rpx;
     left: 31rpx;
-    width: 660rpx;
+    width: 690rpx;
     height: 69rpx;
     display: flex;
     justify-content: space-between;
@@ -155,6 +163,7 @@ Page{
     justify-content: flex-start;
 }
 .number-price > view {
+  
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -162,26 +171,38 @@ Page{
 .number-price-now {
     font-size: 39rpx;
     color: #EE2904;
+    line-height: 39rpx;
+
+}
+.number-price-now >view{
+  font-weight: bold;
 }
 .number-price-prv {
+
     margin-left: 20rpx;
     font-size: 24.5rpx;
     color: #BBBBBB;
     line-height: 28rpx;
     text-decoration: line-through;
 }
+.number-price-prv>view{
+   line-height: 28rpx;
+   font-size: 28rpx;
+}
 .number-time {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    /* margin-left: 200rpx; */
     font-family: PingFangSC-Medium;
-    font-size: 22rpx;
-    color: #BBBBBB;
+    font-size: 26rpx;
+    color: #FED269;
     letter-spacing: 0.05rpx;
-    text-align: left;
+    text-align: right;
 }
 /* 商品名 */
 .title {
+    width: 90%;
     position: relative;
     /* top: 13rpx; */
     margin-top: 13rpx;
@@ -196,6 +217,7 @@ Page{
     margin-top: 6rpx;
 }
 .detail-tip {
+  line-height: 32rpx;
     height: 32rpx;
     padding-left: 17rpx;
     padding-right: 17rpx;
@@ -205,7 +227,9 @@ Page{
     text-align: center;
     background-color: #03D654;
     border-radius: 16rpx;
+    bottom: 4rpx;
     display: inline-block;
+    position: relative;
 }
 .detail-inner {
     font-size: 28rpx;
@@ -244,32 +268,50 @@ Page{
 }
 /* 收藏  */
 .collect{
-   margin: 0 0 0 20rpx; 
-  float: left;
+   /* margin: 0 0 0 20rpx;  */
   height: 114rpx;
   width: 114rpx;
-  bottom: 50rpx;
+  /* bottom: 50rpx; */
+  position: fixed;
+  left: 20rpx;
+  z-index: 999;
+  bottom: 30rpx;
 }
 .all_img{
-  
+  position: fixed;
   height: 114rpx;
   width: 114rpx;
 }
 .leave{
-  margin: 0 20rpx 0 0; 
-  float: right;
-  height: 114rpx;
+  
+  bottom: 30rpx;
+ height: 114rpx;
   width: 114rpx;
-  right: 120rpx;
+  /* bottom: 50rpx; */
+  position: fixed;
+  left: 160rpx;
+  z-index: 999;
 }
 .phone{
-  margin: 0 20rpx; 
-  float: right;
-  height: 114rpx;
-  width: 114rpx;
-  right: 0;
+  bottom: 30rpx;
+   height: 104rpx;
+  width: 251rpx;
+  /* bottom: 50rpx; */
+  position: fixed;
+  right: 20rpx;
+  background-image: url(https://www.woxihuannia.top/img/want.png);
+  background-size:100% 100%; 
+  line-height: 102rpx;
+  text-align: center;
+  z-index: 999;
+  color: white;
+  font-weight: 550;
+   background-repeat:no-repeat;
+  font-size: 38rpx;
+  letter-spacing: 4rpx;
 }
 .le_input{
+  width: 750rpx;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -281,7 +323,7 @@ Page{
 .cf-box {
   padding: 8px 5px;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
 }
 .tou_xiang{
   height: 81rpx;
@@ -297,25 +339,51 @@ Page{
   width: 81rpx;
   
 }
+.none_message{
+  text-align: center;
+  height: 100px;
+  width: 100%;
+  padding-top: 20px;
+}
+.none_message>view:nth-child(1){
+  color:#cfcfcf;
+  font-size:28rpx;
+}
+.none_message>view:nth-child(2){
+  color:#FF9033;
+  margin-top: 11rpx;
+  font-size:36rpx;
+  position: relative;
+
+}
 .liu_yan{
   background-color: #f2f2f2;
   padding: 20rpx 5rpx;
   font-size: 24rpx;
   height: 41rpx;
-  /* line-height: 81rpx; */
+  line-height: 41rpx;
   margin-left: 14rpx;
-  width: 583rpx;
+  /* margin-bottom: 20rpx; */
+  width: 513rpx;
+}
+.send{
+  height: inherit;
+  width: 100rpx;
+  line-height: 81rpx;
+  text-align: center;
+  margin-left: 12rpx;
+  background-color: #FFE9B5;
+  border-radius: 4px;
 }
 .in_font{
   font-size: 24rpx;
- 
+    line-height: 41rpx;
   /* position: absolute;
   left: 10rpx;
   top: 23rpx; */
 }
 .liu{
   width: 100%;
-  height: 80rpx;
 }
 .liu_font{
   font-size: 36rpx;
@@ -325,8 +393,11 @@ Page{
 }
 .button{
   position: fixed;
+  display: flex;
   width: 100%;
-  bottom: 20rpx;
+  height: 120rpx;
+  bottom: 30rpx;
+
 }
 .liu_back{
   background-color: #FFE896;
@@ -338,9 +409,15 @@ Page{
   
 }
 .liu_message{
+  height: 80rpx;
+  margin-left: 80rpx;
   margin-top: 22rpx;
 }
+.liu_message:nth-child(1){
+  margin-left: 0rpx;
+}
 .liu_head_img{
+  border-radius: 50%;
   height: 80rpx;
   width: 80rpx;
   float: left;
@@ -348,11 +425,13 @@ Page{
   /* position: absolute; */
 }
 .liu_nickname{
-  font-size: 28rpx;
+  font-size: 32rpx;
   /* float: left; */
   margin-left: 15rpx;
 }
 .liu_content{
+  color:#3F3F3F;
+  font-size: 24rpx;
   margin-top: 4rpx;
   margin-left: 15rpx;
   /* float: left; */
@@ -361,3 +440,95 @@ Page{
   width: 75%;
   float: left;
 }
+.window{
+  transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+.window>image{
+  width: 552rpx;
+  height: 627rpx;
+  position: absolute;
+  margin: auto;
+  top: -10%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+/* .w_bo{
+  position: relative;
+} */
+.windo{
+  transition: 0.6s cubic-bezier(0.215, 0.610, 0.355, 1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.w_bo{
+  width: 511rpx;
+  height: 627rpx;
+  position: absolute;
+  margin: auto;
+  top: -10%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius:51rpx 51rpx 51rpx 51rpx;
+}
+.w_bo>image{
+  height: 430rpx;
+  width: 510rpx;
+  display: block;
+  border-radius:51rpx 51rpx 0rpx 0rpx;
+  box-shadow: 0rpx 20rpx  25rpx #AAAAAA;
+  -webkit-box-shadow:0 0px 20px rgba(138, 138, 138, 0.4); 
+  
+}
+.backg{
+  background-color: #FFFFFF;
+  box-shadow: 0rpx 0rpx  25rpx #AAAAAA;
+  -webkit-box-shadow:0 0px 20px rgba(138, 138, 138, 0.4); 
+  width: 511rpx;
+  height: 190rpx;
+  border-radius:0px 0px 51rpx 51rpx;
+}
+.topT{
+  height: 50rpx;
+  width: auto;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: 600;
+  padding-top: 18rpx;
+}
+.call_notic{
+  height: 30rpx;
+  text-align: center;
+  width: auto;
+  font-size: 22rpx;
+  font-weight: 500;
+  color:rgba(187,187,187,1);
+}
+.foot{
+  text-align: center;
+  display: flex;
+  margin-left: 8rpx;
+}
+.CL{
+  font-size: 24rpx;
+  font-weight: 500;
+  width: 50%;
+  height: inherit;
+  line-height: 100rpx;
+}
+
+
+
+
+
+

@@ -4,11 +4,12 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -20,8 +21,8 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.2",
-	"appid": "wxa10aa2d334f3772a",
+	"libVersion": "2.9.0",
+	"appid": "wxdb7752412e950f6f",
 	"projectname": "%E4%BA%8C%E6%89%8B%E8%A1%97",
 	"debugOptions": {
 		"hidedInDevtools": []

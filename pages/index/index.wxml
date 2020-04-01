@@ -1,105 +1,112 @@
- <!--index.wxml-->
+<!--index.wxml-->
 
 <view class="container">
-   <!-- 顶部横栏 -->
-   <view class='head'>
-      <view class="s_back">
-         <view class="search">
-            <navigator class="nav_search" url="./search/search">
-               <image class="search_icon" src="../images/search@xhdpi.png"></image>
-               <text>请输入关键字</text>
-            </navigator>
-         </view>
-         <view class="banner">
-            <image class="ban_img" src="../images/banner@hdpi.png"></image>
-         </view>
+  <!-- 顶部横栏 -->
+  <view class='head'>
+    <view class="s_back">
+      <view class="search">
+        <navigator class="nav_search" url="./search/search">
+          <image class="search_icon" src="../images/search@xhdpi.png"></image>
+          <text>请输入关键字</text>
+        </navigator>
       </view>
-   </view>
-   <!-- 分类导航部分 -->
-   <view class="page_classify">
-      <block wx:for="{{classify_top}}" wx:key="{{item}}">
-         <view class="icon" bindtap="nav" data-index='{{item.title}}'>
-            <view class="pic">
-               <image class="cl_img" src="{{item.url}}"></image>
-            </view>
-            <view class="icon_title">{{item.title}}</view>
-         </view>
-      </block>
-   </view>
-   <view class="page_classify">
-      <block wx:for="{{classify_foot}}" wx:key="{{item}}">
-         <view class="icon" bindtap="nav" data-index='{{item.title}}'>
-            <view class="pic">
-               <image class="cl_img" src="{{item.url}}"></image>
-            </view>
-            <view class="icon_title">{{item.title}}</view>
-         </view>
-      </block>
-   </view>
-   <view class="nav">
-    <view class="nav_left {{bg?'bg1':'bg2'}}" bindtap="change1"><text>推荐</text></view>
-    <view class="nav_right {{bg?'bg2':'bg1'}}" bindtap="change2"><text>最新发布</text></view>
+      <view class="banner">
+        <image bindtap="about" class="ban_img" src="../images/banner@hdpi.png"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 分类导航部分 -->
+  <view class="page_classify">
+    <block wx:for="{{classify_top}}" wx:key="{{item}}">
+      <view class="icon" bindtap="nav" data-index='{{item.title}}'>
+        <view class="pic">
+          <image class="cl_img" src="{{item.url}}"></image>
+        </view>
+        <view class="icon_title">{{item.title}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="page_classify">
+    <block wx:for="{{classify_foot}}" wx:key="{{item}}">
+      <view class="icon" bindtap="nav" data-index='{{item.title}}'>
+        <view class="pic">
+          <image class="cl_img" src="{{item.url}}"></image>
+        </view>
+        <view class="icon_title">{{item.title}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="nav">
+    <view class="nav_left {{bg?'bg1':'bg2'}}" bindtap="change1">
+      <text>最新发布</text>
+      <image wx:if="{{pageNow=='1'}}" class="change1" src="../images/icon.png"></image>
+    </view>
+
+    <view class="nav_right {{bg?'bg2':'bg1'}}" bindtap="change2">
+      <text>推荐</text>
+      <image wx:if="{{pageNow=='2'}}" class="change1" src="../images/icon.png"></image>
+    </view>
     <image src="../images/shoucang@2x.png" class="shoucang" bindtap="toCollect"></image>
-   </view>
-   <!-- 所有商品 -->
-   <view class='goods'>
-      <view class='goods-container-left'>
-         <block wx:for="{{goods_left}}" wx:key="{{goods}}">
-            <view class='goods goods-item' bindtap='goods_detail' data-index='{{item.goods_id}}'>
-               <view class='goods-img'>
-                  <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="{{true}}"></image>
-               </view>
-               <view class='goods-detail'>
-                  <view class='goods-title'>{{item.title}}</view>
-                  <view class='goods-info'>
-                     <view class='goods-tags-container'>
-                        <view class='tag'>{{item.isNew}}</view>
-                        <view class='tag'>{{item.tag}}</view>
-                     </view>
-                     <view class='goods-price'>
-                        <view class='price-prv'>
-                           {{item.price}}
-                        </view>
-                        <view class='price-now'>
-                           <span class='price-now'>{{item.purchase_price}}</span>
-                           <span class='price-unit'>￥</span>
-                        </view>
-                     </view>
-                  </view>
-               </view>
+  </view>
+  <!-- 所有商品 -->
+  <view class='goods'>
+    <view class='goods-container-left'>
+      <block wx:for="{{goods_left}}" wx:key="{{goods}}">
+        <view class='goods goods-item' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+          <view class='goods-img'>
+            <image lazy-load="{{true}}" src='{{item.pic1_path}}' mode='aspectFit' lazy-load="{{true}}"></image>
+          </view>
+          <view class='goods-detail'>
+            <view class='goods-title'>{{item.title}}</view>
+            <view class='goods-info'>
+              <view class='goods-price'>
+                <view class='price-now'>
+                  <span class='price-now'>{{item.purchase_price}}</span>
+                  <span class='price-unit'>￥</span>
+                </view>
+                <!-- <view class='price-prv'>
+                  {{item.price}}
+                </view> -->
+              </view>
+              <view class='goods-tags-container'>
+                <view wx:if="{{item.new == '0'}}" class='tag'>全新</view>
+                <view class='tag-a'>{{item.tradeWay}}</view>
+              </view>
             </view>
-         </block>
-      </view>
-      <view class='goods-container-right'>
-         <block wx:for="{{goods_right}}" wx:key="{{goods}}">
-            <view class='goods' bindtap='goods_detail' data-index='{{item.goods_id}}'>
-               <view class='goods-img'>
-                  <image src='{{item.pic1_path}}' mode='aspectFill' lazy-load="true"></image>
-               </view>
-               <view class='goods-detail'>
-                  <view class='goods-title'>{{item.title}}</view>
-                  <view class='goods-info'>
-                     <view class='goods-tags-container'>
-                        <view class='tag'>{{item.isNew}}</view>
-                        <view class='tag'>{{item.tag}}</view>
-                     </view>
-                     <view class='goods-price'>
-                        <view class='price-prv'>
-                           {{item.price}}
-                        </view>
-                        <view class='price-now'>
-                           <span class='price-now'>{{item.purchase_price}}</span>
-                           <span class='price-unit'>￥</span>
-                        </view>
-                     </view>
-                  </view>
-               </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='goods-container-right'>
+      <block wx:for="{{goods_right}}" wx:key="{{goods}}">
+        <view class='goods goods-item' bindtap='goods_detail' data-index='{{item.goods_id}}'>
+          <view class='goods-img'>
+            <image lazy-load="{{true}}" src='{{item.pic1_path}}' mode='aspectFit' lazy-load="true"></image>
+          </view>
+          <view class='goods-detail'>
+            <view class='goods-title'>{{item.title}}</view>
+            <view class='goods-info'>
+              <view class='goods-price'>
+                <view class='price-now'>
+                  <span class='price-now'>{{item.purchase_price}}</span>
+                  <span class='price-unit'>￥</span>
+                </view>
+                <!-- <view class='price-prv'>
+                  {{item.price}}
+                </view> -->
+              </view>
+              <view class='goods-tags-container'>
+                <view wx:if="{{item.new == '0'}}" class='tag'>全新</view>
+                <view class='tag-a'>{{item.tradeWay}}</view>
+              </view>
             </view>
-         </block>
-      </view>
-   </view>
-   <!--custom Modal-->
-<view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!--custom Modal-->
+  <!-- <view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
 <view wx:if="{{showModal}}">
   <view class='modal-photo'>
     <image class="userinfo-avatar" src="{{teacherInfo.photo}}" mode="cover"></image>
@@ -135,5 +142,5 @@
       <button class='btn' bindtap="onChooseTeacher">选择老师</button>
     </view>
   </view>
-  </view>
+  </view> -->
 </view>

@@ -10,6 +10,7 @@ Page({
   data: {
     //发布成功弹窗
     showWindow:false,
+    finished:true,
     // index:'',                      //当前商品id\\
     change:false,
     indicatorDots: true,
@@ -19,34 +20,34 @@ Page({
     bg:true,
     showModal:false,
     classify_top: [{
-        title: "图书教材",
-        url: "../images/book32_32.png"
+        title: "学习相关",
+      url: "../images/book32_32.png"
+      },
+      {
+        title: "生活用品",
+        url: "../images/appliances32_32.png "
       },
       {
         title: "数码产品",
-        url: "../images/digital32_32.png"
-      },
-      {
-        title: "衣物鞋帽",
-        url: "../images/clothing32_32.png"
+        url: " ../images/digital32_32.png "
       }
 
     ],
     classify_foot: [{
-        title: "生活用品",
-        url: "../images/daily32_32.png"
-      },
-      {
-        title: "家用电器",
-        url: "../images/appliances32_32.png"
-      },
-      {
         title: "美妆日化",
-        url: "../images/cosmetics32_32.png"
+      url: "../images/cosmetics32_32.png"
+      },
+      {
+        title: "衣物鞋帽",
+        url: "../images/clothing32_32.png "
+      },
+      {
+        title: "大杂烩",
+        url: "../images/daily32_32.png "
       }
     ],
     goods_left: [{
-      pic1_path: "../images/width.jpg",
+      pic1_path: "",
       title: "窝窝头",
       isNew: "全新",
       tag: "面交",
@@ -54,7 +55,7 @@ Page({
       purchase_price: "0.25"
     }],
     goods_right: [{
-      pic1_path: "../images/width.jpg",
+      pic1_path: "",
       title: "窝窝头",
       isNew: "全新",
       tag: "面交",
@@ -62,7 +63,7 @@ Page({
       purchase_price: "0.25"
     }],
     goods_left_temporary: [{
-      pic1_path: "../images/width.jpg",
+      pic1_path: "",
       title: "窝窝头",
       isNew: "全新",
       tag: "面交",
@@ -70,7 +71,7 @@ Page({
       purchase_price: "0.25"
     }],
     goods_right_temporary: [{
-      pic1_path: "../images/width.jpg",
+      pic1_path: "",
       title: "窝窝头",
       isNew: "全新",
       tag: "面交",
@@ -112,16 +113,13 @@ Page({
    */
   toCollect:function(){
     wx.navigateTo({
-      url: '../collect/collect',
+      url: '../collect/collect?status=collect',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
   },
   getNextView: function() {
-
-    
-
     /**
      * i:循环的中间变量
      * leftHeight：当前左边商品的高度
@@ -130,33 +128,33 @@ Page({
      * rightNumNow：同上
      * needNum: 这次要加载的商品个数
      */
-    let that = this;
     let leftHeight, rightHeight;
-    let resLeft = that.data.goods_left,
-      resRight = that.data.goods_right;
-    let leftNumNow = that.data.leftNum,
-      rightNumNow = that.data.rightNum;
+    let resLeft = this.data.goods_left,
+      resRight = this.data.goods_right;
+    let leftNumNow = this.data.leftNum,
+      rightNumNow = this.data.rightNum;
     let i = leftNumNow + rightNumNow;
     let needNum;
     // 逻辑：获取到商品总量，然后根据商品总量修改resLeft和resRight的内容
-    needNum = that.data.goodsNum;
+    needNum = this.data.goodsNum;
     for(;i<=needNum-1;i++) {
       leftHeight = leftNumNow * 460.2;
       rightHeight = rightNumNow * 578.2;
       // 左边小于等于右边的时候，加载在左边
       if(leftHeight <= rightHeight) {
-        resLeft[leftNumNow] = that.data.allGoods[i];
+        resLeft[leftNumNow] = this.data.allGoods[i];
         leftNumNow++;
       } else {
-        resRight[rightNumNow] = that.data.allGoods[i];
+        resRight[rightNumNow] = this.data.allGoods[i];
         rightNumNow++;
       }
     }
-    that.setData({
+        this.setData({
       goods_left: resLeft,
       goods_right: resRight,
       leftNum: leftNumNow,
       rightNum: rightNumNow,
+      finished: true
     })
   },
 
@@ -165,26 +163,7 @@ Page({
    */
   onReady: function() {
 
-    // wx.getSetting({
-    //   success(res) {
-    //     // console.log(res.authSetting)
-    //     // console.log(!res.authSetting['scope.userInfo'])
-    //     // res.authSetting = {
-    //     //   "scope.userInfo": true,
-    //     //   "scope.userLocation": true
-    //     // }
-    //     if (!res.authSetting['scope.userInfo']) {
-    //       wx.authorize({
-    //         scope: 'scope.userInfo',
-    //         success() {
-    //           wx.showToast({
-    //             title: '授权成功！'
-    //           })
-    //         }
-    //       })
-    //     }
-    //   }
-    // });
+ 
   },
 
 
@@ -213,16 +192,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
 
   /**
    * 用户点击右上角分享
@@ -240,6 +210,9 @@ Page({
   goods_detail: function(e) {
     console.log("打开了" + e.currentTarget.dataset['index'] + "号商品的详情页");
     var index = e.currentTarget.dataset['index'];
+    if(index == undefined || index == ""){
+      return
+    }
     // console.log(index);
     wx.getStorage({
       key: 'token',
@@ -261,27 +234,45 @@ Page({
    * 到底后往下滑继续加载
    */
   onReachBottom: function() {
-    var that = this;
+    wx.onMemoryWarning(function () {
+      console.log('onMemoryWarningReceive')
+    })
     let num;
-    let isLoad = true;
+    
     // 先判断还能不能加
     // 如果总数比现在数量+添加一次数量还多或者相等，自然是直接加载这么多
-    if (that.data.allGoodsNum >= that.data.goodsNum + that.data.goodsOnceAdd) {
-      num = that.data.goodsNum + that.data.goodsOnceAdd
-    } else if (that.data.allGoodsNum > that.data.goodsNum) {
+    if (this.data.allGoodsNum >= this.data.goodsNum + this.data.goodsOnceAdd) {
+      num = this.data.goodsNum + this.data.goodsOnceAdd
+    } else if (this.data.allGoodsNum > this.data.goodsNum) {
       // 如果不比加上一次的多，但是确实还没显示完，那就显示完
-      num = that.data.allGoodsNum;
+      num = this.data.allGoodsNum;
     } else {
+      return;
       // 如果已经加载完了，那就不需要调用后面的函数了
-      isLoad = false;
+      
     }
-    if(isLoad) {
-      that.setData({
-        goodsNum: num,
+    
+    this.setData({
+      goodsNum: num,
+    })
+    if (this.data.finished == true){
+      this.setData({
+        finished: false
       })
-      console.log(that.data.goodsNum);
-      that.getNextView();
+      if (this.data.finished == false){
+        var that = this
+        clearTimeout(Timer)
+        var Timer = setTimeout(function(){
+          that.getNextView();
+
+        },550)
+        
+      }
+        
     }
+      
+      
+   
   },
 //   更换暂存和当前
     changeData: function () {
@@ -328,10 +319,10 @@ Page({
                 // console.log(this.data.goods_new)
                 var that = this;
                 wx.request({
-                    url: 'https://www.woxihuannia.top/php/goodsinfo.php',
+                  url: 'https://market.sky31.com/php/goodsinfo.php',
                     method: "GET",
                     data: {
-                        status: '2'
+                        status: '1'
                     },
                     header: {
                         'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -378,15 +369,16 @@ Page({
     // 获取商品列表
     var that = this;
     wx.request({
-      url: 'https://www.woxihuannia.top/php/goodsinfo.php',
+      url: 'https://market.sky31.com/php/goodsinfo.php',
       method: "GET",
       data: {
-        status: '1'
+        status: '2'
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
+        console.log(res.data)
         that.setData({
           allGoods: res.data,
           allGoodsNum: res.data.length,
@@ -397,6 +389,7 @@ Page({
     })
   },
   onPullDownRefresh: function () {
+    
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.getGoods()
     //模拟加载
@@ -405,6 +398,11 @@ Page({
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 500);
+  },
+  about:function(){
+    wx.navigateTo({
+      url: '../about/about',
+    })
   }
 
 })

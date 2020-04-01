@@ -1,10 +1,13 @@
 <!--pages/Put/index.wxml-->
-<view class="page">
+
+<view class="page" style="filter:{{Sure == true?'blur(2px)':'blur(0px)'}}">
+  
   <view class="container" style="filter:{{success==true?'blur(2px)':'blur(0px)'}}" >
     <view class="title">
-      <textarea maxlength="20" placeholder="请输入宝贝标题（说重点喔！）" bindblur="setTitle" value="{{title}}"></textarea>
-      <label>
-        <view class="radio" value="全新" bindtap="checkNew" wx:if="{{isNew}}" style="border-width:0">
+      <input class="inputTitle" maxlength="20"  placeholder="请输入宝贝标题（说重点喔！）" bindinput="setTitle" value="{{title}}"></input>
+      <text class="notic" style="color:{{color}}">{{font_count}}/20</text>
+      <label bindtap="checkNew">
+        <view class="radio" value="全新" bindtap="checkNew" wx:if="{{!isNew}}" style="border-width:0">
           <image src="img/checked.png" style="display:block"></image>
         </view>
         <view class="radio" value="全新" bindtap="checkNew" wx:else style="border-width:2">
@@ -14,17 +17,18 @@
       </label>
     </view>
     <view class="describe">
-      <textarea type="text" placeholder="请给宝贝一段描述（不多于120字）" maxlength="120" adjust-position="false" bindblur="setDescribe" value="{{describe}}"></textarea>
+      <textarea type="text" show-confirm-bar="{{false}}" placeholder-class="posi" placeholder="宝贝新旧程度,入手渠道,转手原因,品牌型号..." maxlength="120" adjust-position="false" bindinput="setDescribe" value="{{describe}}"></textarea>
+      <text class="Dnotic" style="color:{{Dcolor}}">{{Dfont_count}}/120</text>
     </view>
     <!-- 可移动 -->
     <movable-area class="movable-imgs imgs">
-      <block wx:for="{{picture}}">
+      <block wx:for="{{picture}}" wx:key='item'>
 
-        <view class="img" class="img" style="{{picture[index]==''?'display:none':'display:flex'}}">
+        <view class="img" wx:if="{{picture[index]!=''}}" class="img" style="{{picture[index]==''?'display:none':'display:flex'}}">
           <view class="first" style="{{index==0?'display:block':'display:none'}}">主图</view>
           <view class="itembtn delete {{none[index]==1?'selected':''}}" bindtap="deleteItem" data-index="{{index}}">×</view>
           <view class="itembtn toTop {{none[index]==1?'selected':''}}" bindtap="toTopItem" data-index="{{index}}">主</view>
-          <image src="{{picture[index]}}" mode='aspectFill' bindlongpress="selectItem" bindtap="resetSelected" data-index="{{index}}"></image>
+          <image data-sr="{{item}}" src="{{item}}" mode='aspectFill' bindlongpress="selectItem" bindtap="resetSelected" data-index="{{index}}"></image>
         </view>
       </block>
       <movable-view style="left:{{positionX[picNum]}}rpx;top:{{positionY[picNum]}}rpx" wx:if="{{picNum < 6}}" class="camara" bindtap="chooseImg">
@@ -32,12 +36,47 @@
       </movable-view>
     </movable-area>
     <!-- 图片下面的提示 -->
-    <view class="tip">提示：商品发布一个月后将自动下架</view>
+    <view class="tip">
+      <image src="../images/hint@hdpi.png"></image>
+    提示：大图上传可能卡顿，请避免选择原图。</view>
     <!-- 联系信息 -->
     <view class="info-link">
       <view class="info-title">联系信息</view>
+        <view class="info-inner-class">
+          <view class="info-inner-title" >
+            <view class="info-inner-title-icon">
+              <image src="img/class.png"></image>
+            </view>
+            
+            <view class="info-inner-title-text">年级</view>
+          </view>
+          <view class="info-inner-input">
+            <view class="info-options info-options-choosed" wx:if="{{grade == '大一'}}">大一</view>
+            <view bindtap="setClass"  data-index="大一" class="info-options" wx:else>大一</view>
+            <view class="info-options info-options-choosed" wx:if="{{grade == '大二'}}" >大二</view>
+            <view bindtap="setClass" data-index="大二" class="info-options" wx:else>大二</view>
+            <view class="info-options info-options-choosed" wx:if="{{grade == '大三'}}" >大三</view>
+            <view bindtap="setClass" data-index="大三" class="info-options" wx:else>大三</view>
+            <view class="info-options info-options-choosed" wx:if="{{grade == '大四'}}" >大四</view>
+            <view bindtap="setClass"  data-index="大四" class="info-options" wx:else>大四</view>
+            
+          </view> 
+          
+        </view>
+        <view class="info-inner-yan">
+         <view  class="info-inner-input">
+            <view class="info-options info-options-choosed" wx:if="{{grade == '研一'}}" >研一</view>
+            <view bindtap="setClass"  data-index="研一" class="info-options" wx:else>研一</view>
+            <view class="info-options info-options-choosed" wx:if="{{grade == '研二'}}" >研二</view>
+            <view bindtap="setClass"  data-index="研二" class="info-options" wx:else>研二</view>
+            <view class="info-options info-options-choosed" wx:if="{{grade == '研三'}}" >研三</view>
+            <view bindtap="setClass"  data-index="研三" class="info-options" wx:else>研三</view>
+          </view>
+            
+       </view>
       <view class="info-contain">
         <!-- 宿舍 -->
+
         <view class="info-inner">
           <view class="info-inner-title">
             <view class="info-inner-title-icon">
@@ -99,19 +138,19 @@
               <view class="info-inner-title-text">微信</view>
             </view>
             <view class="info-inner-input">
-              <input bindinput="setLinkDetail" placeholder="请填写微信号" type="text" maxlength="20" value="{{linkDetail}}"></input>
+              <input bindinput="setLinkDetailW" placeholder="请填写微信号" type="text" maxlength="20" value="{{linkDetailW}}"></input>
             </view>
           </view>
           <!-- QQ -->
           <view style="transform:translateY(-{{linkDetail_height_inner}})" class="info-inner-QQ">
             <view class="info-inner-title">
               <view class="info-inner-title-icon">
-                <image src="img/linkWay.png"></image>
+                <image src="img/QQ.png"></image>
               </view>
               <view class="info-inner-title-text">QQ</view>
             </view>
             <view class="info-inner-input">
-              <input maxlength="10" bindinput="setLinkDetail" placeholder="请填写QQ号" type="number" value="{{linkDetail}}"></input>
+              <input maxlength="10" bindinput="setLinkDetailQ" placeholder="请填写QQ号" type="number" value="{{linkDetailQ}}"></input>
             </view>
           </view>
         </view>
@@ -127,20 +166,20 @@
             <view class="info-inner-title-icon">
               <image src="img/price.png"></image>
             </view>
-            <view class="info-inner-title-text">价格</view>
+            <view class="info-inner-title-text" >价格</view>
           </view>
           <view class="info-inner-input">
             <view class="info-price-input-inner">
               <view class="info-price-input-title">现价</view>
               <view class="info-price-input-input">
-                <input maxlength="4" bindinput="setPriceNow" placeholder="请填写价格" type="digit" value="{{priceNow}}"></input>
+                <input  maxlength="4" bindinput="setPriceNow" placeholder="请填写价格" type="digit" value="{{priceNow}}"></input>
               </view>
               <view class="info-price-input-unit">元</view>
             </view>
             <view class="info-price-input-inner">
               <view class="info-price-input-title">原价</view>
               <view class="info-price-input-input">
-                <input maxlength="4" bindinput="setPricePrv" placeholder="请填写价格" type="number" value="{{pricePrv}}"></input>
+                <input maxlength="5" bindinput="setPricePrv" placeholder="请填写价格" type="number" value="{{pricePrv}}"></input>
               </view>
               <view class="info-price-input-unit">元</view>
             </view>
@@ -159,51 +198,51 @@
             <view class="info-inner-title-text">分类</view>
           </view>
           <view class="info-inner-input">
-            <view bindtap="setType" data-index="图书教材" data-num="0" wx:if="{{type != '图书教材'}}" class="info-options">图书教材</view>
-            <view wx:else class="info-options info-options-choosed">图书教材</view>
+            <view bindtap="setType" data-index="学习相关" data-num="0" wx:if="{{type != '学习相关'}}" class="info-options">学习相关</view>
+            <view wx:else class="info-options info-options-choosed">学习相关</view>
 
-            <view bindtap="setType" data-index="数码产品" data-num="1" wx:if="{{type != '数码产品'}}" class="info-options">数码产品</view>
-            <view wx:else class="info-options info-options-choosed">数码产品</view>
-
-            <view bindtap="setType" data-index="衣物鞋帽" data-num="2" wx:if="{{type != '衣物鞋帽'}}" class="info-options">衣物鞋帽</view>
-            <view wx:else class="info-options info-options-choosed">衣物鞋帽</view>
-
-            <view bindtap="setType" data-index="生活用品" data-num="3" wx:if="{{type != '生活用品'}}" class="info-options">生活用品</view>
+            <view bindtap="setType" data-index="生活用品" data-num="1" wx:if="{{type != '生活用品'}}" class="info-options">生活用品</view>
             <view wx:else class="info-options info-options-choosed">生活用品</view>
 
-            <view bindtap="setType" data-index="美妆日记" data-num="4" wx:if="{{type != '美妆日记'}}" class="info-options">美妆日化</view>
+            <view bindtap="setType" data-index="数码产品" data-num="2" wx:if="{{type != '数码产品'}}" class="info-options">数码产品</view>
+            <view wx:else class="info-options info-options-choosed">数码产品</view>
+
+            <view bindtap="setType" data-index="美妆日化" data-num="3" wx:if="{{type != '美妆日化'}}" class="info-options">美妆日化</view>
             <view wx:else class="info-options info-options-choosed">美妆日化</view>
 
-            <view bindtap="setType" data-index="家用电器" data-num="5" wx:if="{{type != '家用电器'}}" class="info-options">家用电器</view>
-            <view wx:else class="info-options info-options-choosed">家用电器</view>
+            <view bindtap="setType" data-index="衣物鞋帽" data-num="4" wx:if="{{type != '衣物鞋帽'}}" class="info-options">衣物鞋帽</view>
+            <view wx:else class="info-options info-options-choosed">衣物鞋帽</view>
+
+            <view bindtap="setType" data-index="大杂烩" data-num="5" wx:if="{{type != '大杂烩'}}" class="info-options">大杂烩</view>
+            <view wx:else class="info-options info-options-choosed">大杂烩</view>
           </view>
         </view>
         <!-- 标签 -->
-        <view class="info-inner">
+        <view class="info-inner" >
           <view class="info-inner-title">
             <view class="info-inner-title-icon">
               <image src="img/tip.png"></image>
             </view>
             <view class="info-inner-title-text">标签</view>
           </view>
-          <view class="info-inner-input">
+          <view class="info-inner-input" style="height:33px">
             <view class="info-inner-input-container" style="transform: translateY(-{{tipY}}rpx)">
               <block wx:for="{{allTip}}" wx:key="tips">
                 <view class="tip-container">
-                  <view data-index="{{item.tip[0]}}" bindtap="setTip" wx:if="{{tip != item.tip[0]}}" class="info-options">{{item.tip[0]}}</view>
+                  <view data-index="{{item.tip[0]}}" bindtap="setTip" wx:if="{{tip != item.tip[0]}}" class="info-optionss">{{item.tip[0]}}</view>
                   <view wx:else class="info-options info-options-choosed">{{item.tip[0]}}</view>
 
-                  <view data-index="{{item.tip[1]}}" bindtap="setTip" wx:if="{{tip != item.tip[1]}}" class="info-options">{{item.tip[1]}}</view>
+                  <view data-index="{{item.tip[1]}}" bindtap="setTip" wx:if="{{tip != item.tip[1]}}" class="info-optionss">{{item.tip[1]}}</view>
                   <view wx:else class="info-options info-options-choosed">{{item.tip[1]}}</view>
 
-                  <view data-index="{{item.tip[2]}}" bindtap="setTip" wx:if="{{tip != item.tip[2]}}" class="info-options">{{item.tip[2]}}</view>
+                  <view data-index="{{item.tip[2]}}" bindtap="setTip" wx:if="{{tip != item.tip[2]}}" class="info-optionss">{{item.tip[2]}}</view>
                   <view wx:else class="info-options info-options-choosed">{{item.tip[2]}}</view>
 
-                  <view data-index="{{item.tip[3]}}" bindtap="setTip" wx:if="{{tip != item.tip[3]}}" class="info-options">{{item.tip[3]}}</view>
+                  <view data-index="{{item.tip[3]}}" bindtap="setTip" wx:if="{{tip != item.tip[3]}}" class="info-optionss">{{item.tip[3]}}</view>
                   <view wx:else class="info-options info-options-choosed">{{item.tip[3]}}</view>
 
-                  <view data-index="{{item.tip[4]}}" bindtap="setTip" wx:if="{{tip != item.tip[4]}}" class="info-options">{{item.tip[4]}}</view>
-                  <view wx:else class="info-options info-options-choosed">{{item.tip[4]}}</view>
+                  <!-- <view data-index="{{item.tip[4]}}" bindtap="setTip" wx:if="{{tip != item.tip[4]}}" class="info-options">{{item.tip[4]}}</view>
+                  <view wx:else class="info-options info-options-choosed">{{item.tip[4]}}</view> -->
                 </view>
               </block>
             </view>
@@ -219,19 +258,44 @@
             <view class="info-inner-title-text">交易方式</view>
           </view>
           <view class="info-inner-input">
-            <view wx:if="{{tradeWay == 0}}" class="info-options info-options-choosed">面交</view>
+            <view wx:if="{{tradeWay == '面交'}}" class="info-options info-options-choosed">面交</view>
             <view wx:else bindtap="setTradeWay" class="info-options">面交</view>
-            <view wx:if="{{tradeWay == 1}}" class="info-options info-options-choosed">可邮寄</view>
+            <view wx:if="{{tradeWay == '可邮寄'}}" class="info-options info-options-choosed">可邮寄</view>
             <view wx:else bindtap="setTradeWay" class="info-options">可邮寄</view>
           </view>
         </view>
       </view>
     </view>
-    <button class="release" bindtap="release">发布</button>
+    
+    <view class="putButt">
+      <view class="release" bindtap="Sure">发布</view>
+    </view>
+    <view class="tip" style="text-align:center;display:block;margin-top:-10px">
+    提示：商品发布一个月后将自动下架</view>
 
   </view>
-  <view class="toast" style="display:{{modal == true?'block':'none'}}">{{modalStr}}</view>
-  <view class="window" bindtap="closeWindow" style="top:{{success == true?'0':'100%'}}">
+  
+  
+</view>
+<view class="toast" style="display:{{modalStr != ''?'block':'none'}}">{{modalStr}}</view>
+  <view class="window"  style="top:{{success == true?'0':'100%'}}">
     <image src="../images/PutSuccess.png"></image>
+  </view>
+<view class="windo" style="display:{{Sure == true?'block':'none'}}">
+    
+  <view class="w_bo">
+    <image mode="scaleToFill" src="./img/sure.png"></image>
+    <view class="backg">
+      <view class="topT">
+        <text>你将接到电话</text>
+      </view>
+      <view class="call_notic">
+        <text>确认后将可能接到买家电话联系喔</text>
+      </view>
+      <view class="foot">
+        <view bindtap="closeWindow" style="color:rgba(187,187,187,1);" class="CL">拒绝</view>
+        <view bindtap="True" style="color:rgba(255,121,17,1);" class="CL">确认</view>
+      </view>
+    </view>
   </view>
 </view>

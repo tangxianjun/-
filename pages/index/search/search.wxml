@@ -1,8 +1,8 @@
 <!--pages/index/search/search.wxml-->
 <view class="content">
   <view class="search" bindtap="search_input">
-    <icon size="25rpx" class="icon" type="search"></icon>
-    <view class="text">请输入关键字</view>
+    <icon size="35rpx" class="icon" type="search"></icon>
+    <input class="se_input" placeholder="请输入关键字" confirm-type="search" bindconfirm="search" bindinput="input" focus="true"></input>
   </view>
     <view id="search" style="display:{{display}}">
       <view class="rently">最近搜索</view>
@@ -16,14 +16,14 @@
   <view class="hot">热门搜索</view>
   <view class="backgd"></view>
   <view class="hot_up">
-    <view class="hot_text"><image src="../../images/火花@hdpi.svg"></image><text>小煮锅</text></view>
-    <view class="hot_text"><image src="../../images/火花@hdpi.svg"></image><text>考研英语</text></view>
-    <view class="h_text"><text>考研政治</text></view>
+    <view class="hot_text" data-text="小煮锅" bindtap="hot_search"><image src="../../images/hot@xhdpi.png"></image><text>小煮锅</text></view>
+    <view class="hot_text" data-text="考研英语" catchtap="hot_search"><image src="../../images/hot@xhdpi.png"></image><text>考研英语</text></view>
+    <view class="h_text" data-text="考研政治" catchtap="hot_search"><text>考研政治</text></view>
   </view>
   <view class="hot_bt">
-    <view class="h_text" wx:for="{{hot}}" wx:key="item.id"><text>{{item.title}}</text></view>
+    <view class="h_text" data-text="{{item.title}}" catchtap="hot_search" wx:for="{{hot}}" wx:key="item.id"><text>{{item.title}}</text></view>
   </view>
   <view class="input" style="visibility:{{visibility}}">
-    <input type="text" class="input_style"placeholder-class='font' confirm-type="search" cursor-spacing="0" bindconfirm="search" bindinput="input" adjust-position="false" focus="{{focus}}" placeholder="请输入你要所搜的关键词"></input>
+    <!-- <input type="text" class="input_style"placeholder-class='font' confirm-type="search" cursor-spacing="0" bindconfirm="search" bindinput="input" adjust-position="false" focus="{{focus}}" placeholder="请输入你要所搜的关键词"></input> -->
   </view>
 </view>

@@ -4,7 +4,18 @@
     width: 750rpx;
     height: 99.9rpx;
 }
-
+.tag-a {
+   border-radius: 1000px;
+   padding-left: 20rpx;
+   padding-right: 20rpx;
+   white-space: nowrap;
+   line-height: 40.1422rpx;
+   font-size: 0.8rem;
+   color: #FFFFFF;
+   background-color: #FED269;
+   margin-left: 5rpx;
+   font-family: PingFangSC-Medium;
+}
 .search-input {
     width: 666rpx;
     height: 66.9rpx;
@@ -98,7 +109,7 @@
     margin-top: 20rpx;
     margin-bottom: 10rpx;
     border-radius: 30rpx;
-    box-shadow: 0 2px 4px 0 #bbb;
+    /* box-shadow: 0 2px 4px 0 #bbb; */
     overflow: hidden;
 }
 
@@ -106,7 +117,7 @@
     margin-top: 20rpx;
     margin-bottom: 10rpx;
     border-radius: 30rpx;
-    box-shadow: 0 2px 4px 0 #bbb;
+   box-shadow:0px 2px 4px 0px rgba(0,0,0,0.06);
     overflow: hidden;
 }
 
@@ -239,7 +250,7 @@
 .goods-price > view {
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .price-prv {
@@ -251,10 +262,15 @@
 }
 
 .price-now {
+    font-size: 38rpx;
+    font-weight: bold;
     color: #ee2904;
     font-family: PingFangSC-Semibold;
+    line-height: 38rpx;
 }
 
 .price-unit {
-    font-size: 0.6rem;
+    line-height: 26rpx;
+    font-size: 26rpx;
+    font-weight: bold;
 }

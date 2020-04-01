@@ -32,7 +32,7 @@ Page({
         var that = this;
         var data = options.data
         wx.request({
-            url: 'https://www.woxihuannia.top/php/goodsinfo.php',
+          url: 'https://market.sky31.com/php/goodsinfo.php',
             method: "GET",
             data: {
                 search: data
@@ -46,11 +46,12 @@ Page({
                     // 获取到了商品
                     that.setData({
                         code: res.data.code,
-                        allGoods: res.data.mesage,
+                        allGoods: res.data.message,
                     })
                     // 加载
                     var num;
                     let isLoad = true;
+                    console.log(that.data);
                     // 先判断还能不能加
                     // 如果总数比现在数量+添加一次数量还多或者相等，自然是直接加载这么多
                     if (that.data.allGoods.length >= that.data.goodsNum + that.data.goodsOnceAdd) {
@@ -206,12 +207,12 @@ Page({
             success(res) {
                 // console.log(res.data)
                 wx.navigateTo({
-                    url: '../details/details?data' + index,
+                    url: '../details/details?data=' + index,
                 })
             },
             fail: (res) => {
                 wx.navigateTo({
-                    url: '../login/login',
+                    url: '../login/login?data=请先登录',
                 })
             }
         })

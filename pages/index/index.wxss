@@ -3,10 +3,21 @@
 view,text{
    font-family: PingFang SC;
 }
+.tag-a {
+   border-radius: 1000px;
+   padding-left: 20rpx;
+   padding-right: 20rpx;
+   white-space: nowrap;
+   line-height: 40.1422rpx;
+   font-size: 0.8rem;
+   color: #FFFFFF;
+   background-color: #FED269;
+   margin-left: 5rpx;
+   font-family: PingFangSC-Medium;
+}
 .container {
     width: 750rpx;
-    overflow-x: hidd
-    en;
+    overflow-x: hidden;
 }
 .head{
   height: 390rpx;
@@ -48,7 +59,7 @@ view,text{
 /* 首页 banner */
 .banner{
   height: 320rpx;
-  width: 100%;
+  width: 80%;
   float: left;
   padding: 0 33.5rpx;
   margin-top: 10rpx;  
@@ -86,7 +97,7 @@ view,text{
 .nav{
   margin-top: 32rpx;
   width: 100%;
-  height: 50rpx;
+  height: 60rpx;
   display: flex;
 }
 .nav_left{
@@ -100,6 +111,7 @@ view,text{
   right: 20px;
 }
 .bg1{
+  font-weight: bold;
   color: #000000;
   font-size: 36rpx;
   font-family: PingFangSC-Semibold;
@@ -110,7 +122,7 @@ view,text{
   line-height: 50rpx;
   position: relative;
 }
-.bg1::after {
+/* .bg1::after {
     content: '';
     width: 56rpx;
     height: 20rpx;
@@ -119,6 +131,14 @@ view,text{
     position: absolute;
     bottom: -20rpx;
     right: 61.5rpx;
+} */
+.change1{
+    width: 46rpx;
+    height: 15rpx;
+   
+    position: absolute;
+    bottom: -15rpx;
+    right: 68.5rpx;
 }
 .bg2{
     width: 179rpx;
@@ -145,6 +165,9 @@ view,text{
    width: 354rpx; /* 47.2%总宽度 */
 }
 .goods > view > view {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
    width: 100%;
 }
 /* 左边的图片宽高1:1，整个方块的宽高354:461，就当1:1.3吧 */
@@ -206,12 +229,14 @@ view,text{
 }
 /* 商品名 */
 .goods-title {
-   font-size: 36rpx;
+   width: 90%!important;
+   font-size: 32rpx;
+   font-weight: 600;
    line-height: 40.1422rpx;
    white-space: nowrap;
    overflow: hidden;
    text-overflow: ellipsis;
-   padding-left: 16rpx;
+   padding-left: 11rpx;
    padding-right: 16rpx;
    font-family: PingFang SC,PingFang SC-Semibold;
 }
@@ -226,7 +251,7 @@ view,text{
 }
 /* 标签 */
 .goods-tags-container {
-   margin-left: 0;
+   margin-right: 20rpx;
 }
 .tag {
    border-radius: 1000px;
@@ -234,7 +259,7 @@ view,text{
    padding-right: 20rpx;
    white-space: nowrap;
    line-height: 40.1422rpx;
-   font-size: 20rpx;
+   font-size: 0.8rem;
    color: #FFFFFF;
    margin-left: 5rpx;
    font-family: Pingfang SC,PingFang SC-Medium;
@@ -253,21 +278,26 @@ view,text{
 .goods-price > view {
    height: 100%;
    display: flex;
-   align-items: center;
+   align-items: flex-end;
 }
 .price-prv {
    text-decoration: line-through;
    color: #BBBBBB;
-   font-size: 0.6rem;
+   font-size: 26rpx;
    margin-right: 15rpx;
    font-family: PingFangSC-Medium;
 }
 .price-now {
+  font-weight: bold;
+   font-size: 38rpx;
+   line-height: 38rpx;
    color: #EE2904;
    font-family: PingFangSC-Semibold;
 }
 .price-unit {
-   font-size: 0.6rem;
+  font-weight: bold;
+   font-size: 28rpx;
+   line-height: 28rpx;
 }
 
 

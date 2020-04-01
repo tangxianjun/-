@@ -12,31 +12,31 @@ Page({
         data: '',
         type: "未选择",
         typeNum: -1,
-        typeList: ["图书教材", "数码产品", "衣物鞋帽", "生活用品", "家用电器", "美妆日化"],
-        typeImgUrl: ["image/book.svg", "image/shu.svg", "image/cloth.svg", "image/live.svg", "image/ele.svg", "image/mei.svg"],
+        typeList: ["学习相关", "生活用品", "数码产品", "美妆日化", "衣物鞋帽", "大杂烩"],
+      typeImgUrl: ["https://market.sky31.com/php/picLib/book.png", "https://market.sky31.com/php/picLib/live.png", "https://market.sky31.com/php/picLib/shu.png", "https://market.sky31.com/php/picLib/mei.png", "https://market.sky31.com/php/picLib/yi.png", "https://market.sky31.com/php/picLib/za.png"],
         typeCategory: [{
-                title: "图书教材",
-                category: ["全部", "教材", "考试", "畅销书", "经典"],
-            },
-            {
-                title: "数码产品",
-                category: ["全部", "护肤", "美妆", "洗护", "大牌"],
-            },
-            {
-                title: "衣物鞋帽",
-                category: ["全部", "上装", "裤装", "鞋履", "配饰"],
+                title: "学习相关",
+                category: ["全部", "教辅", "文具", "课外", "其它"],
             },
             {
                 title: "生活用品",
-                category: ["全部", "手机", "电脑", "相机", "其它"],
+              category: ["全部", "寝室", "电器", "娱乐", "其它"],
             },
             {
-                title: "家用电器",
-                category: ["全部", "收纳", "雨伞", "洗晒", "清洁"],
+                title: "数码产品",
+              category: ["全部", "设备", "配件", "外设", "其它"],
             },
             {
                 title: "美妆日化",
-                category: ["全部", "厨具", "电暖气", "电冷器", "照明"],
+              category: ["全部", "美妆", "洗护", "大牌", "其它"],
+            },
+            {
+                title: "衣物鞋帽",
+              category: ["全部", "衣物", "鞋帽", "饰品", "其它"],
+            },
+            {
+                title: "大杂烩",
+              category: ["全部", "动植物", "租借", "零食", "其它"], 
             }
         ],
         allGoods: [],
@@ -50,7 +50,7 @@ Page({
         // rightNum:右边的商品数量
         goodsNum: 0,
         goodsOnceAdd: 5,
-        allGoods: [],
+        all: [],
         leftNum: 0,
         rightNum: 0,
         // 搜索框
@@ -83,7 +83,7 @@ Page({
         })
         //获取本地的token数据
         wx.request({
-            url: 'https://www.woxihuannia.top/php/goodsinfo.php',
+          url: 'https://market.sky31.com/php/goodsinfo.php',
             method: "GET",
             data: {
                 category: options.data
@@ -93,9 +93,26 @@ Page({
             },
             success: function(res) {
                 console.log(res)
-                that.setData({
-                    allGoods: res.data.message,
-                })
+                if (res.data.code == 1) {
+                  that.setData({
+                    goods_left: [],
+                    goods_right: [],
+                    leftNum: 0,
+                    rightNum: 0,
+                  })
+
+                  return;
+                }
+                console.log(res.data);
+                if(res.data.message[0]==0){
+                  return
+                }
+                else{
+                  that.setData({
+                    all: res.data.message,
+                    allGoods: res.data.message[0],
+                  })
+                }
                 // 加载
                 var num;
                 let isLoad = true;
@@ -103,7 +120,7 @@ Page({
                 // 如果总数比现在数量+添加一次数量还多或者相等，自然是直接加载这么多
                 if (that.data.allGoods.length >= that.data.goodsNum + that.data.goodsOnceAdd) {
                     num = that.data.allGoods.length + that.data.goodsOnceAdd
-                } else if (that.data.allGoods.length > that.data.goodsNum) {
+                } else if (that.data.allGoods.length < that.data.goodsNum + that.data.goodsOnceAdd) {
                     // 如果不比加上一次的多，但是确实还没显示完，那就显示完
                     num = that.data.allGoods.length;
                 } else {
@@ -132,10 +149,33 @@ Page({
         if(i == e.target.dataset.index)
           arr[i] = 1;
       }
-      //这里还需要获得数据 2019.11.20
+      var num=0;
+      var data = this.data;
       this.setData({
-        categorySelected:arr
+        categorySelected:arr,
+        allGoods: data.all[e.target.dataset.index],
       })
+      
+      if (data.allGoods == [] || data.allGoods == undefined){
+        return;
+      }
+      else if (data.allGoods.length >= data.goodsNum + data.goodsOnceAdd) {
+        num = data.allGoods.length +  data.goodsOnceAdd
+      } else if (data.allGoods.length < data.goodsNum + data.goodsOnceAdd) {
+        // 如果不比加上一次的多，但是确实还没显示完，那就显示完
+        num = data.allGoods.length;
+      }
+      console.log(num);
+      //重置
+      this.setData({
+        goodsNum: num,
+        goods_left: [],
+        goods_right: [],
+        leftNum: 0,
+        rightNum: 0,
+      })
+      
+      this.getNextView();
     },
     getNextView: function() {
         /**
@@ -153,9 +193,20 @@ Page({
         let leftNumNow = that.data.leftNum,
             rightNumNow = that.data.rightNum;
         let i = leftNumNow + rightNumNow;
+        
         let needNum;
         // 逻辑：获取到商品总量，然后根据商品总量修改resLeft和resRight的内容
         needNum = that.data.goodsNum;
+        if(needNum == 0){
+          that.setData({
+            goods_left: [],
+            goods_right: [],
+            leftNum: 0,
+            rightNum: 0,
+          })
+          
+          return ;
+        }
         for (; i <= needNum - 1; i++) {
             leftHeight = leftNumNow * 460.2;
             rightHeight = rightNumNow * 578.2;
@@ -187,7 +238,7 @@ Page({
             success(res) {
                 // console.log(res.data)
                 wx.navigateTo({
-                    url: '../details/details?data' + index,
+                    url: '../details/details?data=' + index,
                 })
             },
             fail: (res) => {
@@ -196,6 +247,7 @@ Page({
                 })
             }
         })
+        
 
     },
     // 到底往下滑
@@ -222,7 +274,12 @@ Page({
             that.getNextView();
         }
     },
-
+search:function(){
+  var data = this.data.searchText
+  wx.navigateTo({
+    url: "../../result/result?data=" + data
+  })
+},
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -284,7 +341,7 @@ Page({
     /**
      * 输入框输入内容
      */
-    searchDetail: function(e) {
+    searchInput: function(e) {
         this.setData({
             searchText: e.detail.value
         })
@@ -300,5 +357,12 @@ Page({
                 searchClearDisplay: "none",
             })
         }
-    }
+    },
+  searchDetail:function(){
+    var data = this.data.searchText
+    wx.navigateTo({
+      url: "../result/result?data=" + data
+    })
+  
+  }
 })

@@ -7,7 +7,10 @@ Page({
    */
   data: {
     // me:'me_kong',     控制是否有背景色
+    noneTex:'',
+    selled:true,
     tex:"",
+    tex2:"",
     url:'',
     status:'',
     me:"me_kong",
@@ -17,28 +20,7 @@ Page({
     nickname:null,
     img_none:"block",
     selected:999,
-    list: [
-      {
-        pic1_path: '../images/shoucang@2x.png',
-        title: '这是一件我收藏的商品，这是一件我收藏的商品',
-        description: '这是一件测试用的收藏商品，如果有实际数据返回了，请把这一组数据删掉',
-        purchase_price:588,
-        status:'已上架'
-      },
-      {
-        pic1_path: '../images/noneput.svg',
-        title: '这是二件我收藏的商品，这是二件我收藏的商品',
-        description: '这是一件测试用的收藏商品，如果有实际数据返回了，请把这一组数据删掉',
-        purchase_price: 588,
-        status: '已上架'
-      },
-      {
-        pic1_path: '../images/news.png',
-        title: '这是三件我收藏的商品，这是三件我收藏的商品',
-        description: '这是一件测试用的收藏商品，如果有实际数据返回了，请把这一组数据删掉',
-        purchase_price: 588,
-        status: '已下架'
-      },]
+    list: []
   },
 
   /**
@@ -46,20 +28,34 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var token = wx.getStorageSync('token')
+    if (token) {
+      that.setData({
+        token: token
+      })
+    } else {
+      wx.navigateTo({
+        url: '../login/login?data=请先登录',
+      })
+    }
     var status = options.status
     this.setData({
       status:status
     })
     if(status=='sell'){
       this.setData({
-        tex:"收获满满了吗？"
+        tex:"收获满满了吗？",
+        tex2: '这是你卖出的商品',
+        noneTex:'你还没有卖出一件宝贝喔~'
       })
       wx.setNavigationBarTitle({
         title: '我的卖出'
       })
     }else{
       this.setData({
-        tex:"快把你的闲置放进来！"
+        tex:"快把你的闲置放进来",
+        tex2:'这是你发布的商品',
+        noneTex: '这里空空的，快去发一个吧~'
       })
       wx.setNavigationBarTitle({
         title: '我的发布'
@@ -83,43 +79,75 @@ Page({
     }
 
   
-  try {
-    var value = wx.getStorageSync('token')
-    if (value) {
-        // Do something with return value
-      console.log(value)
-    }
-  } catch (e) {
-      // Do something when catch error
-  }
   if(status=='sell'){
       this.setData({
-        url:'https://www.woxihuannia.top/php/show_sale.php'
+        url:'https://market.sky31.com/php/show_sale.php'
       })
   }else{
     this.setData({
-      url:'https://www.woxihuannia.top/php/show_publish.php'
+      url:'https://market.sky31.com/php/show_publish.php'
     })
   }
-  var that = this;
     wx.request({
       url: that.data.url,
       method: "POST",
       data: {
-        token: value
+        token: that.data.token
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
+        if (res.data.code == 2 || res.data.code == 4) {
+          wx.navigateTo({
+            url: '../login/login?data=请先登录'
+          })
+          wx.removeStorageSync('token')
+          return;
+        }
         console.log(res.data)
+        
         if (status == 'sell'){
+          var resData = res.data.sale_list;
+          for (var i = 0; i < resData.length; i++) {
+            switch (resData[i].status) {
+              case 1:
+                resData[i].status = '正出售';
+                break;
+              case 0:
+                resData[i].status = '已下架';
+                break;
+              case 2:
+                resData[i].status = '已卖出';
+                break;
+              case 3:
+                resData[i].status = '删除';
+                break;
+            }
+          }
           that.setData({
-            list: res.data.sale_list
+            list: resData
           })
         }else{
+          var resData = res.data.publish_list;
+          for(var i = 0;i<resData.length;i++){
+            switch (resData[i].status) {
+              case 1:
+                resData[i].status = '正出售';
+                break;
+              case 0:
+                resData[i].status = '已下架';
+                break;
+              case 2:
+                resData[i].status = '已卖出';
+                break;
+              case 3:
+                resData[i].status = '删除';
+                break;
+            }
+          }
           that.setData({
-            list: res.data.publish_list
+            list: resData
           })
         }
         console.log(that.data.list);
@@ -148,7 +176,9 @@ Page({
 
 },
   deleteSell:function(e){
+    console.log(e)
     var item = e.target.dataset.item;
+    var id = e.currentTarget.dataset['index']
     var arr = this.data.list;
     var result = [];
     var length = arr.length;
@@ -157,14 +187,16 @@ Page({
       if (arr[i] != "")
         result.push(arr[i]);
     }
-    console.log(arr);
-    wx.showToast({
-      title: '删除成功！',
-    })
-    this.setData({
-      list: result,
-      selected:999
-    })
+    console.log(id);
+    if(this.chang(id,4)){
+      wx.showToast({
+        title: '删除成功！',
+      })
+      this.setData({
+        list: result,
+        selected: 999
+      })
+    }
 
   },
   toggleItem:function(e){
@@ -176,6 +208,7 @@ Page({
         this.setData({
           selected: e.target.dataset.item
       })
+      console.log(this.data.selected)
     }
     else 
     {
@@ -239,14 +272,114 @@ Page({
 
   },
   nav:function(){
-    wx.switchTab({
-      url: '../index/index',
-    })
+    if(this.data.status=='sell'){
+      wx.switchTab({
+        url: '../index/index',
+      })
+    }else{
+      wx.switchTab({
+        url: '../Put/index',
+      })
+    }
   },
   nav_detail:function(e){
     var index = e.currentTarget.dataset['index'];
     wx.navigateTo({
       url: '../details/details?data=' + index,
     })
+    return;
+  },
+  chang:function(e,status){
+    var that = this
+    wx.request({
+      url: 'https://market.sky31.com/php/statusChange.php',
+      method: "POST",
+      data: {
+        token:that.data.token,
+        goodsId:e,
+        status: status
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+       console.log(res.data)
+       
+      }
+
+    })
+    return true
+  },
+  selled:function(e){
+    console.log(e)
+    var item = e.target.dataset.item;
+    var id = e.currentTarget.dataset['index']
+    var arr = this.data.list;
+    var result = [];
+    var length = arr.length;
+    arr[e.currentTarget.dataset.item] = ""
+    for (var i = 0; i < length; i++) {
+      if (arr[i] != "")
+        result.push(arr[i]);
+    }
+    console.log(id);
+    if (this.chang(id, 0)) {
+      wx.showToast({
+        title: '已卖出！',
+      })
+      this.setData({
+        list: result,
+        selected: 999
+      })
+    }
+
+  },
+  delete:function(e){
+    console.log(e)
+    var item = e.target.dataset.item;
+    var id = e.currentTarget.dataset['index']
+    var arr = this.data.list;
+    var result = [];
+    var length = arr.length;
+    arr[e.currentTarget.dataset.item] = ""
+    for (var i = 0; i < length; i++) {
+      if (arr[i] != "")
+        result.push(arr[i]);
+    }
+    console.log(id);
+    if (this.chang(id, 4)) {
+      wx.showToast({
+        title: '已删除！',
+      })
+      this.setData({
+        list: result,
+        selected: 999
+      })
+    }
+  },
+  edit:function(e){
+    var that = this
+    var id = e.currentTarget.dataset['index']
+    wx.request({
+      url: 'https://market.sky31.com/php/editGoods.php',
+      method: "POST",
+      data: {
+        token: that.data.token,
+        goodsId:id
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+        // console.log(res.data)
+         wx.switchTab({
+           url: '../Put/index?data',
+         })
+        app.globalData.putdata = res.data
+        app.globalData.edit = true
+      }
+
+    })
+
   }
 })

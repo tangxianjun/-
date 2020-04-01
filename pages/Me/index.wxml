@@ -4,7 +4,8 @@
     <text >{{nickname}},欢迎来到二手街。</text>
    </view>
    <view class="ba_text">
-     <text bindtap="quit">退出 ></text>
+     <text bindtap="quit">退出</text>
+     <image class="q_icon"  src="../images/quit.png"></image>
    </view>
    <image  class="h_img" src="{{head_img}}"></image>
   </view> 
@@ -16,11 +17,11 @@
       <view class="head_left">我的主页</view>
       <view class="backgd"></view>
       
-      <view class="we">
+      <view class="we" bindtap="connect">
         <view  class="we_img">
-         <image class="we_img" src="../images/问好@hdpi.svg"></image>
+         <image class="we_img" src="../images/wen@hdpi.svg"></image>
         </view>
-        <view class="we_text">关于我们</view>
+        <view class="we_text">联系我们</view>
       </view>
     </view>
     <view class="l1" bindtap="nav1">
@@ -31,7 +32,8 @@
         <text>快去发布宝贝吧！</text>
       </view>
       <view class="l1_text2">
-        <text>我的发布 ></text>
+        <text>我的发布</text>
+        <image class="r_icon"  src="../images/ri.png"></image>
       </view>  
     </view>
     <view class="l2">
@@ -42,7 +44,8 @@
          <text>卖出的宝贝在这里~</text>
       </view>
       <view class="l1_text2" bindtap="sell">
-        <text>我的卖出 ></text>
+        <text>我的卖出</text>
+        <image class="r_icon"  src="../images/ri.png"></image>
       </view> 
     </view>
     <view class="l2">
@@ -53,7 +56,8 @@
          <text>收藏的宝贝多来看看~</text>
       </view>
       <view class="l1_text2" bindtap="collect">
-        <text>我的收藏 ></text>
+        <text>我的收藏</text>
+        <image class="r_icon"  src="../images/ri.png"></image>
       </view> 
     </view>
     <view class="l2">
@@ -62,9 +66,11 @@
       </view>
       <view class="l1_text">
          <text>有人找你喔!</text>
-      </view>
+         <view class="newsStatus" wx:if="{{News==true}}" style="display:block"></view>
+      </view> 
       <view class="l1_text2" bindtap="news">
-        <text>我的消息 ></text>
+        <text>我的消息</text>
+        <image class="r_icon"  src="../images/ri.png"></image>
       </view> 
     </view>   
    </view>
